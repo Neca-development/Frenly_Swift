@@ -1,0 +1,653 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		71643962290592F80065EA09 /* WalletConnectSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 71643961290592F80065EA09 /* WalletConnectSwift */; };
+		71643968290595350065EA09 /* UtilsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71643967290595350065EA09 /* UtilsService.swift */; };
+		7164396A2905954C0065EA09 /* RandomUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716439692905954C0065EA09 /* RandomUtil.swift */; };
+		7164396E290596760065EA09 /* UtilsErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7164396D290596760065EA09 /* UtilsErrors.swift */; };
+		716439732905BF740065EA09 /* WalletViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716439722905BF740065EA09 /* WalletViewModel.swift */; };
+		716439762905BFE50065EA09 /* WalletDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716439752905BFE50065EA09 /* WalletDetails.swift */; };
+		716439782905C0080065EA09 /* WCStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716439772905C0080065EA09 /* WCStatus.swift */; };
+		7164397A2905C3510065EA09 /* WalletType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716439792905C3510065EA09 /* WalletType.swift */; };
+		7164397D2905C7FB0065EA09 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7164397C2905C7FB0065EA09 /* LoginView.swift */; };
+		716439812905CAB60065EA09 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716439802905CAB60065EA09 /* Colors.swift */; };
+		7164398A2905D19A0065EA09 /* TotalFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716439892905D19A0065EA09 /* TotalFeedView.swift */; };
+		7164398F29065E940065EA09 /* UserFeedNavTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7164398E29065E940065EA09 /* UserFeedNavTitleView.swift */; };
+		7164399329066F0D0065EA09 /* PostWithCommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7164399229066F0D0065EA09 /* PostWithCommentsView.swift */; };
+		71643996290670360065EA09 /* CommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71643995290670360065EA09 /* CommentView.swift */; };
+		71643998290673660065EA09 /* PostNavTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71643997290673660065EA09 /* PostNavTitleView.swift */; };
+		7164399C29067F0F0065EA09 /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7164399B29067F0F0065EA09 /* PostView.swift */; };
+		7164399E290683FB0065EA09 /* CommentTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7164399D290683FB0065EA09 /* CommentTextEditor.swift */; };
+		716439A429068C840065EA09 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716439A329068C840065EA09 /* StringExtension.swift */; };
+		716439AA2906B8D50065EA09 /* CommentsNavTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716439A92906B8D50065EA09 /* CommentsNavTitle.swift */; };
+		716439AD2906BDDF0065EA09 /* DraftFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716439AC2906BDDF0065EA09 /* DraftFeedView.swift */; };
+		716439AF2906BE5D0065EA09 /* PostInDraftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716439AE2906BE5D0065EA09 /* PostInDraftView.swift */; };
+		716439B12906C07D0065EA09 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716439B02906C07D0065EA09 /* UserInfo.swift */; };
+		716439B32906C1A60065EA09 /* DraftBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716439B22906C1A60065EA09 /* DraftBackButton.swift */; };
+		719E5A5D2907A3FB0005A1DF /* UserFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719E5A5C2907A3FB0005A1DF /* UserFeedView.swift */; };
+		719E5A5F2907A7930005A1DF /* PostWithUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719E5A5E2907A7930005A1DF /* PostWithUserView.swift */; };
+		719E5A672907B9C70005A1DF /* BackNavButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719E5A662907B9C70005A1DF /* BackNavButton.swift */; };
+		71D775D42901127F005F7D7D /* FrenlyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D775D32901127F005F7D7D /* FrenlyApp.swift */; };
+		71D775D62901127F005F7D7D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D775D52901127F005F7D7D /* ContentView.swift */; };
+		71D775D829011283005F7D7D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71D775D729011283005F7D7D /* Assets.xcassets */; };
+		71D775DB29011283005F7D7D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71D775DA29011283005F7D7D /* Preview Assets.xcassets */; };
+		71D775E929013A3D005F7D7D /* WalletConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D775E829013A3D005F7D7D /* WalletConnect.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		71643967290595350065EA09 /* UtilsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsService.swift; sourceTree = "<group>"; };
+		716439692905954C0065EA09 /* RandomUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomUtil.swift; sourceTree = "<group>"; };
+		7164396D290596760065EA09 /* UtilsErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsErrors.swift; sourceTree = "<group>"; };
+		716439722905BF740065EA09 /* WalletViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewModel.swift; sourceTree = "<group>"; };
+		716439752905BFE50065EA09 /* WalletDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletDetails.swift; sourceTree = "<group>"; };
+		716439772905C0080065EA09 /* WCStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WCStatus.swift; sourceTree = "<group>"; };
+		716439792905C3510065EA09 /* WalletType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletType.swift; sourceTree = "<group>"; };
+		7164397C2905C7FB0065EA09 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		716439802905CAB60065EA09 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		716439872905CEAB0065EA09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		716439892905D19A0065EA09 /* TotalFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalFeedView.swift; sourceTree = "<group>"; };
+		7164398E29065E940065EA09 /* UserFeedNavTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFeedNavTitleView.swift; sourceTree = "<group>"; };
+		7164399229066F0D0065EA09 /* PostWithCommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostWithCommentsView.swift; sourceTree = "<group>"; };
+		71643995290670360065EA09 /* CommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
+		71643997290673660065EA09 /* PostNavTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostNavTitleView.swift; sourceTree = "<group>"; };
+		7164399B29067F0F0065EA09 /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
+		7164399D290683FB0065EA09 /* CommentTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTextEditor.swift; sourceTree = "<group>"; };
+		716439A329068C840065EA09 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		716439A92906B8D50065EA09 /* CommentsNavTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsNavTitle.swift; sourceTree = "<group>"; };
+		716439AC2906BDDF0065EA09 /* DraftFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraftFeedView.swift; sourceTree = "<group>"; };
+		716439AE2906BE5D0065EA09 /* PostInDraftView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostInDraftView.swift; sourceTree = "<group>"; };
+		716439B02906C07D0065EA09 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		716439B22906C1A60065EA09 /* DraftBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraftBackButton.swift; sourceTree = "<group>"; };
+		719E5A5C2907A3FB0005A1DF /* UserFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFeedView.swift; sourceTree = "<group>"; };
+		719E5A5E2907A7930005A1DF /* PostWithUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostWithUserView.swift; sourceTree = "<group>"; };
+		719E5A662907B9C70005A1DF /* BackNavButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackNavButton.swift; sourceTree = "<group>"; };
+		71D775D02901127F005F7D7D /* Frenly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Frenly.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		71D775D32901127F005F7D7D /* FrenlyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrenlyApp.swift; sourceTree = "<group>"; };
+		71D775D52901127F005F7D7D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		71D775D729011283005F7D7D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		71D775DA29011283005F7D7D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		71D775E829013A3D005F7D7D /* WalletConnect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletConnect.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		71D775CD2901127F005F7D7D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				71643962290592F80065EA09 /* WalletConnectSwift in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		71643965290595190065EA09 /* WalletConnect */ = {
+			isa = PBXGroup;
+			children = (
+				71D775E829013A3D005F7D7D /* WalletConnect.swift */,
+			);
+			path = WalletConnect;
+			sourceTree = "<group>";
+		};
+		71643966290595230065EA09 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				71643967290595350065EA09 /* UtilsService.swift */,
+				716439692905954C0065EA09 /* RandomUtil.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		7164396B290596560065EA09 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				716439A229068C740065EA09 /* String */,
+				7164396C2905965F0065EA09 /* Errors */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		7164396C2905965F0065EA09 /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				7164396D290596760065EA09 /* UtilsErrors.swift */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
+		7164396F2905BEE60065EA09 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				716439742905BFD10065EA09 /* Wallet */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		716439702905BF410065EA09 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				716439712905BF670065EA09 /* Wallet */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		716439712905BF670065EA09 /* Wallet */ = {
+			isa = PBXGroup;
+			children = (
+				716439722905BF740065EA09 /* WalletViewModel.swift */,
+			);
+			path = Wallet;
+			sourceTree = "<group>";
+		};
+		716439742905BFD10065EA09 /* Wallet */ = {
+			isa = PBXGroup;
+			children = (
+				716439752905BFE50065EA09 /* WalletDetails.swift */,
+				716439772905C0080065EA09 /* WCStatus.swift */,
+				716439792905C3510065EA09 /* WalletType.swift */,
+			);
+			path = Wallet;
+			sourceTree = "<group>";
+		};
+		7164397B2905C7E30065EA09 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				7164397C2905C7FB0065EA09 /* LoginView.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		7164397E2905CAA30065EA09 /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				7164397F2905CAA70065EA09 /* Color */,
+			);
+			path = Styles;
+			sourceTree = "<group>";
+		};
+		7164397F2905CAA70065EA09 /* Color */ = {
+			isa = PBXGroup;
+			children = (
+				716439802905CAB60065EA09 /* Colors.swift */,
+			);
+			path = Color;
+			sourceTree = "<group>";
+		};
+		716439882905D18F0065EA09 /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				716439892905D19A0065EA09 /* TotalFeedView.swift */,
+				719E5A5C2907A3FB0005A1DF /* UserFeedView.swift */,
+				716439AC2906BDDF0065EA09 /* DraftFeedView.swift */,
+			);
+			path = Feed;
+			sourceTree = "<group>";
+		};
+		7164399029066E7B0065EA09 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				719E5A652907B9BE0005A1DF /* Buttons */,
+				719E5A642907B9B00005A1DF /* Titles */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
+		7164399129066EDC0065EA09 /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				7164399229066F0D0065EA09 /* PostWithCommentsView.swift */,
+				7164399B29067F0F0065EA09 /* PostView.swift */,
+				719E5A5E2907A7930005A1DF /* PostWithUserView.swift */,
+				716439AE2906BE5D0065EA09 /* PostInDraftView.swift */,
+			);
+			path = Post;
+			sourceTree = "<group>";
+		};
+		71643994290670260065EA09 /* Comments */ = {
+			isa = PBXGroup;
+			children = (
+				71643995290670360065EA09 /* CommentView.swift */,
+				7164399D290683FB0065EA09 /* CommentTextEditor.swift */,
+			);
+			path = Comments;
+			sourceTree = "<group>";
+		};
+		716439A229068C740065EA09 /* String */ = {
+			isa = PBXGroup;
+			children = (
+				716439A329068C840065EA09 /* StringExtension.swift */,
+			);
+			path = String;
+			sourceTree = "<group>";
+		};
+		716439AB2906BDBA0065EA09 /* Drafts */ = {
+			isa = PBXGroup;
+			children = (
+				716439B22906C1A60065EA09 /* DraftBackButton.swift */,
+			);
+			path = Drafts;
+			sourceTree = "<group>";
+		};
+		719E5A602907AFDA0005A1DF /* User */ = {
+			isa = PBXGroup;
+			children = (
+				716439B02906C07D0065EA09 /* UserInfo.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		719E5A642907B9B00005A1DF /* Titles */ = {
+			isa = PBXGroup;
+			children = (
+				7164398E29065E940065EA09 /* UserFeedNavTitleView.swift */,
+				71643997290673660065EA09 /* PostNavTitleView.swift */,
+				716439A92906B8D50065EA09 /* CommentsNavTitle.swift */,
+			);
+			path = Titles;
+			sourceTree = "<group>";
+		};
+		719E5A652907B9BE0005A1DF /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				719E5A662907B9C70005A1DF /* BackNavButton.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		71D775C72901127F005F7D7D = {
+			isa = PBXGroup;
+			children = (
+				71D775D22901127F005F7D7D /* Frenly */,
+				71D775D12901127F005F7D7D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		71D775D12901127F005F7D7D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				71D775D02901127F005F7D7D /* Frenly.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		71D775D22901127F005F7D7D /* Frenly */ = {
+			isa = PBXGroup;
+			children = (
+				716439872905CEAB0065EA09 /* Info.plist */,
+				7164397E2905CAA30065EA09 /* Styles */,
+				7164396B290596560065EA09 /* Common */,
+				71D775E729013A31005F7D7D /* Services */,
+				7164396F2905BEE60065EA09 /* Models */,
+				716439702905BF410065EA09 /* ViewModels */,
+				71D775E129011299005F7D7D /* View */,
+				71D775D32901127F005F7D7D /* FrenlyApp.swift */,
+				71D775D52901127F005F7D7D /* ContentView.swift */,
+				71D775D729011283005F7D7D /* Assets.xcassets */,
+				71D775D929011283005F7D7D /* Preview Content */,
+			);
+			path = Frenly;
+			sourceTree = "<group>";
+		};
+		71D775D929011283005F7D7D /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				71D775DA29011283005F7D7D /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		71D775E129011299005F7D7D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				719E5A602907AFDA0005A1DF /* User */,
+				716439AB2906BDBA0065EA09 /* Drafts */,
+				71643994290670260065EA09 /* Comments */,
+				7164399029066E7B0065EA09 /* Navigation */,
+				716439882905D18F0065EA09 /* Feed */,
+				7164399129066EDC0065EA09 /* Post */,
+				7164397B2905C7E30065EA09 /* Login */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		71D775E729013A31005F7D7D /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				71643966290595230065EA09 /* Utils */,
+				71643965290595190065EA09 /* WalletConnect */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		71D775CF2901127F005F7D7D /* Frenly */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 71D775DE29011283005F7D7D /* Build configuration list for PBXNativeTarget "Frenly" */;
+			buildPhases = (
+				71D775CC2901127F005F7D7D /* Sources */,
+				71D775CD2901127F005F7D7D /* Frameworks */,
+				71D775CE2901127F005F7D7D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Frenly;
+			packageProductDependencies = (
+				71643961290592F80065EA09 /* WalletConnectSwift */,
+			);
+			productName = Frenly;
+			productReference = 71D775D02901127F005F7D7D /* Frenly.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		71D775C82901127F005F7D7D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1340;
+				LastUpgradeCheck = 1340;
+				TargetAttributes = {
+					71D775CF2901127F005F7D7D = {
+						CreatedOnToolsVersion = 13.4.1;
+					};
+				};
+			};
+			buildConfigurationList = 71D775CB2901127F005F7D7D /* Build configuration list for PBXProject "Frenly" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 71D775C72901127F005F7D7D;
+			packageReferences = (
+				71643960290592F70065EA09 /* XCRemoteSwiftPackageReference "WalletConnectSwift" */,
+			);
+			productRefGroup = 71D775D12901127F005F7D7D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				71D775CF2901127F005F7D7D /* Frenly */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		71D775CE2901127F005F7D7D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				71D775DB29011283005F7D7D /* Preview Assets.xcassets in Resources */,
+				71D775D829011283005F7D7D /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		71D775CC2901127F005F7D7D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				71643996290670360065EA09 /* CommentView.swift in Sources */,
+				716439782905C0080065EA09 /* WCStatus.swift in Sources */,
+				7164399C29067F0F0065EA09 /* PostView.swift in Sources */,
+				716439812905CAB60065EA09 /* Colors.swift in Sources */,
+				71D775E929013A3D005F7D7D /* WalletConnect.swift in Sources */,
+				716439AA2906B8D50065EA09 /* CommentsNavTitle.swift in Sources */,
+				71643968290595350065EA09 /* UtilsService.swift in Sources */,
+				7164396A2905954C0065EA09 /* RandomUtil.swift in Sources */,
+				719E5A5D2907A3FB0005A1DF /* UserFeedView.swift in Sources */,
+				716439A429068C840065EA09 /* StringExtension.swift in Sources */,
+				716439B32906C1A60065EA09 /* DraftBackButton.swift in Sources */,
+				71D775D62901127F005F7D7D /* ContentView.swift in Sources */,
+				719E5A672907B9C70005A1DF /* BackNavButton.swift in Sources */,
+				716439732905BF740065EA09 /* WalletViewModel.swift in Sources */,
+				716439762905BFE50065EA09 /* WalletDetails.swift in Sources */,
+				7164398F29065E940065EA09 /* UserFeedNavTitleView.swift in Sources */,
+				7164399329066F0D0065EA09 /* PostWithCommentsView.swift in Sources */,
+				716439B12906C07D0065EA09 /* UserInfo.swift in Sources */,
+				716439AD2906BDDF0065EA09 /* DraftFeedView.swift in Sources */,
+				7164399E290683FB0065EA09 /* CommentTextEditor.swift in Sources */,
+				71D775D42901127F005F7D7D /* FrenlyApp.swift in Sources */,
+				71643998290673660065EA09 /* PostNavTitleView.swift in Sources */,
+				719E5A5F2907A7930005A1DF /* PostWithUserView.swift in Sources */,
+				7164397D2905C7FB0065EA09 /* LoginView.swift in Sources */,
+				7164398A2905D19A0065EA09 /* TotalFeedView.swift in Sources */,
+				7164397A2905C3510065EA09 /* WalletType.swift in Sources */,
+				7164396E290596760065EA09 /* UtilsErrors.swift in Sources */,
+				716439AF2906BE5D0065EA09 /* PostInDraftView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		71D775DC29011283005F7D7D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		71D775DD29011283005F7D7D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		71D775DF29011283005F7D7D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Frenly/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Frenly/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Unistory.Frenly;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		71D775E029011283005F7D7D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Frenly/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Frenly/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Unistory.Frenly;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		71D775CB2901127F005F7D7D /* Build configuration list for PBXProject "Frenly" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				71D775DC29011283005F7D7D /* Debug */,
+				71D775DD29011283005F7D7D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		71D775DE29011283005F7D7D /* Build configuration list for PBXNativeTarget "Frenly" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				71D775DF29011283005F7D7D /* Debug */,
+				71D775E029011283005F7D7D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		71643960290592F70065EA09 /* XCRemoteSwiftPackageReference "WalletConnectSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/WalletConnect/WalletConnectSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		71643961290592F80065EA09 /* WalletConnectSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 71643960290592F70065EA09 /* XCRemoteSwiftPackageReference "WalletConnectSwift" */;
+			productName = WalletConnectSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 71D775C82901127F005F7D7D /* Project object */;
+}
