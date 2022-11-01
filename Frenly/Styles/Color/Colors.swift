@@ -21,4 +21,6 @@ extension Color {
     static let declineButtonBackground = Color("Color_DeclineButton_Background")
     
     static let declineButtonForeground = Color("Color_DeclineButton_Foreground")
+    
+    static let eyesLogo = Color("Color_Eyes_Simple")
 }

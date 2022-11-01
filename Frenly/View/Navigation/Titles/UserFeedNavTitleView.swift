@@ -11,8 +11,10 @@ struct UserFeedNavTitle: View {
     var body: some View {
         HStack {
             Image("Image_Eyes_Simple")
+                .renderingMode(.template)
                 .resizable()
                 .frame(width: 40, height: 30)
+                .foregroundColor(.eyesLogo)
             
             Text("frenly feed")
                 .font(.system(size: 22, weight: .bold, design: .rounded))

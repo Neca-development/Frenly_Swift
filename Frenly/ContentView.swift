@@ -14,20 +14,20 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
-            if (login.status == .unauthorized || wallet.wcStatus == .failed || wallet.wcStatus == .disconnected) {
-                LoginView()
-                    .environmentObject(login)
-                    .environmentObject(wallet)
-            }
-            
-            if (login.status == .authorized && wallet.wcStatus == .connected) {
+//            if (login.status == .unauthorized || wallet.wcStatus == .failed || wallet.wcStatus == .disconnected) {
+//                LoginView()
+//                    .environmentObject(login)
+//                    .environmentObject(wallet)
+//            }
+//
+//            if (login.status == .authorized && wallet.wcStatus == .connected) {
                 TotalFeedView()
                     .environmentObject(wallet)
-            }
+//            }
 
         }
         .onAppear() {
-            tryConnectWithDefaults()
+//            tryConnectWithDefaults()
         }
     }
     

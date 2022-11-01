@@ -49,6 +49,8 @@ struct CommentTextEditor: View {
                 .onChange(of: focusedField.wrappedValue) { newValue in
                     if (newValue == nil) {
                         onSubmitAction()
+                    } else {
+                        onChangeAction()
                     }
                 }
                 .animation(.easeInOut(duration: 0.4), value: textEditorHeight)

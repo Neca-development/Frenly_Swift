@@ -78,6 +78,12 @@ struct PostWithCommentsView: View {
                         .animation(.easeInOut(duration: 0.4), value: editorHeight)
                 }
             }
+            
+            // Keyboard placeholder
+            
+            Rectangle()
+                .opacity(0.001)
+                .frame(height: 10)
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
