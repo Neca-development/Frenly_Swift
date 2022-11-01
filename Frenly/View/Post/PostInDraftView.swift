@@ -25,6 +25,7 @@ struct PostInDraftView: View {
             ))
             
             Rectangle()
+                .foregroundColor(.blue)
                 .frame(
                     height: UIScreen.main.bounds.height * 0.4
                 )

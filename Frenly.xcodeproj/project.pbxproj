@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		710CB7AB2910ED2E00367885 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710CB7AA2910ED2E00367885 /* LoginViewModel.swift */; };
+		710CB7AE2910F1FF00367885 /* AuthWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710CB7AD2910F1FF00367885 /* AuthWebService.swift */; };
+		710CB7B12910F29E00367885 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710CB7B02910F29E00367885 /* Constants.swift */; };
+		710CB7B32910F33300367885 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710CB7B22910F33300367885 /* WebService.swift */; };
+		710CB7B52910F3DC00367885 /* NetworkErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710CB7B42910F3DC00367885 /* NetworkErrors.swift */; };
+		710CB7B72910FF1900367885 /* WalletConnectError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710CB7B62910FF1900367885 /* WalletConnectError.swift */; };
+		710CB7BA2911150B00367885 /* UserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710CB7B92911150B00367885 /* UserDefaultsExtension.swift */; };
+		710CB7BD291117D200367885 /* JWTDecode in Frameworks */ = {isa = PBXBuildFile; productRef = 710CB7BC291117D200367885 /* JWTDecode */; };
+		710CB7C029111BB300367885 /* KeyChainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710CB7BF29111BB300367885 /* KeyChainHelper.swift */; };
+		710CB7C229111BCD00367885 /* AuthTokensHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710CB7C129111BCD00367885 /* AuthTokensHelper.swift */; };
 		71643962290592F80065EA09 /* WalletConnectSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 71643961290592F80065EA09 /* WalletConnectSwift */; };
 		71643968290595350065EA09 /* UtilsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71643967290595350065EA09 /* UtilsService.swift */; };
 		7164396A2905954C0065EA09 /* RandomUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716439692905954C0065EA09 /* RandomUtil.swift */; };
@@ -37,10 +47,19 @@
 		71D775D62901127F005F7D7D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D775D52901127F005F7D7D /* ContentView.swift */; };
 		71D775D829011283005F7D7D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71D775D729011283005F7D7D /* Assets.xcassets */; };
 		71D775DB29011283005F7D7D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71D775DA29011283005F7D7D /* Preview Assets.xcassets */; };
-		71D775E929013A3D005F7D7D /* WalletConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D775E829013A3D005F7D7D /* WalletConnect.swift */; };
+		71D775E929013A3D005F7D7D /* WalletConnectService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D775E829013A3D005F7D7D /* WalletConnectService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		710CB7AA2910ED2E00367885 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		710CB7AD2910F1FF00367885 /* AuthWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthWebService.swift; sourceTree = "<group>"; };
+		710CB7B02910F29E00367885 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		710CB7B22910F33300367885 /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
+		710CB7B42910F3DC00367885 /* NetworkErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkErrors.swift; sourceTree = "<group>"; };
+		710CB7B62910FF1900367885 /* WalletConnectError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletConnectError.swift; sourceTree = "<group>"; };
+		710CB7B92911150B00367885 /* UserDefaultsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtension.swift; sourceTree = "<group>"; };
+		710CB7BF29111BB300367885 /* KeyChainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainHelper.swift; sourceTree = "<group>"; };
+		710CB7C129111BCD00367885 /* AuthTokensHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTokensHelper.swift; sourceTree = "<group>"; };
 		71643967290595350065EA09 /* UtilsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsService.swift; sourceTree = "<group>"; };
 		716439692905954C0065EA09 /* RandomUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomUtil.swift; sourceTree = "<group>"; };
 		7164396D290596760065EA09 /* UtilsErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsErrors.swift; sourceTree = "<group>"; };
@@ -72,7 +91,7 @@
 		71D775D52901127F005F7D7D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		71D775D729011283005F7D7D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		71D775DA29011283005F7D7D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		71D775E829013A3D005F7D7D /* WalletConnect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletConnect.swift; sourceTree = "<group>"; };
+		71D775E829013A3D005F7D7D /* WalletConnectService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletConnectService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				710CB7BD291117D200367885 /* JWTDecode in Frameworks */,
 				71643962290592F80065EA09 /* WalletConnectSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -87,10 +107,52 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		710CB7A92910ED1E00367885 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				710CB7AA2910ED2E00367885 /* LoginViewModel.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		710CB7AC2910F1EC00367885 /* Web */ = {
+			isa = PBXGroup;
+			children = (
+				710CB7AD2910F1FF00367885 /* AuthWebService.swift */,
+				710CB7B22910F33300367885 /* WebService.swift */,
+			);
+			path = Web;
+			sourceTree = "<group>";
+		};
+		710CB7AF2910F29100367885 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				710CB7B02910F29E00367885 /* Constants.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		710CB7B8291114FA00367885 /* UserDefaults */ = {
+			isa = PBXGroup;
+			children = (
+				710CB7B92911150B00367885 /* UserDefaultsExtension.swift */,
+			);
+			path = UserDefaults;
+			sourceTree = "<group>";
+		};
+		710CB7BE29111BA600367885 /* KeyChain */ = {
+			isa = PBXGroup;
+			children = (
+				710CB7BF29111BB300367885 /* KeyChainHelper.swift */,
+				710CB7C129111BCD00367885 /* AuthTokensHelper.swift */,
+			);
+			path = KeyChain;
+			sourceTree = "<group>";
+		};
 		71643965290595190065EA09 /* WalletConnect */ = {
 			isa = PBXGroup;
 			children = (
-				71D775E829013A3D005F7D7D /* WalletConnect.swift */,
+				71D775E829013A3D005F7D7D /* WalletConnectService.swift */,
 			);
 			path = WalletConnect;
 			sourceTree = "<group>";
@@ -107,6 +169,8 @@
 		7164396B290596560065EA09 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				710CB7B8291114FA00367885 /* UserDefaults */,
+				710CB7AF2910F29100367885 /* Constants */,
 				716439A229068C740065EA09 /* String */,
 				7164396C2905965F0065EA09 /* Errors */,
 			);
@@ -117,6 +181,8 @@
 			isa = PBXGroup;
 			children = (
 				7164396D290596760065EA09 /* UtilsErrors.swift */,
+				710CB7B42910F3DC00367885 /* NetworkErrors.swift */,
+				710CB7B62910FF1900367885 /* WalletConnectError.swift */,
 			);
 			path = Errors;
 			sourceTree = "<group>";
@@ -132,6 +198,7 @@
 		716439702905BF410065EA09 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				710CB7A92910ED1E00367885 /* Login */,
 				716439712905BF670065EA09 /* Wallet */,
 			);
 			path = ViewModels;
@@ -319,6 +386,8 @@
 		71D775E729013A31005F7D7D /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				710CB7BE29111BA600367885 /* KeyChain */,
+				710CB7AC2910F1EC00367885 /* Web */,
 				71643966290595230065EA09 /* Utils */,
 				71643965290595190065EA09 /* WalletConnect */,
 			);
@@ -343,6 +412,7 @@
 			name = Frenly;
 			packageProductDependencies = (
 				71643961290592F80065EA09 /* WalletConnectSwift */,
+				710CB7BC291117D200367885 /* JWTDecode */,
 			);
 			productName = Frenly;
 			productReference = 71D775D02901127F005F7D7D /* Frenly.app */;
@@ -374,6 +444,7 @@
 			mainGroup = 71D775C72901127F005F7D7D;
 			packageReferences = (
 				71643960290592F70065EA09 /* XCRemoteSwiftPackageReference "WalletConnectSwift" */,
+				710CB7BB291117D200367885 /* XCRemoteSwiftPackageReference "JWTDecode" */,
 			);
 			productRefGroup = 71D775D12901127F005F7D7D /* Products */;
 			projectDirPath = "";
@@ -403,13 +474,18 @@
 			files = (
 				71643996290670360065EA09 /* CommentView.swift in Sources */,
 				716439782905C0080065EA09 /* WCStatus.swift in Sources */,
+				710CB7C229111BCD00367885 /* AuthTokensHelper.swift in Sources */,
 				7164399C29067F0F0065EA09 /* PostView.swift in Sources */,
 				716439812905CAB60065EA09 /* Colors.swift in Sources */,
-				71D775E929013A3D005F7D7D /* WalletConnect.swift in Sources */,
+				71D775E929013A3D005F7D7D /* WalletConnectService.swift in Sources */,
+				710CB7BA2911150B00367885 /* UserDefaultsExtension.swift in Sources */,
 				716439AA2906B8D50065EA09 /* CommentsNavTitle.swift in Sources */,
 				71643968290595350065EA09 /* UtilsService.swift in Sources */,
 				7164396A2905954C0065EA09 /* RandomUtil.swift in Sources */,
+				710CB7B52910F3DC00367885 /* NetworkErrors.swift in Sources */,
+				710CB7B72910FF1900367885 /* WalletConnectError.swift in Sources */,
 				719E5A5D2907A3FB0005A1DF /* UserFeedView.swift in Sources */,
+				710CB7B12910F29E00367885 /* Constants.swift in Sources */,
 				716439A429068C840065EA09 /* StringExtension.swift in Sources */,
 				716439B32906C1A60065EA09 /* DraftBackButton.swift in Sources */,
 				71D775D62901127F005F7D7D /* ContentView.swift in Sources */,
@@ -419,11 +495,15 @@
 				7164398F29065E940065EA09 /* UserFeedNavTitleView.swift in Sources */,
 				7164399329066F0D0065EA09 /* PostWithCommentsView.swift in Sources */,
 				716439B12906C07D0065EA09 /* UserInfo.swift in Sources */,
+				710CB7AE2910F1FF00367885 /* AuthWebService.swift in Sources */,
 				716439AD2906BDDF0065EA09 /* DraftFeedView.swift in Sources */,
 				7164399E290683FB0065EA09 /* CommentTextEditor.swift in Sources */,
 				71D775D42901127F005F7D7D /* FrenlyApp.swift in Sources */,
+				710CB7AB2910ED2E00367885 /* LoginViewModel.swift in Sources */,
+				710CB7C029111BB300367885 /* KeyChainHelper.swift in Sources */,
 				71643998290673660065EA09 /* PostNavTitleView.swift in Sources */,
 				719E5A5F2907A7930005A1DF /* PostWithUserView.swift in Sources */,
+				710CB7B32910F33300367885 /* WebService.swift in Sources */,
 				7164397D2905C7FB0065EA09 /* LoginView.swift in Sources */,
 				7164398A2905D19A0065EA09 /* TotalFeedView.swift in Sources */,
 				7164397A2905C3510065EA09 /* WalletType.swift in Sources */,
@@ -557,6 +637,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Frenly/Preview Content\"";
+				DEVELOPMENT_TEAM = BJ7N7UHC59;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Frenly/Info.plist;
@@ -586,6 +667,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Frenly/Preview Content\"";
+				DEVELOPMENT_TEAM = BJ7N7UHC59;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Frenly/Info.plist;
@@ -631,6 +713,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		710CB7BB291117D200367885 /* XCRemoteSwiftPackageReference "JWTDecode" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/auth0/JWTDecode.swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 		71643960290592F70065EA09 /* XCRemoteSwiftPackageReference "WalletConnectSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/WalletConnect/WalletConnectSwift.git";
@@ -642,6 +732,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		710CB7BC291117D200367885 /* JWTDecode */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 710CB7BB291117D200367885 /* XCRemoteSwiftPackageReference "JWTDecode" */;
+			productName = JWTDecode;
+		};
 		71643961290592F80065EA09 /* WalletConnectSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 71643960290592F70065EA09 /* XCRemoteSwiftPackageReference "WalletConnectSwift" */;

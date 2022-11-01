@@ -14,31 +14,59 @@ final class WalletViewModel: ObservableObject {
     
     private var wcService: WalletConnectService!
     
+    var walletAddress: String? {
+        get {
+            guard let accounts = wcService.session?.walletInfo?.accounts, let wallet = accounts.first else { return nil }
+            
+            return wallet
+        }
+    }
+    
     public init() {
         wcService = WalletConnectService(delegate: self)
-        
-        let status = wcService.tryReconnect()
-
-        if (status == .success) {
-            wcStatus = .connected
-        }
     }
      
     func connectWallet(walletType: WalletType) async -> Void {
         let wcUrl = wcService.connect(title: "Frenly", description: "Frenly App")
-        let encodedWcUrl = wcUrl.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
-        let formattedWcUrl = encodedWcUrl.replacingOccurrences(of: "=", with: "%3D").replacingOccurrences(of: "&", with: "%26")
-
-        let deepLink =  "\(walletType.rawValue)\(formattedWcUrl)"
-
-        guard let url = URL(string: deepLink) else {
+        
+        do {
+            UserDefaults.standard.set(walletType.rawValue, forKey: Constants.WC_WALLET_TYPE_KEY)
+            
+            try openExternalWalletApp(wcUrl: wcUrl)
+        } catch {
             wcStatus = .failed
             return
         }
+    }
+    
+    func reconnect() -> WalletConnectService.ReconnectStatus {
+        return wcService.tryReconnect()
+    }
+    
+    func sign(message: String) async throws -> String {
+        let wcUrl = wcService.session.url.absoluteString
+
+        try openExternalWalletApp(wcUrl: wcUrl)
+        
+        return try await wcService.sign(message: message)
+    }
+    
+    private func openExternalWalletApp(wcUrl: String) throws -> Void {
+        let encodedWcUrl = wcUrl.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
+        let formattedWcUrl = encodedWcUrl.replacingOccurrences(of: "=", with: "%3D").replacingOccurrences(of: "&", with: "%26")
+
+        guard let walletLink = UserDefaults.standard.string(forKey: Constants.WC_WALLET_TYPE_KEY) else {
+            throw WalletConnectErrors.missingWalletType
+        }
+        
+        let deepLink = "\(walletLink)\(formattedWcUrl)"
+
+        guard let url = URL(string: deepLink) else {
+            throw WalletConnectErrors.invalidDeepLink
+        }
         
         if (!UIApplication.shared.canOpenURL(url)) {
-            wcStatus = .failed
-            return
+            throw WalletConnectErrors.invalidDeepLink
         }
         
         UIApplication.shared.open(url, options: [:], completionHandler: nil)

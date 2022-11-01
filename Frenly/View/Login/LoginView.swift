@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
+    @EnvironmentObject private var login: LoginViewModel
     @EnvironmentObject private var wallet: WalletViewModel
     
     var body: some View {
@@ -33,7 +34,11 @@ struct LoginView: View {
             
             Button {
                 Task {
-                    await wallet.connectWallet(walletType: .metaMask)
+                    if (wallet.wcStatus != .connected) {
+                        await wallet.connectWallet(walletType: .metaMask)
+                    } else {
+                        await authorize()
+                    }
                 }
             } label: {
                 Text("CONNECT WALLET")
@@ -46,8 +51,28 @@ struct LoginView: View {
                     .foregroundColor(.white)
                     .cornerRadius(50)
             }
+            .onChange(of: wallet.wcStatus) { status in
+                if (status == .connected) {
+                    Task { await authorize() }
+                }
+            }
             
             Spacer()
+        }
+    }
+    
+    private func authorize() async -> Void {
+        do {
+            guard let walletAddress = wallet.walletAddress else { return }
+            
+            let nonce = try await login.getUserNonce(walletAddress: walletAddress)
+            let message = "Nonce: \(nonce)"
+            
+            let signature = try await wallet.sign(message: message)
+            
+            try await login.authorizeWithSignature(walletAddress: walletAddress, signature: signature)
+        } catch {
+            wallet.wcStatus = .failed
         }
     }
 }
