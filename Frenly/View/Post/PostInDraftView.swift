@@ -8,38 +8,78 @@
 import SwiftUI
 
 struct PostInDraftView: View {
+    @EnvironmentObject private var drafts: DraftFeedViewModel
+    
+    var post: Post
+    
     var body: some View {
         VStack(alignment: .leading) {
-            Text("SEP, 11 AT 9:41 AM")
+            Text(post.getFormattedDate())
                 .font(.system(size: 14, weight: .regular, design: .rounded))
                 .foregroundColor(.grayBlue)
                 
-            HStack(spacing: 0) {
-                Text("Transfer type to ")
-                Text("wallet_user")
+            if (post.fromAddress == Constants.ETH_NULL_ADDRESS) {
+                Text("🎉 Minted a new NFT from ")
+                    .font(.system(
+                        size: 18,
+                        weight: .regular,
+                        design: .rounded
+                    ))
+                Text(post.contractAddress)
+                    .font(.system(
+                        size: 18,
+                        weight: .regular,
+                        design: .rounded
+                    ))
+                    .foregroundColor(.blue)
             }
-            .font(.system(
-                size: 18,
-                weight: .regular,
-                design: .rounded
-            ))
             
-            Rectangle()
-                .foregroundColor(.blue)
-                .frame(
-                    height: UIScreen.main.bounds.height * 0.4
-                )
-                .cornerRadius(30)
+            if (post.fromAddress != Constants.ETH_NULL_ADDRESS) {
+                Text("📤 \(post.transferType == "SEND" ? "Sent" : "Recieved") NFT \(post.transferType == "SEND" ? "to" : "from")")
+                    .font(.system(
+                        size: 18,
+                        weight: .regular,
+                        design: .rounded
+                    ))
+                
+                Text(post.transferType == "SEND" ? post.fromAddress : post.toAddress)
+                    .font(.system(
+                        size: 18,
+                        weight: .regular,
+                        design: .rounded
+                    ))
+                    .foregroundColor(.blue)
+            }
             
-            Text("NFT name #id")
+            AsyncImage(
+                url: URL(string: "\(Constants.TOKEN_IMAGES_URL)/\(post.image)")!
+            ) { phase in
+                if let image = phase.image {
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                } else if phase.error == nil {
+                    ProgressView()
+                }
+            }
+            .frame(
+                width: UIScreen.main.bounds.width * 0.9,
+                height: UIScreen.main.bounds.height * 0.3,
+                alignment: .center
+            )
+            .cornerRadius(30)
+            
+            Text("FrenlyDraft")
                 .font(.system(size: 18, weight: .regular, design: .rounded))
                 .foregroundColor(.grayBlue)
             
             
             HStack {
-                Text("Polygonscan")
-                    .font(.system(size: 18, weight: .regular, design: .rounded))
-                    .foregroundColor(.blue)
+                Link(destination: URL(string: "https://etherscan.io/tx/\(post.transactionHash)")!) {
+                    Text("Etherscan")
+                        .font(.system(size: 18, weight: .regular, design: .rounded))
+                        .foregroundColor(.blue)
+                }
                 
                 Spacer()
             }
@@ -78,6 +118,7 @@ struct PostInDraftView: View {
 
 struct PostInDraftView_Previews: PreviewProvider {
     static var previews: some View {
-        PostInDraftView()
+        PostInDraftView(post: Post())
+            .environmentObject(DraftFeedViewModel())
     }
 }

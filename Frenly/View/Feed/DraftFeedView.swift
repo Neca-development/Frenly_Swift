@@ -13,26 +13,46 @@ struct DraftFeedView: View {
     @EnvironmentObject private var wallet: WalletViewModel
     @EnvironmentObject private var auth: AuthViewModel
     
+    @Environment(\.refresh) private var refresh
+    
     @StateObject private var drafts = DraftFeedViewModel()
     
     @State private var isEditing = false
+    @State private var isRefreshing = false
     
     var body: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             if (!isEditing) {
                 UserInfoView(
                     avatar: user.user.avatar,
                     description: user.user.description
                 )
                 
-                PostInDraftView()
-                Divider()
-                PostInDraftView()
-                Divider()
-                PostInDraftView()
-                Divider()
-                PostInDraftView()
-                Divider()
+                LazyVStack {
+                    if (isRefreshing) {
+                        Spacer()
+                        ProgressView()
+                        Spacer()
+                    }
+                    
+                    ForEach(drafts.posts, id: \.id) { post in
+                        PostInDraftView(post: post)
+                            .environmentObject(drafts)
+                    }
+                }
+                .background(GeometryReader {
+                    Color.clear.preference(key: ViewOffsetKey.self, value: -$0.frame(in: .global).origin.y)
+                })
+                .onPreferenceChange(ViewOffsetKey.self) {
+                    if $0 < -80 && !isRefreshing {
+                        isRefreshing = true
+                        Task {
+                            await refresh?()
+                            isRefreshing = false
+                        }
+                    }
+                }
+                
             
                 DraftBackButton()
             } else {
@@ -41,6 +61,10 @@ struct DraftFeedView: View {
                     .environmentObject(wallet)
                     .environmentObject(auth)
             }
+        }
+        .refreshable {
+            drafts.posts = []
+            await drafts.fetchPosts()
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
@@ -63,6 +87,7 @@ struct DraftFeedView: View {
         .onAppear() {
             Task {
                 await user.fetchUser()
+                await drafts.fetchPosts()
             }
         }
     }
@@ -85,6 +110,15 @@ struct DraftFeedView: View {
                 }
             }
             .font(.system(size: 22, weight: .regular, design: .rounded))
+        }
+    }
+    
+    private struct ViewOffsetKey: PreferenceKey {
+        public typealias Value = CGFloat
+        public static var defaultValue = CGFloat.zero
+
+        public static func reduce(value: inout Value, nextValue: () -> Value) {
+            value += nextValue()
         }
     }
 }

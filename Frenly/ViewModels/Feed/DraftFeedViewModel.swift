@@ -17,6 +17,8 @@ class DraftFeedViewModel: ObservableObject {
         }
 
         for i in 0..<response.data.count {
+            let scanLink = "https://etherscan.io/tx/\(response.data[i].transactionHash)"
+            
             posts.append(Post(
                 id: response.data[i].id,
                 fromAddress: response.data[i].fromAddress,
@@ -25,6 +27,7 @@ class DraftFeedViewModel: ObservableObject {
                 transactionHash: response.data[i].transactionHash,
                 transferType: response.data[i].transferType,
                 image: response.data[i].image ?? "",
+                scanLink: scanLink,
                 createdDate: response.data[i].creationDate
             ))
         }

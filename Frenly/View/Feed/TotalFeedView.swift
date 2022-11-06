@@ -136,9 +136,8 @@ struct TotalFeedView: View {
 
 struct TotalFeedView_Previews: PreviewProvider {
     static var previews: some View {
-        let model = WalletViewModel()
-        
-        return TotalFeedView()
-            .environmentObject(model)
+        TotalFeedView()
+            .environmentObject(WalletViewModel())
+            .environmentObject(AuthViewModel())
     }
 }
