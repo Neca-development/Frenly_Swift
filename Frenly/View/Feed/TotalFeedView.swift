@@ -32,7 +32,7 @@ struct TotalFeedView: View {
                     
                     ForEach(feed.posts, id: \.id) { post in
                         NavigationLink {
-                            PostWithCommentsView()
+                            PostWithCommentsView(post: post)
                         } label: {
                             PostWithUserView(
                                 post: post,

@@ -27,6 +27,7 @@ public enum SchemaMetadata: ApolloAPI.SchemaMetadata {
     case "Post": return LensProtocol.Objects.Post
     case "Comment": return LensProtocol.Objects.Comment
     case "Mirror": return LensProtocol.Objects.Mirror
+    case "MetadataOutput": return LensProtocol.Objects.MetadataOutput
     case "Profile": return LensProtocol.Objects.Profile
     case "PublicationStats": return LensProtocol.Objects.PublicationStats
     case "AuthChallengeResult": return LensProtocol.Objects.AuthChallengeResult

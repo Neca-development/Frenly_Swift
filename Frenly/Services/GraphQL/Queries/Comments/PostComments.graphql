@@ -1,0 +1,16 @@
+query PostComments($publicationId: InternalPublicationId!) {
+  publications(request: {commentsOf: $publicationId}) {
+    items {
+      ... on Comment {
+        id
+        metadata {
+          content
+        }
+        createdAt
+        profile {
+          ownedBy
+        }
+      }
+    }
+  }
+}

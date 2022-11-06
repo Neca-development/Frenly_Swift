@@ -36,7 +36,7 @@
 		7164399329066F0D0065EA09 /* PostWithCommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7164399229066F0D0065EA09 /* PostWithCommentsView.swift */; };
 		71643996290670360065EA09 /* CommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71643995290670360065EA09 /* CommentView.swift */; };
 		71643998290673660065EA09 /* PostNavTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71643997290673660065EA09 /* PostNavTitleView.swift */; };
-		7164399C29067F0F0065EA09 /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7164399B29067F0F0065EA09 /* PostView.swift */; };
+		7164399C29067F0F0065EA09 /* FullViewPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7164399B29067F0F0065EA09 /* FullViewPost.swift */; };
 		7164399E290683FB0065EA09 /* CommentTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7164399D290683FB0065EA09 /* CommentTextEditor.swift */; };
 		716439A429068C840065EA09 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716439A329068C840065EA09 /* StringExtension.swift */; };
 		716439AA2906B8D50065EA09 /* CommentsNavTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716439A92906B8D50065EA09 /* CommentsNavTitle.swift */; };
@@ -65,6 +65,10 @@
 		71E052C92913AD55006FB1DC /* MediaUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E052C82913AD55006FB1DC /* MediaUtil.swift */; };
 		71E052CC2913AEF7006FB1DC /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E052CB2913AEF7006FB1DC /* Data.swift */; };
 		71E052CE2917EE9C006FB1DC /* DraftFeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E052CD2917EE9C006FB1DC /* DraftFeedViewModel.swift */; };
+		71E052D12917FD04006FB1DC /* PostComments.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 71E052D02917FD04006FB1DC /* PostComments.graphql */; };
+		71E052D32917FD80006FB1DC /* PostCommentsQuery.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E052D22917FD80006FB1DC /* PostCommentsQuery.graphql.swift */; };
+		71E052D62917FFFE006FB1DC /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E052D52917FFFE006FB1DC /* Comment.swift */; };
+		71E052D9291802CB006FB1DC /* CommentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E052D8291802CB006FB1DC /* CommentsViewModel.swift */; };
 		71E18EEE2912C89800FDBC05 /* LensProtocol in Frameworks */ = {isa = PBXBuildFile; productRef = 71E18EED2912C89800FDBC05 /* LensProtocol */; };
 		71E18EF12912CE3F00FDBC05 /* Authenticate.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 71E18EF02912CE3F00FDBC05 /* Authenticate.graphql */; };
 		71E18EF32912CE7D00FDBC05 /* RefreshJWT.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 71E18EF22912CE7D00FDBC05 /* RefreshJWT.graphql */; };
@@ -109,7 +113,7 @@
 		7164399229066F0D0065EA09 /* PostWithCommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostWithCommentsView.swift; sourceTree = "<group>"; };
 		71643995290670360065EA09 /* CommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
 		71643997290673660065EA09 /* PostNavTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostNavTitleView.swift; sourceTree = "<group>"; };
-		7164399B29067F0F0065EA09 /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
+		7164399B29067F0F0065EA09 /* FullViewPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullViewPost.swift; sourceTree = "<group>"; };
 		7164399D290683FB0065EA09 /* CommentTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTextEditor.swift; sourceTree = "<group>"; };
 		716439A329068C840065EA09 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		716439A92906B8D50065EA09 /* CommentsNavTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsNavTitle.swift; sourceTree = "<group>"; };
@@ -138,6 +142,10 @@
 		71E052C82913AD55006FB1DC /* MediaUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaUtil.swift; sourceTree = "<group>"; };
 		71E052CB2913AEF7006FB1DC /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		71E052CD2917EE9C006FB1DC /* DraftFeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraftFeedViewModel.swift; sourceTree = "<group>"; };
+		71E052D02917FD04006FB1DC /* PostComments.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = PostComments.graphql; sourceTree = "<group>"; };
+		71E052D22917FD80006FB1DC /* PostCommentsQuery.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCommentsQuery.graphql.swift; sourceTree = "<group>"; };
+		71E052D52917FFFE006FB1DC /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		71E052D8291802CB006FB1DC /* CommentsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewModel.swift; sourceTree = "<group>"; };
 		71E18EEB2912C87500FDBC05 /* LensProtocol */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = LensProtocol; path = Frenly/Services/GraphQL/LensProtocol; sourceTree = "<group>"; };
 		71E18EF02912CE3F00FDBC05 /* Authenticate.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Authenticate.graphql; sourceTree = "<group>"; };
 		71E18EF22912CE7D00FDBC05 /* RefreshJWT.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = RefreshJWT.graphql; sourceTree = "<group>"; };
@@ -287,6 +295,7 @@
 		7164396F2905BEE60065EA09 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				71E052D42917FFF3006FB1DC /* Comments */,
 				71E052C42913AC69006FB1DC /* Media */,
 				71E18F092913154000FDBC05 /* User */,
 				710CB7CC2911423000367885 /* Post */,
@@ -298,6 +307,7 @@
 		716439702905BF410065EA09 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				71E052D7291802B5006FB1DC /* Comments */,
 				71E18F06291314E100FDBC05 /* User */,
 				71E18EFE2912D93E00FDBC05 /* Wallet */,
 				710CB7C9291136DD00367885 /* Feed */,
@@ -364,7 +374,7 @@
 			isa = PBXGroup;
 			children = (
 				7164399229066F0D0065EA09 /* PostWithCommentsView.swift */,
-				7164399B29067F0F0065EA09 /* PostView.swift */,
+				7164399B29067F0F0065EA09 /* FullViewPost.swift */,
 				719E5A5E2907A7930005A1DF /* PostWithUserView.swift */,
 				716439AE2906BE5D0065EA09 /* PostInDraftView.swift */,
 			);
@@ -426,6 +436,7 @@
 		71AD718B2912C1DB00BC7CF7 /* Queries */ = {
 			isa = PBXGroup;
 			children = (
+				71E052CF2917FCE2006FB1DC /* Comments */,
 				71E18EFF2913036E00FDBC05 /* Posts */,
 				71E18EEF2912CE1800FDBC05 /* Authentication */,
 			);
@@ -525,6 +536,31 @@
 				71E052CB2913AEF7006FB1DC /* Data.swift */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		71E052CF2917FCE2006FB1DC /* Comments */ = {
+			isa = PBXGroup;
+			children = (
+				71E052D02917FD04006FB1DC /* PostComments.graphql */,
+				71E052D22917FD80006FB1DC /* PostCommentsQuery.graphql.swift */,
+			);
+			path = Comments;
+			sourceTree = "<group>";
+		};
+		71E052D42917FFF3006FB1DC /* Comments */ = {
+			isa = PBXGroup;
+			children = (
+				71E052D52917FFFE006FB1DC /* Comment.swift */,
+			);
+			path = Comments;
+			sourceTree = "<group>";
+		};
+		71E052D7291802B5006FB1DC /* Comments */ = {
+			isa = PBXGroup;
+			children = (
+				71E052D8291802CB006FB1DC /* CommentsViewModel.swift */,
+			);
+			path = Comments;
 			sourceTree = "<group>";
 		};
 		71E18EEA2912C87500FDBC05 /* Packages */ = {
@@ -667,6 +703,7 @@
 			files = (
 				71AD718D2912C20700BC7CF7 /* lens-protocol-schema.graphqls in Resources */,
 				71D775DB29011283005F7D7D /* Preview Assets.xcassets in Resources */,
+				71E052D12917FD04006FB1DC /* PostComments.graphql in Resources */,
 				71E18EF32912CE7D00FDBC05 /* RefreshJWT.graphql in Resources */,
 				71C4DB3D29129550008B4A8C /* Challenge.graphql in Resources */,
 				71AD71962912C5F400BC7CF7 /* apollo-codegen-config.json in Resources */,
@@ -687,7 +724,7 @@
 				716439782905C0080065EA09 /* WCStatus.swift in Sources */,
 				710CB7C229111BCD00367885 /* AuthTokensHelper.swift in Sources */,
 				710CB7CE2911425000367885 /* Post.swift in Sources */,
-				7164399C29067F0F0065EA09 /* PostView.swift in Sources */,
+				7164399C29067F0F0065EA09 /* FullViewPost.swift in Sources */,
 				716439812905CAB60065EA09 /* Colors.swift in Sources */,
 				71D775E929013A3D005F7D7D /* WalletConnectService.swift in Sources */,
 				710CB7BA2911150B00367885 /* UserDefaultsExtension.swift in Sources */,
@@ -704,6 +741,8 @@
 				716439A429068C840065EA09 /* StringExtension.swift in Sources */,
 				716439B32906C1A60065EA09 /* DraftBackButton.swift in Sources */,
 				71D775D62901127F005F7D7D /* ContentView.swift in Sources */,
+				71E052D62917FFFE006FB1DC /* Comment.swift in Sources */,
+				71E052D32917FD80006FB1DC /* PostCommentsQuery.graphql.swift in Sources */,
 				71E18F0B2913154800FDBC05 /* User.swift in Sources */,
 				719E5A672907B9C70005A1DF /* BackNavButton.swift in Sources */,
 				71E052C32913A73A006FB1DC /* ImagePicker.swift in Sources */,
@@ -715,6 +754,7 @@
 				71E052C92913AD55006FB1DC /* MediaUtil.swift in Sources */,
 				716439B12906C07D0065EA09 /* UserInfoView.swift in Sources */,
 				71E052C62913AC74006FB1DC /* Media.swift in Sources */,
+				71E052D9291802CB006FB1DC /* CommentsViewModel.swift in Sources */,
 				71E052BE29138CA3006FB1DC /* UserUtil.swift in Sources */,
 				710CB7AE2910F1FF00367885 /* AuthWebService.swift in Sources */,
 				716439AD2906BDDF0065EA09 /* DraftFeedView.swift in Sources */,

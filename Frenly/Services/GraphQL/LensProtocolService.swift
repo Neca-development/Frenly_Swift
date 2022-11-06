@@ -113,6 +113,37 @@ class LensProtocolService {
         }
     }
     
+    static func getCommentsByPostId(postId: String) async -> [Comment] {
+        await withCheckedContinuation { continuation in
+
+            apolloClient.fetch(query: PostCommentsQuery(publicationId: postId)) { result in
+                var comments: [Comment] = []
+                
+                guard let data = try? result.get().data else {
+                    continuation.resume(returning: comments)
+                    return
+                }
+                
+                for i in 0..<data.publications.items.count {
+                    let isoDate = data.publications.items[i].asComment!.createdAt
+                    
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+                    let date = dateFormatter.date(from:isoDate)!
+                    
+                    comments.append(Comment(
+                        id: data.publications.items[i].asComment!.id,
+                        walletAddress: data.publications.items[i].asComment!.profile.ownedBy,
+                        text: data.publications.items[i].asComment!.metadata.content!,
+                        creationDate: date
+                    ))
+                }
+                
+                continuation.resume(returning: comments)
+            }
+        }
+    }
+    
     // Response Types
     struct JWTPair {
         var accessToken: String
@@ -129,5 +160,12 @@ class LensProtocolService {
         var totalAmountOfComments: Int
         var totalUpvotes: Int
         var totalAmountOfMirrors: Int
+    }
+    
+    struct Comment {
+        var id: String
+        var walletAddress: String
+        var text: String
+        var creationDate: Date
     }
 }

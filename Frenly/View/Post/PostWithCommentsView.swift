@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct PostWithCommentsView: View {
+    @StateObject private var comments = CommentsViewModel()
+    
     @State private var text = ""
     @State private var editorHeight: CGFloat = 20
     
@@ -15,12 +17,14 @@ struct PostWithCommentsView: View {
     
     @FocusState var commentsFocus: Int?
     
+    var post: Post
+    
     var body: some View {
         VStack {
             Divider()
 
             if (isContentShown) {
-                FullViewPost()
+                FullViewPost(post: post)
                     .frame(
                         width: UIScreen.main.bounds.width * 0.9
                     )
@@ -33,18 +37,16 @@ struct PostWithCommentsView: View {
             
             ScrollView(showsIndicators: false) {
                 ScrollViewReader { reader in
-                    CommentView()
-                    
-                    CommentView()
-                    
-                    CommentView()
-                    
-                    CommentView()
-                    
-                    CommentView()
-                    
-                    // TODO:
-                    // Scroll to bottom via reader
+                   
+                    ForEach(comments.comments, id: \.id) { comment in
+                        CommentView(comment: comment)
+                    }
+                    .onAppear {
+                        reader.scrollTo(
+                            comments.comments.last?.id,
+                            anchor: .center
+                        )
+                    }
                 }
             }
             .frame(
@@ -101,7 +103,7 @@ struct PostWithCommentsView: View {
                     NavigationLink {
                         UserFeedView()
                     } label: {
-                        PostNavTitleView()
+                        PostNavTitleView(post: post)
                     }
                     .buttonStyle(PlainButtonStyle())
                 } else {
@@ -109,13 +111,16 @@ struct PostWithCommentsView: View {
                 }
             }
         }
+        .onAppear() {
+            Task { await comments.fetchComments(lensId: post.lensId) }
+        }
     }
 }
 
 struct PostWithCommentsView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            PostWithCommentsView()
+            PostWithCommentsView(post: Post())
         }
     }
 }

@@ -15,7 +15,7 @@ struct UserFeedView: View {
             UserInfoView(avatar: "", description: "description")
 
             NavigationLink {
-                PostWithCommentsView()
+                PostWithCommentsView(post: Post())
             } label: {
                 PostWithUserView()
             }
@@ -24,7 +24,7 @@ struct UserFeedView: View {
             Divider()
             
             NavigationLink {
-                PostWithCommentsView()
+                PostWithCommentsView(post: Post())
             } label: {
                 PostWithUserView()
             }
@@ -33,7 +33,7 @@ struct UserFeedView: View {
             Divider()
             
             NavigationLink {
-                PostWithCommentsView()
+                PostWithCommentsView(post: Post())
             } label: {
                 PostWithUserView()
             }
@@ -42,7 +42,7 @@ struct UserFeedView: View {
             Divider()
             
             NavigationLink {
-                PostWithCommentsView()
+                PostWithCommentsView(post: Post())
             } label: {
                 PostWithUserView()
             }
