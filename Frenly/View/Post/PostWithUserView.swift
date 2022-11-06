@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct PostWithUserView: View {
+struct PostWithUserView: View {    
+    var post = Post()
     var navigateToUser = false
-    var isMirror: Bool = Bool.random()
     
     var body: some View {
         HStack(alignment: .top) {
@@ -17,81 +17,113 @@ struct PostWithUserView: View {
                 NavigationLink {
                     UserFeedView()
                 } label: {
-                    Image("Image_MockAvatar")
-                        .resizable()
-                        .frame(
-                            width: 40,
-                            height: 40
-                        )
+                    avatar(name: post.avatar)
                 }
                 .buttonStyle(PlainButtonStyle())
             } else {
-                Image("Image_MockAvatar")
-                    .resizable()
-                    .frame(
-                        width: 40,
-                        height: 40
-                    )
+                avatar(name: post.avatar)
             }
             
             VStack(alignment: .leading) {
-                if (isMirror) {
+                Text(post.username)
+                    .font(.system(size: 20, weight: .bold, design: .rounded))
+
+                if (post.isMirror) {
                     HStack(spacing: 0) {
                         Text("🪞mirrored from ")
                             .font(.system(size: 18, weight: .regular, design: .rounded))
-                        Text("from address")
+                        Text(post.mirroredFrom)
                             .font(.system(size: 18, weight: .bold, design: .rounded))
                     }
-                } else {
-                    Text("username")
-                        .font(.system(size: 20, weight: .bold, design: .rounded))
                 }
                 
-                Text("SEP, 11 AT 9:41 AM")
+                Text(post.getFormattedDate())
                     .font(.system(size: 14, weight: .regular, design: .rounded))
                     .foregroundColor(.grayBlue)
-                    
-                HStack(spacing: 0) {
-                    Text("Transfer type to ")
-                    Text("wallet_user")
+                
+                if (post.fromAddress == Constants.ETH_NULL_ADDRESS) {
+                    Text("🎉 Minted a new NFT from ")
+                        .font(.system(
+                            size: 18,
+                            weight: .regular,
+                            design: .rounded
+                        ))
+                    Text(post.contractAddress)
+                        .font(.system(
+                            size: 18,
+                            weight: .regular,
+                            design: .rounded
+                        ))
+                        .foregroundColor(.blue)
                 }
-                .font(.system(
-                    size: 18,
-                    weight: .regular,
-                    design: .rounded
-                ))
                 
-                Rectangle()
-                    .foregroundColor(.blue)
-                    .frame(
-                        height: UIScreen.main.bounds.height * 0.4
-                    )
-                    .cornerRadius(30)
+                if (post.fromAddress != Constants.ETH_NULL_ADDRESS) {
+                    Text("📤 \(post.transferType == "SEND" ? "Sent" : "Recieved") NFT \(post.transferType == "SEND" ? "to" : "from")")
+                        .font(.system(
+                            size: 18,
+                            weight: .regular,
+                            design: .rounded
+                        ))
+                    
+                    Text(post.transferType == "SEND" ? post.fromAddress : post.toAddress)
+                        .font(.system(
+                            size: 18,
+                            weight: .regular,
+                            design: .rounded
+                        ))
+                        .foregroundColor(.blue)
+                }
                 
-                Text("NFT name #id")
+                if (post.isMirror) {
+                    Text(post.mirrorDescription)
+                        .font(.system(size: 18, weight: .regular, design: .rounded))
+                        .foregroundColor(.grayBlue)
+                }
+                
+                AsyncImage(
+                    url: URL(string: "\(Constants.TOKEN_IMAGES_URL)/\(post.image)")!
+                ) { phase in
+                    if let image = phase.image {
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                    } else if phase.error == nil {
+                        ProgressView()
+                    }
+                }
+                .frame(
+                    width: UIScreen.main.bounds.width * 0.75,
+                    height: UIScreen.main.bounds.height * 0.3,
+                    alignment: .center
+                )
+                .cornerRadius(30)
+                
+                Text("FrenlyPost")
                     .font(.system(size: 18, weight: .regular, design: .rounded))
                     .foregroundColor(.grayBlue)
                 
                 
                 HStack {
-                    Text("Polygonscan")
-                        .font(.system(size: 18, weight: .regular, design: .rounded))
-                        .foregroundColor(.blue)
+                    Link(destination: URL(string: "https://etherscan.io/tx/\(post.transactionHash)")!) {
+                        Text("Etherscan")
+                            .font(.system(size: 18, weight: .regular, design: .rounded))
+                            .foregroundColor(.blue)
+                    }
                     
                     Spacer()
                     
                     Image("Image_Hearth")
-                    Text("0")
+                    Text("\(post.totalLikes)")
                         .foregroundColor(.grayBlue)
                         .padding(.trailing, 10)
                     
                     Image("Image_Comment")
-                    Text("0")
+                    Text("\(post.totalComments)")
                         .foregroundColor(.grayBlue)
                         .padding(.trailing, 10)
 
                     Image("Image_Repost")
-                    Text("0")
+                    Text("\(post.totalMirrors)")
                         .foregroundColor(.grayBlue)
                         .padding(.trailing, 10)
                 }
@@ -101,6 +133,27 @@ struct PostWithUserView: View {
                 alignment: .leading
             )
         }
+    }
+    
+    func avatar(name: String) -> some View {
+        AsyncImage(
+            url: URL(string: "\(Constants.AVATAR_IMAGES_URL)/\(name)")!
+        ) { phase in
+            if let image = phase.image {
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .clipShape(Circle())
+            } else {
+                Image("Image_MockAvatar")
+                    .resizable()
+            }
+        }
+        .frame(
+            width: 40,
+            height: 40,
+            alignment: .center
+        )
     }
 }
 

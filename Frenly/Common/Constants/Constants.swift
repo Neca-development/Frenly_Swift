@@ -8,11 +8,20 @@
 import Foundation
 
 class Constants {
-    static let SERVER_URL = "http://135.181.216.90:49310/rest"
+    static let SERVER_URL = "https://gm.frenly.cc/rest"
+    static let LENS_URL = "https://api-mumbai.lens.dev"
+    
+    static let TOKEN_IMAGES_URL = "https://gm.frenly.cc/rest/token-images"
+    static let AVATAR_IMAGES_URL = "https://gm.frenly.cc/rest/avatars"
     
     static let ACCESS_TOKEN_KEY = "access_token"
     static let REFRESH_TOKEN_KEY = "refresh_token"
     
+    static let LENS_ACCESS_TOKEN_KEY = "lens_access_token"
+    static let LENS_REFRESH_TOKEN_KEY = "lens_refresh_token"
+    
     static let WC_SESSION_KEY = "wc_session"
     static let WC_WALLET_TYPE_KEY = "wc_wallet_type"
+    
+    static let ETH_NULL_ADDRESS = "0x0000000000000000000000000000000000000000"
 }

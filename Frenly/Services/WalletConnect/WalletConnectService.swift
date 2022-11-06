@@ -31,7 +31,7 @@ final class WalletConnectService {
         // test bridge with latest protocol version: https://bridge.walletconnect.org
 
         let bridgeURL = URL(string: "https://bridge.walletconnect.org")!
-        let clientURL = URL(string: "https://safe.gnosis.io")!
+        let clientURL = URL(string: "https://gm.frenly.cc")!
         
         let randmoKey = try! UtilsService.Random.get32BytesHex()
 

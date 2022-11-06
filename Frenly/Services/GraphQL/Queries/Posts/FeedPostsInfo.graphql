@@ -1,0 +1,35 @@
+query FeedPostsInfo($publicationIds: [InternalPublicationId!]) {
+  publications(request: {publicationIds: $publicationIds}) {
+    items {
+      ... on Post {
+        profile {
+          ownedBy
+        }
+        id
+        stats {
+          totalUpvotes
+          totalAmountOfComments
+          totalAmountOfMirrors
+        }
+      }
+      ... on Mirror {
+        mirrorOf {
+          ... on Post {
+            profile {
+              ownedBy
+            }
+          }
+        }
+        profile {
+          ownedBy
+        }
+        stats {
+          totalAmountOfMirrors
+          totalAmountOfComments
+          totalUpvotes
+        }
+        id
+      }
+    }
+  }
+}

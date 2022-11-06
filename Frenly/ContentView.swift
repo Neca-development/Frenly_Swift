@@ -9,25 +9,40 @@ import SwiftUI
 import JWTDecode
 
 struct ContentView: View {
-    @StateObject private var login = LoginViewModel()
+    @StateObject private var auth = AuthViewModel()
     @StateObject private var wallet = WalletViewModel()
     
     var body: some View {
         ZStack {
-//            if (login.status == .unauthorized || wallet.wcStatus == .failed || wallet.wcStatus == .disconnected) {
-//                LoginView()
-//                    .environmentObject(login)
-//                    .environmentObject(wallet)
-//            }
-//
-//            if (login.status == .authorized && wallet.wcStatus == .connected) {
-                TotalFeedView()
+            Color.appBackground.ignoresSafeArea()
+            
+            if (auth.status == .unauthorized || wallet.wcStatus != .connected) {
+                LoginView()
+                    .environmentObject(auth)
                     .environmentObject(wallet)
-//            }
+                    .animation(.easeInOut(duration: 0.4), value: auth.status)
+            }
 
+            if (auth.status == .authorized) {
+                TotalFeedView()
+                    .environmentObject(auth)
+                    .environmentObject(wallet)
+                    .animation(.easeInOut(duration: 0.4), value: auth.status)
+            }
+            
+            if (auth.status == .inProgress) {
+                Color.appBackground.ignoresSafeArea()
+
+                Image("Image_Eyes")
+                    .resizable()
+                    .frame(
+                        width: 200,
+                        height: 200
+                    )
+            }
         }
         .onAppear() {
-//            tryConnectWithDefaults()
+            tryConnectWithDefaults()
         }
     }
     
@@ -38,18 +53,18 @@ struct ContentView: View {
             wallet.wcStatus = .connected
         }
         
-        guard let accessToken = AuthTokenHelper.readAccessToken() else { return }
-        guard let decodedAccess = try? decode(jwt: accessToken) else { return }
-
-        if !decodedAccess.expired {
-            login.status = .authorized
-            return
-        }
-        
         Task {
-            guard let _ = try? await login.refreshTokens() else { return }
+            guard let _ = try? await AuthViewModel.refreshTokens() else {
+                auth.status = .unauthorized
+                return
+            }
+            
+            guard let _ = try? await AuthViewModel.refreshLensTokens() else {
+                auth.status = .unauthorized
+                return
+            }
                 
-            login.status = .authorized
+            auth.status = .authorized
         }
     }
 }

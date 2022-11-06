@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
-    @EnvironmentObject private var login: LoginViewModel
+    @EnvironmentObject private var login: AuthViewModel
     @EnvironmentObject private var wallet: WalletViewModel
     
     var body: some View {
@@ -34,6 +34,8 @@ struct LoginView: View {
             
             Button {
                 Task {
+                    login.status = .inProgress
+                    
                     if (wallet.wcStatus != .connected) {
                         await wallet.connectWallet(walletType: .metaMask)
                     } else {
@@ -51,28 +53,46 @@ struct LoginView: View {
                     .foregroundColor(.white)
                     .cornerRadius(50)
             }
-            .onChange(of: wallet.wcStatus) { status in
-                if (status == .connected) {
-                    Task { await authorize() }
-                }
-            }
             
             Spacer()
+        }
+        .onChange(of: wallet.wcStatus) { newValue in
+            if (newValue == .failed) {
+                login.status = .unauthorized
+            }
+            
+            if (newValue == .connected) {
+                Task { await authorize() }
+            }
         }
     }
     
     private func authorize() async -> Void {
         do {
+            if (wallet.wcStatus != .connected) {
+                return
+            }
+            
             guard let walletAddress = wallet.walletAddress else { return }
             
+            // Backend authentication
             let nonce = try await login.getUserNonce(walletAddress: walletAddress)
             let message = "Nonce: \(nonce)"
             
             let signature = try await wallet.sign(message: message)
             
-            try await login.authorizeWithSignature(walletAddress: walletAddress, signature: signature)
+            try await login.authorizeWithBackendSignature(walletAddress: walletAddress, signature: signature)
+            
+            // Lens authentication
+            let lensMessage = try await LensProtocolService.challenge(address: walletAddress)
+            let lensSignature = try await wallet.sign(message: lensMessage)
+            
+            try await login.authorizeWithLensSignature(walletAddress: walletAddress, signature: lensSignature)
+            
+            login.status = .authorized
         } catch {
             wallet.wcStatus = .failed
+            login.status = .unauthorized
         }
     }
 }
@@ -80,6 +100,5 @@ struct LoginView: View {
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView()
-            .environmentObject(WalletViewModel())
     }
 }

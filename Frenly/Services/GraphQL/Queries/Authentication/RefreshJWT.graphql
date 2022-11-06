@@ -1,0 +1,8 @@
+mutation Refresh($token: Jwt!) {
+  refresh(request: {
+    refreshToken: $token
+  }) {
+    accessToken
+    refreshToken
+  }
+}

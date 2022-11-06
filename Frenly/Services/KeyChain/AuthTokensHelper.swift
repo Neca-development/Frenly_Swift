@@ -51,4 +51,16 @@ final class AuthTokenHelper {
 
         return String(data: data, encoding: .utf8)
     }
+    
+    static func clearTokens() -> Void {
+        KeychainHelper.standard.delete(
+            service: Constants.ACCESS_TOKEN_KEY,
+            account: applicationAccount
+        )
+        
+        KeychainHelper.standard.delete(
+            service: Constants.REFRESH_TOKEN_KEY,
+            account: applicationAccount
+        )
+    }
 }

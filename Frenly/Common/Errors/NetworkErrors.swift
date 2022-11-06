@@ -12,4 +12,5 @@ enum NetworkErrors: LocalizedError {
     case noData
     case decodingError
     case intenalServerError
+    case unauthorized
 }

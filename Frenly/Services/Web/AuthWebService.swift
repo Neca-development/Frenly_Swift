@@ -8,7 +8,7 @@
 import Foundation
 
 class AuthWebService: WebService {
-    func getUsersNonce (walletAddress: String) async throws -> ApiResponse<NonceResponse> {
+    static func getUsersNonce (walletAddress: String) async throws -> ApiResponse<NonceResponse> {
         guard let url = URL(string: "\(APP_URL)/auth/\(walletAddress)/nonce") else {
             throw NetworkErrors.invalidURL
         }
@@ -29,7 +29,7 @@ class AuthWebService: WebService {
         return response
     }
     
-    func validateSignature (walletAddress: String, signature: String) async throws -> ApiResponse<JWTPairResponse> {
+    static func validateSignature (walletAddress: String, signature: String) async throws -> ApiResponse<JWTPairResponse> {
         guard let url = URL(string: "\(APP_URL)/auth/\(walletAddress)/signature") else {
             throw NetworkErrors.invalidURL
         }
@@ -52,10 +52,12 @@ class AuthWebService: WebService {
         return response
     }
     
-    func refreshToken () async throws -> ApiResponse<JWTPairResponse> {
+    static func refreshToken () async throws -> ApiResponse<JWTPairResponse> {
         guard let url = URL(string: "\(APP_URL)/auth/refresh-token") else {
             throw NetworkErrors.invalidURL
         }
+        
+        try await validateTokens()
         
         guard let accessToken = AuthTokenHelper.readAccessToken() else { throw NetworkErrors.noData }
         guard let refreshToken = AuthTokenHelper.readRefreshToken() else { throw NetworkErrors.noData }

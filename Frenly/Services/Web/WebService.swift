@@ -6,13 +6,24 @@
 //
 
 import Foundation
+import JWTDecode
 
 class WebService {
-    let APP_URL = Constants.SERVER_URL
+    static let APP_URL = Constants.SERVER_URL
+    
+    static func validateTokens() async throws -> Void {
+        guard let accessToken = AuthTokenHelper.readAccessToken() else { throw NetworkErrors.unauthorized }
+        
+        guard let token = try? decode(jwt: accessToken) else { throw NetworkErrors.unauthorized }
+        
+        if (token.expired) {
+            guard let _ = try? await AuthViewModel.refreshTokens() else { throw NetworkErrors.unauthorized }
+        }
+    }
     
     class ApiResponse<T : Codable> : Codable {
-        let data: T
-        let error: String
-        let status: Int
+        var data: T
+        var error: String
+        var status: Int
     }
 }

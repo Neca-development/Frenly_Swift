@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct UserFeedView: View {
+    @StateObject private var user = UserViewModel()
+    
     var body: some View {
         ScrollView {
-            UserInfo()
+            UserInfoView(avatar: "", description: "description")
 
             NavigationLink {
                 PostWithCommentsView()
@@ -59,6 +61,9 @@ struct UserFeedView: View {
                 Text("Username")
                     .font(.system(size: 24, weight: .bold, design: .rounded))
             }
+        }
+        .onAppear() {
+            Task { await user.fetchUser() }
         }
     }
 }

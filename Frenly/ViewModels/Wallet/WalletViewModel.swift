@@ -51,6 +51,10 @@ final class WalletViewModel: ObservableObject {
         return try await wcService.sign(message: message)
     }
     
+    func disconnect() -> Void {
+        let _ = try? wcService.disconnect()
+    }
+    
     private func openExternalWalletApp(wcUrl: String) throws -> Void {
         let encodedWcUrl = wcUrl.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
         let formattedWcUrl = encodedWcUrl.replacingOccurrences(of: "=", with: "%3D").replacingOccurrences(of: "&", with: "%26")
@@ -77,7 +81,9 @@ extension WalletViewModel: WalletConnectDelegate {
     func didUpdate() {}
 
     func failedToConnect() {
-        wcStatus = .failed
+        DispatchQueue.main.async {
+            self.wcStatus = .failed
+        }
     }
 
     func didConnect() {
@@ -87,6 +93,8 @@ extension WalletViewModel: WalletConnectDelegate {
     }
 
     func didDisconnect() {
-        wcStatus = .disconnected
+        DispatchQueue.main.async {
+            self.wcStatus = .disconnected
+        }
     }
 }

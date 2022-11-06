@@ -17,6 +17,10 @@
 		710CB7BD291117D200367885 /* JWTDecode in Frameworks */ = {isa = PBXBuildFile; productRef = 710CB7BC291117D200367885 /* JWTDecode */; };
 		710CB7C029111BB300367885 /* KeyChainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710CB7BF29111BB300367885 /* KeyChainHelper.swift */; };
 		710CB7C229111BCD00367885 /* AuthTokensHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710CB7C129111BCD00367885 /* AuthTokensHelper.swift */; };
+		710CB7C5291133C400367885 /* FeedWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710CB7C4291133C400367885 /* FeedWebService.swift */; };
+		710CB7CB291136EF00367885 /* TotalFeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710CB7CA291136EF00367885 /* TotalFeedViewModel.swift */; };
+		710CB7CE2911425000367885 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710CB7CD2911425000367885 /* Post.swift */; };
+		710CB7D32911481400367885 /* UserWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710CB7D22911481400367885 /* UserWebService.swift */; };
 		71643962290592F80065EA09 /* WalletConnectSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 71643961290592F80065EA09 /* WalletConnectSwift */; };
 		71643968290595350065EA09 /* UtilsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71643967290595350065EA09 /* UtilsService.swift */; };
 		7164396A2905954C0065EA09 /* RandomUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716439692905954C0065EA09 /* RandomUtil.swift */; };
@@ -38,16 +42,42 @@
 		716439AA2906B8D50065EA09 /* CommentsNavTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716439A92906B8D50065EA09 /* CommentsNavTitle.swift */; };
 		716439AD2906BDDF0065EA09 /* DraftFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716439AC2906BDDF0065EA09 /* DraftFeedView.swift */; };
 		716439AF2906BE5D0065EA09 /* PostInDraftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716439AE2906BE5D0065EA09 /* PostInDraftView.swift */; };
-		716439B12906C07D0065EA09 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716439B02906C07D0065EA09 /* UserInfo.swift */; };
+		716439B12906C07D0065EA09 /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716439B02906C07D0065EA09 /* UserInfoView.swift */; };
 		716439B32906C1A60065EA09 /* DraftBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716439B22906C1A60065EA09 /* DraftBackButton.swift */; };
 		719E5A5D2907A3FB0005A1DF /* UserFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719E5A5C2907A3FB0005A1DF /* UserFeedView.swift */; };
 		719E5A5F2907A7930005A1DF /* PostWithUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719E5A5E2907A7930005A1DF /* PostWithUserView.swift */; };
 		719E5A672907B9C70005A1DF /* BackNavButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719E5A662907B9C70005A1DF /* BackNavButton.swift */; };
+		71AD71862912BAA200BC7CF7 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 71AD71852912BAA200BC7CF7 /* Apollo */; };
+		71AD718D2912C20700BC7CF7 /* lens-protocol-schema.graphqls in Resources */ = {isa = PBXBuildFile; fileRef = 71AD718C2912C20700BC7CF7 /* lens-protocol-schema.graphqls */; };
+		71AD71962912C5F400BC7CF7 /* apollo-codegen-config.json in Resources */ = {isa = PBXBuildFile; fileRef = 71AD71952912C5F400BC7CF7 /* apollo-codegen-config.json */; };
+		71C4DB202912856B008B4A8C /* LensProtocolService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C4DB1F2912856B008B4A8C /* LensProtocolService.swift */; };
+		71C4DB3D29129550008B4A8C /* Challenge.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 71C4DB3C29129550008B4A8C /* Challenge.graphql */; };
 		71D775D42901127F005F7D7D /* FrenlyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D775D32901127F005F7D7D /* FrenlyApp.swift */; };
 		71D775D62901127F005F7D7D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D775D52901127F005F7D7D /* ContentView.swift */; };
 		71D775D829011283005F7D7D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71D775D729011283005F7D7D /* Assets.xcassets */; };
 		71D775DB29011283005F7D7D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71D775DA29011283005F7D7D /* Preview Assets.xcassets */; };
 		71D775E929013A3D005F7D7D /* WalletConnectService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D775E829013A3D005F7D7D /* WalletConnectService.swift */; };
+		71E052BC291388EC006FB1DC /* FeedPostsInfoQuery.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E052BB291388EC006FB1DC /* FeedPostsInfoQuery.graphql.swift */; };
+		71E052BE29138CA3006FB1DC /* UserUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E052BD29138CA3006FB1DC /* UserUtil.swift */; };
+		71E052C02913A43E006FB1DC /* UserEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E052BF2913A43E006FB1DC /* UserEditView.swift */; };
+		71E052C32913A73A006FB1DC /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E052C22913A73A006FB1DC /* ImagePicker.swift */; };
+		71E052C62913AC74006FB1DC /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E052C52913AC74006FB1DC /* Media.swift */; };
+		71E052C92913AD55006FB1DC /* MediaUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E052C82913AD55006FB1DC /* MediaUtil.swift */; };
+		71E052CC2913AEF7006FB1DC /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E052CB2913AEF7006FB1DC /* Data.swift */; };
+		71E052CE2917EE9C006FB1DC /* DraftFeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E052CD2917EE9C006FB1DC /* DraftFeedViewModel.swift */; };
+		71E18EEE2912C89800FDBC05 /* LensProtocol in Frameworks */ = {isa = PBXBuildFile; productRef = 71E18EED2912C89800FDBC05 /* LensProtocol */; };
+		71E18EF12912CE3F00FDBC05 /* Authenticate.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 71E18EF02912CE3F00FDBC05 /* Authenticate.graphql */; };
+		71E18EF32912CE7D00FDBC05 /* RefreshJWT.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 71E18EF22912CE7D00FDBC05 /* RefreshJWT.graphql */; };
+		71E18EF72912CF0700FDBC05 /* RefreshMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E18EF42912CF0700FDBC05 /* RefreshMutation.graphql.swift */; };
+		71E18EF82912CF0700FDBC05 /* AuthenticateMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E18EF52912CF0700FDBC05 /* AuthenticateMutation.graphql.swift */; };
+		71E18EF92912CF0700FDBC05 /* ChallengeQuery.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E18EF62912CF0700FDBC05 /* ChallengeQuery.graphql.swift */; };
+		71E18EFB2912D07300FDBC05 /* GraphQLErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E18EFA2912D07300FDBC05 /* GraphQLErrors.swift */; };
+		71E18EFD2912D50A00FDBC05 /* LensTokensHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E18EFC2912D50A00FDBC05 /* LensTokensHelper.swift */; };
+		71E18F012913039000FDBC05 /* FeedPostsInfo.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 71E18F002913039000FDBC05 /* FeedPostsInfo.graphql */; };
+		71E18F052913144900FDBC05 /* EndOfTotalFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E18F042913144800FDBC05 /* EndOfTotalFeedView.swift */; };
+		71E18F08291314FC00FDBC05 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E18F07291314FC00FDBC05 /* UserViewModel.swift */; };
+		71E18F0B2913154800FDBC05 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E18F0A2913154800FDBC05 /* User.swift */; };
+		71E18F0E2913188100FDBC05 /* JSONCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E18F0D2913188100FDBC05 /* JSONCoder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +90,10 @@
 		710CB7B92911150B00367885 /* UserDefaultsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtension.swift; sourceTree = "<group>"; };
 		710CB7BF29111BB300367885 /* KeyChainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainHelper.swift; sourceTree = "<group>"; };
 		710CB7C129111BCD00367885 /* AuthTokensHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTokensHelper.swift; sourceTree = "<group>"; };
+		710CB7C4291133C400367885 /* FeedWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedWebService.swift; sourceTree = "<group>"; };
+		710CB7CA291136EF00367885 /* TotalFeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalFeedViewModel.swift; sourceTree = "<group>"; };
+		710CB7CD2911425000367885 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		710CB7D22911481400367885 /* UserWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserWebService.swift; sourceTree = "<group>"; };
 		71643967290595350065EA09 /* UtilsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsService.swift; sourceTree = "<group>"; };
 		716439692905954C0065EA09 /* RandomUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomUtil.swift; sourceTree = "<group>"; };
 		7164396D290596760065EA09 /* UtilsErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsErrors.swift; sourceTree = "<group>"; };
@@ -81,17 +115,42 @@
 		716439A92906B8D50065EA09 /* CommentsNavTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsNavTitle.swift; sourceTree = "<group>"; };
 		716439AC2906BDDF0065EA09 /* DraftFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraftFeedView.swift; sourceTree = "<group>"; };
 		716439AE2906BE5D0065EA09 /* PostInDraftView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostInDraftView.swift; sourceTree = "<group>"; };
-		716439B02906C07D0065EA09 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		716439B02906C07D0065EA09 /* UserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
 		716439B22906C1A60065EA09 /* DraftBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraftBackButton.swift; sourceTree = "<group>"; };
 		719E5A5C2907A3FB0005A1DF /* UserFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFeedView.swift; sourceTree = "<group>"; };
 		719E5A5E2907A7930005A1DF /* PostWithUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostWithUserView.swift; sourceTree = "<group>"; };
 		719E5A662907B9C70005A1DF /* BackNavButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackNavButton.swift; sourceTree = "<group>"; };
+		71AD718C2912C20700BC7CF7 /* lens-protocol-schema.graphqls */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "lens-protocol-schema.graphqls"; sourceTree = "<group>"; };
+		71AD71952912C5F400BC7CF7 /* apollo-codegen-config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "apollo-codegen-config.json"; sourceTree = "<group>"; };
+		71C4DB1F2912856B008B4A8C /* LensProtocolService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LensProtocolService.swift; sourceTree = "<group>"; };
+		71C4DB3C29129550008B4A8C /* Challenge.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Challenge.graphql; sourceTree = "<group>"; };
 		71D775D02901127F005F7D7D /* Frenly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Frenly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71D775D32901127F005F7D7D /* FrenlyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrenlyApp.swift; sourceTree = "<group>"; };
 		71D775D52901127F005F7D7D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		71D775D729011283005F7D7D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		71D775DA29011283005F7D7D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		71D775E829013A3D005F7D7D /* WalletConnectService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletConnectService.swift; sourceTree = "<group>"; };
+		71E052BB291388EC006FB1DC /* FeedPostsInfoQuery.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedPostsInfoQuery.graphql.swift; sourceTree = "<group>"; };
+		71E052BD29138CA3006FB1DC /* UserUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUtil.swift; sourceTree = "<group>"; };
+		71E052BF2913A43E006FB1DC /* UserEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEditView.swift; sourceTree = "<group>"; };
+		71E052C22913A73A006FB1DC /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		71E052C52913AC74006FB1DC /* Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
+		71E052C82913AD55006FB1DC /* MediaUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaUtil.swift; sourceTree = "<group>"; };
+		71E052CB2913AEF7006FB1DC /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		71E052CD2917EE9C006FB1DC /* DraftFeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraftFeedViewModel.swift; sourceTree = "<group>"; };
+		71E18EEB2912C87500FDBC05 /* LensProtocol */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = LensProtocol; path = Frenly/Services/GraphQL/LensProtocol; sourceTree = "<group>"; };
+		71E18EF02912CE3F00FDBC05 /* Authenticate.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Authenticate.graphql; sourceTree = "<group>"; };
+		71E18EF22912CE7D00FDBC05 /* RefreshJWT.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = RefreshJWT.graphql; sourceTree = "<group>"; };
+		71E18EF42912CF0700FDBC05 /* RefreshMutation.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshMutation.graphql.swift; sourceTree = "<group>"; };
+		71E18EF52912CF0700FDBC05 /* AuthenticateMutation.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticateMutation.graphql.swift; sourceTree = "<group>"; };
+		71E18EF62912CF0700FDBC05 /* ChallengeQuery.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeQuery.graphql.swift; sourceTree = "<group>"; };
+		71E18EFA2912D07300FDBC05 /* GraphQLErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLErrors.swift; sourceTree = "<group>"; };
+		71E18EFC2912D50A00FDBC05 /* LensTokensHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LensTokensHelper.swift; sourceTree = "<group>"; };
+		71E18F002913039000FDBC05 /* FeedPostsInfo.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = FeedPostsInfo.graphql; sourceTree = "<group>"; };
+		71E18F042913144800FDBC05 /* EndOfTotalFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndOfTotalFeedView.swift; sourceTree = "<group>"; };
+		71E18F07291314FC00FDBC05 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
+		71E18F0A2913154800FDBC05 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		71E18F0D2913188100FDBC05 /* JSONCoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONCoder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,7 +158,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71E18EEE2912C89800FDBC05 /* LensProtocol in Frameworks */,
 				710CB7BD291117D200367885 /* JWTDecode in Frameworks */,
+				71AD71862912BAA200BC7CF7 /* Apollo in Frameworks */,
 				71643962290592F80065EA09 /* WalletConnectSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -120,6 +181,8 @@
 			children = (
 				710CB7AD2910F1FF00367885 /* AuthWebService.swift */,
 				710CB7B22910F33300367885 /* WebService.swift */,
+				710CB7C4291133C400367885 /* FeedWebService.swift */,
+				710CB7D22911481400367885 /* UserWebService.swift */,
 			);
 			path = Web;
 			sourceTree = "<group>";
@@ -145,8 +208,37 @@
 			children = (
 				710CB7BF29111BB300367885 /* KeyChainHelper.swift */,
 				710CB7C129111BCD00367885 /* AuthTokensHelper.swift */,
+				71E18EFC2912D50A00FDBC05 /* LensTokensHelper.swift */,
 			);
 			path = KeyChain;
+			sourceTree = "<group>";
+		};
+		710CB7C9291136DD00367885 /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				710CB7CA291136EF00367885 /* TotalFeedViewModel.swift */,
+				71E052CD2917EE9C006FB1DC /* DraftFeedViewModel.swift */,
+			);
+			path = Feed;
+			sourceTree = "<group>";
+		};
+		710CB7CC2911423000367885 /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				710CB7CD2911425000367885 /* Post.swift */,
+			);
+			path = Post;
+			sourceTree = "<group>";
+		};
+		710CB7D429125EEE00367885 /* GraphQL */ = {
+			isa = PBXGroup;
+			children = (
+				71AD718B2912C1DB00BC7CF7 /* Queries */,
+				71AD718C2912C20700BC7CF7 /* lens-protocol-schema.graphqls */,
+				71AD71952912C5F400BC7CF7 /* apollo-codegen-config.json */,
+				71C4DB1F2912856B008B4A8C /* LensProtocolService.swift */,
+			);
+			path = GraphQL;
 			sourceTree = "<group>";
 		};
 		71643965290595190065EA09 /* WalletConnect */ = {
@@ -162,6 +254,8 @@
 			children = (
 				71643967290595350065EA09 /* UtilsService.swift */,
 				716439692905954C0065EA09 /* RandomUtil.swift */,
+				71E052BD29138CA3006FB1DC /* UserUtil.swift */,
+				71E052C82913AD55006FB1DC /* MediaUtil.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -169,6 +263,8 @@
 		7164396B290596560065EA09 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				71E052CA2913AED4006FB1DC /* Data */,
+				71E18F0C2913186E00FDBC05 /* JSON */,
 				710CB7B8291114FA00367885 /* UserDefaults */,
 				710CB7AF2910F29100367885 /* Constants */,
 				716439A229068C740065EA09 /* String */,
@@ -183,6 +279,7 @@
 				7164396D290596760065EA09 /* UtilsErrors.swift */,
 				710CB7B42910F3DC00367885 /* NetworkErrors.swift */,
 				710CB7B62910FF1900367885 /* WalletConnectError.swift */,
+				71E18EFA2912D07300FDBC05 /* GraphQLErrors.swift */,
 			);
 			path = Errors;
 			sourceTree = "<group>";
@@ -190,6 +287,9 @@
 		7164396F2905BEE60065EA09 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				71E052C42913AC69006FB1DC /* Media */,
+				71E18F092913154000FDBC05 /* User */,
+				710CB7CC2911423000367885 /* Post */,
 				716439742905BFD10065EA09 /* Wallet */,
 			);
 			path = Models;
@@ -198,18 +298,12 @@
 		716439702905BF410065EA09 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				71E18F06291314E100FDBC05 /* User */,
+				71E18EFE2912D93E00FDBC05 /* Wallet */,
+				710CB7C9291136DD00367885 /* Feed */,
 				710CB7A92910ED1E00367885 /* Login */,
-				716439712905BF670065EA09 /* Wallet */,
 			);
 			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		716439712905BF670065EA09 /* Wallet */ = {
-			isa = PBXGroup;
-			children = (
-				716439722905BF740065EA09 /* WalletViewModel.swift */,
-			);
-			path = Wallet;
 			sourceTree = "<group>";
 		};
 		716439742905BFD10065EA09 /* Wallet */ = {
@@ -252,6 +346,7 @@
 				716439892905D19A0065EA09 /* TotalFeedView.swift */,
 				719E5A5C2907A3FB0005A1DF /* UserFeedView.swift */,
 				716439AC2906BDDF0065EA09 /* DraftFeedView.swift */,
+				71E18F042913144800FDBC05 /* EndOfTotalFeedView.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -304,7 +399,8 @@
 		719E5A602907AFDA0005A1DF /* User */ = {
 			isa = PBXGroup;
 			children = (
-				716439B02906C07D0065EA09 /* UserInfo.swift */,
+				716439B02906C07D0065EA09 /* UserInfoView.swift */,
+				71E052BF2913A43E006FB1DC /* UserEditView.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -327,11 +423,22 @@
 			path = Buttons;
 			sourceTree = "<group>";
 		};
+		71AD718B2912C1DB00BC7CF7 /* Queries */ = {
+			isa = PBXGroup;
+			children = (
+				71E18EFF2913036E00FDBC05 /* Posts */,
+				71E18EEF2912CE1800FDBC05 /* Authentication */,
+			);
+			path = Queries;
+			sourceTree = "<group>";
+		};
 		71D775C72901127F005F7D7D = {
 			isa = PBXGroup;
 			children = (
+				71E18EEA2912C87500FDBC05 /* Packages */,
 				71D775D22901127F005F7D7D /* Frenly */,
 				71D775D12901127F005F7D7D /* Products */,
+				71E18EEC2912C89800FDBC05 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -372,6 +479,7 @@
 		71D775E129011299005F7D7D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				71E052C12913A72A006FB1DC /* Common */,
 				719E5A602907AFDA0005A1DF /* User */,
 				716439AB2906BDBA0065EA09 /* Drafts */,
 				71643994290670260065EA09 /* Comments */,
@@ -386,12 +494,106 @@
 		71D775E729013A31005F7D7D /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				710CB7D429125EEE00367885 /* GraphQL */,
 				710CB7BE29111BA600367885 /* KeyChain */,
 				710CB7AC2910F1EC00367885 /* Web */,
 				71643966290595230065EA09 /* Utils */,
 				71643965290595190065EA09 /* WalletConnect */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		71E052C12913A72A006FB1DC /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				71E052C22913A73A006FB1DC /* ImagePicker.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		71E052C42913AC69006FB1DC /* Media */ = {
+			isa = PBXGroup;
+			children = (
+				71E052C52913AC74006FB1DC /* Media.swift */,
+			);
+			path = Media;
+			sourceTree = "<group>";
+		};
+		71E052CA2913AED4006FB1DC /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				71E052CB2913AEF7006FB1DC /* Data.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		71E18EEA2912C87500FDBC05 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				71E18EEB2912C87500FDBC05 /* LensProtocol */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+		71E18EEC2912C89800FDBC05 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		71E18EEF2912CE1800FDBC05 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				71C4DB3C29129550008B4A8C /* Challenge.graphql */,
+				71E18EF62912CF0700FDBC05 /* ChallengeQuery.graphql.swift */,
+				71E18EF02912CE3F00FDBC05 /* Authenticate.graphql */,
+				71E18EF52912CF0700FDBC05 /* AuthenticateMutation.graphql.swift */,
+				71E18EF22912CE7D00FDBC05 /* RefreshJWT.graphql */,
+				71E18EF42912CF0700FDBC05 /* RefreshMutation.graphql.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		71E18EFE2912D93E00FDBC05 /* Wallet */ = {
+			isa = PBXGroup;
+			children = (
+				716439722905BF740065EA09 /* WalletViewModel.swift */,
+			);
+			path = Wallet;
+			sourceTree = "<group>";
+		};
+		71E18EFF2913036E00FDBC05 /* Posts */ = {
+			isa = PBXGroup;
+			children = (
+				71E18F002913039000FDBC05 /* FeedPostsInfo.graphql */,
+				71E052BB291388EC006FB1DC /* FeedPostsInfoQuery.graphql.swift */,
+			);
+			path = Posts;
+			sourceTree = "<group>";
+		};
+		71E18F06291314E100FDBC05 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				71E18F07291314FC00FDBC05 /* UserViewModel.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		71E18F092913154000FDBC05 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				71E18F0A2913154800FDBC05 /* User.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		71E18F0C2913186E00FDBC05 /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				71E18F0D2913188100FDBC05 /* JSONCoder.swift */,
+			);
+			path = JSON;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -413,6 +615,8 @@
 			packageProductDependencies = (
 				71643961290592F80065EA09 /* WalletConnectSwift */,
 				710CB7BC291117D200367885 /* JWTDecode */,
+				71AD71852912BAA200BC7CF7 /* Apollo */,
+				71E18EED2912C89800FDBC05 /* LensProtocol */,
 			);
 			productName = Frenly;
 			productReference = 71D775D02901127F005F7D7D /* Frenly.app */;
@@ -445,6 +649,7 @@
 			packageReferences = (
 				71643960290592F70065EA09 /* XCRemoteSwiftPackageReference "WalletConnectSwift" */,
 				710CB7BB291117D200367885 /* XCRemoteSwiftPackageReference "JWTDecode" */,
+				71AD71842912BAA200BC7CF7 /* XCRemoteSwiftPackageReference "apollo-ios" */,
 			);
 			productRefGroup = 71D775D12901127F005F7D7D /* Products */;
 			projectDirPath = "";
@@ -460,8 +665,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71AD718D2912C20700BC7CF7 /* lens-protocol-schema.graphqls in Resources */,
 				71D775DB29011283005F7D7D /* Preview Assets.xcassets in Resources */,
+				71E18EF32912CE7D00FDBC05 /* RefreshJWT.graphql in Resources */,
+				71C4DB3D29129550008B4A8C /* Challenge.graphql in Resources */,
+				71AD71962912C5F400BC7CF7 /* apollo-codegen-config.json in Resources */,
+				71E18EF12912CE3F00FDBC05 /* Authenticate.graphql in Resources */,
 				71D775D829011283005F7D7D /* Assets.xcassets in Resources */,
+				71E18F012913039000FDBC05 /* FeedPostsInfo.graphql in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -475,6 +686,7 @@
 				71643996290670360065EA09 /* CommentView.swift in Sources */,
 				716439782905C0080065EA09 /* WCStatus.swift in Sources */,
 				710CB7C229111BCD00367885 /* AuthTokensHelper.swift in Sources */,
+				710CB7CE2911425000367885 /* Post.swift in Sources */,
 				7164399C29067F0F0065EA09 /* PostView.swift in Sources */,
 				716439812905CAB60065EA09 /* Colors.swift in Sources */,
 				71D775E929013A3D005F7D7D /* WalletConnectService.swift in Sources */,
@@ -483,32 +695,53 @@
 				71643968290595350065EA09 /* UtilsService.swift in Sources */,
 				7164396A2905954C0065EA09 /* RandomUtil.swift in Sources */,
 				710CB7B52910F3DC00367885 /* NetworkErrors.swift in Sources */,
+				71E18EFD2912D50A00FDBC05 /* LensTokensHelper.swift in Sources */,
 				710CB7B72910FF1900367885 /* WalletConnectError.swift in Sources */,
+				71E18EF92912CF0700FDBC05 /* ChallengeQuery.graphql.swift in Sources */,
 				719E5A5D2907A3FB0005A1DF /* UserFeedView.swift in Sources */,
 				710CB7B12910F29E00367885 /* Constants.swift in Sources */,
+				71E18EF72912CF0700FDBC05 /* RefreshMutation.graphql.swift in Sources */,
 				716439A429068C840065EA09 /* StringExtension.swift in Sources */,
 				716439B32906C1A60065EA09 /* DraftBackButton.swift in Sources */,
 				71D775D62901127F005F7D7D /* ContentView.swift in Sources */,
+				71E18F0B2913154800FDBC05 /* User.swift in Sources */,
 				719E5A672907B9C70005A1DF /* BackNavButton.swift in Sources */,
+				71E052C32913A73A006FB1DC /* ImagePicker.swift in Sources */,
+				71E18F08291314FC00FDBC05 /* UserViewModel.swift in Sources */,
 				716439732905BF740065EA09 /* WalletViewModel.swift in Sources */,
 				716439762905BFE50065EA09 /* WalletDetails.swift in Sources */,
 				7164398F29065E940065EA09 /* UserFeedNavTitleView.swift in Sources */,
 				7164399329066F0D0065EA09 /* PostWithCommentsView.swift in Sources */,
-				716439B12906C07D0065EA09 /* UserInfo.swift in Sources */,
+				71E052C92913AD55006FB1DC /* MediaUtil.swift in Sources */,
+				716439B12906C07D0065EA09 /* UserInfoView.swift in Sources */,
+				71E052C62913AC74006FB1DC /* Media.swift in Sources */,
+				71E052BE29138CA3006FB1DC /* UserUtil.swift in Sources */,
 				710CB7AE2910F1FF00367885 /* AuthWebService.swift in Sources */,
 				716439AD2906BDDF0065EA09 /* DraftFeedView.swift in Sources */,
 				7164399E290683FB0065EA09 /* CommentTextEditor.swift in Sources */,
+				71E18F0E2913188100FDBC05 /* JSONCoder.swift in Sources */,
 				71D775D42901127F005F7D7D /* FrenlyApp.swift in Sources */,
 				710CB7AB2910ED2E00367885 /* LoginViewModel.swift in Sources */,
 				710CB7C029111BB300367885 /* KeyChainHelper.swift in Sources */,
+				710CB7CB291136EF00367885 /* TotalFeedViewModel.swift in Sources */,
+				710CB7D32911481400367885 /* UserWebService.swift in Sources */,
+				71E052BC291388EC006FB1DC /* FeedPostsInfoQuery.graphql.swift in Sources */,
 				71643998290673660065EA09 /* PostNavTitleView.swift in Sources */,
+				71E052C02913A43E006FB1DC /* UserEditView.swift in Sources */,
+				71E18EF82912CF0700FDBC05 /* AuthenticateMutation.graphql.swift in Sources */,
+				710CB7C5291133C400367885 /* FeedWebService.swift in Sources */,
+				71E052CC2913AEF7006FB1DC /* Data.swift in Sources */,
 				719E5A5F2907A7930005A1DF /* PostWithUserView.swift in Sources */,
+				71E052CE2917EE9C006FB1DC /* DraftFeedViewModel.swift in Sources */,
 				710CB7B32910F33300367885 /* WebService.swift in Sources */,
+				71E18F052913144900FDBC05 /* EndOfTotalFeedView.swift in Sources */,
 				7164397D2905C7FB0065EA09 /* LoginView.swift in Sources */,
 				7164398A2905D19A0065EA09 /* TotalFeedView.swift in Sources */,
 				7164397A2905C3510065EA09 /* WalletType.swift in Sources */,
+				71E18EFB2912D07300FDBC05 /* GraphQLErrors.swift in Sources */,
 				7164396E290596760065EA09 /* UtilsErrors.swift in Sources */,
 				716439AF2906BE5D0065EA09 /* PostInDraftView.swift in Sources */,
+				71C4DB202912856B008B4A8C /* LensProtocolService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -729,6 +962,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		71AD71842912BAA200BC7CF7 /* XCRemoteSwiftPackageReference "apollo-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apollographql/apollo-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -741,6 +982,15 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 71643960290592F70065EA09 /* XCRemoteSwiftPackageReference "WalletConnectSwift" */;
 			productName = WalletConnectSwift;
+		};
+		71AD71852912BAA200BC7CF7 /* Apollo */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 71AD71842912BAA200BC7CF7 /* XCRemoteSwiftPackageReference "apollo-ios" */;
+			productName = Apollo;
+		};
+		71E18EED2912C89800FDBC05 /* LensProtocol */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = LensProtocol;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
