@@ -1,0 +1,48 @@
+query UserPostsByLensId($profileId: ProfileId!, $cursor: Cursor) {
+  publications(request: { profileId: $profileId, cursor: $cursor, limit: 50 }) {
+    items {
+      ... on Post {
+        id
+        stats {
+          totalUpvotes
+          totalAmountOfComments
+          totalAmountOfMirrors
+        }
+        metadata {
+          image
+          attributes {
+            traitType
+            value
+          }
+        }
+        createdAt
+      }
+      ... on Mirror {
+        mirrorOf {
+          ... on Post {
+            profile {
+              ownedBy
+            }
+            metadata {
+                content
+                attributes {
+                traitType
+                value
+                }
+            }
+          }
+        }
+        stats {
+          totalAmountOfMirrors
+          totalAmountOfComments
+          totalUpvotes
+        }
+        id
+        createdAt
+      }
+    }
+    pageInfo {
+        next
+    }
+  }
+}

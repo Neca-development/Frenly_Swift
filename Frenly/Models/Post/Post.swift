@@ -11,6 +11,7 @@ struct Post {
     var id = 0
     var lensId = ""
     
+    var ownerAddress = ""
     var username = ""
     var avatar = ""
     

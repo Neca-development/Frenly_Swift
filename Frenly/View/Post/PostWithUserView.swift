@@ -15,7 +15,7 @@ struct PostWithUserView: View {
         HStack(alignment: .top) {
             if (navigateToUser) {
                 NavigationLink {
-                    UserFeedView()
+                    UserFeedView(walletAddress: post.ownerAddress)
                 } label: {
                     avatar(name: post.avatar)
                 }

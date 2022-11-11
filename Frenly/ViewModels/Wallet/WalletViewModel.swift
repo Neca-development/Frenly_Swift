@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import WalletConnectSwift
 
 @MainActor
 final class WalletViewModel: ObservableObject {
@@ -19,6 +20,14 @@ final class WalletViewModel: ObservableObject {
             guard let accounts = wcService.session?.walletInfo?.accounts, let wallet = accounts.first else { return nil }
             
             return wallet
+        }
+    }
+
+    var chainId: Int? {
+        get {
+            guard let chainId = wcService.session.walletInfo?.chainId else { return nil }
+            
+            return chainId
         }
     }
     
@@ -49,6 +58,36 @@ final class WalletViewModel: ObservableObject {
         try openExternalWalletApp(wcUrl: wcUrl)
         
         return try await wcService.sign(message: message)
+    }
+    
+    func switchNetworkToMumbai() async -> Void {
+        let params = AddETHChainParams(
+            chainId: Constants.MUMBAI_CHAIN_ID,
+            chainName: "Mumbai Testnet",
+            nativeCurrency: NativeCurrency(
+                name: "MATIC",
+                symbol: "MATIC",
+                decimals: 18
+            ),
+            rpcUrls: ["https://matic-mumbai.chainstacklabs.com/"],
+            blockExplorerUrls: ["https://mumbai.polygonscan.com/"],
+            iconUrls: ["https://polygonscan.com/images/svg/brands/polygon.svg"]
+        )
+
+        guard let request = try? Request(
+            url: wcService.wcUrl,
+            method: "wallet_addEthereumChain",
+            params: [params]
+        ) else {
+            print("ERROR WHILE REQUEST CREATION")
+            return
+        }
+        
+        try? wcService.client.send(request) { response in
+            print(response)
+        }
+
+        try? openExternalWalletApp(wcUrl: wcService.session.url.absoluteString)
     }
     
     func disconnect() -> Void {
@@ -97,4 +136,22 @@ extension WalletViewModel: WalletConnectDelegate {
             self.wcStatus = .disconnected
         }
     }
+}
+
+struct AddETHChainParams: Codable {
+    var chainId: String
+    var chainName: String
+    
+    var nativeCurrency: NativeCurrency?
+    
+    var rpcUrls: [String]
+    
+    var blockExplorerUrls: [String]?
+    var iconUrls: [String]?
+}
+
+struct NativeCurrency: Codable {
+    var name: String
+    var symbol: String
+    var decimals: Int
 }

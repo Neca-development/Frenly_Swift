@@ -101,7 +101,7 @@ struct PostWithCommentsView: View {
             ToolbarItem(placement: .navigationBarLeading) {
                 if (isContentShown) {
                     NavigationLink {
-                        UserFeedView()
+                        UserFeedView(walletAddress: post.ownerAddress)
                     } label: {
                         PostNavTitleView(post: post)
                     }

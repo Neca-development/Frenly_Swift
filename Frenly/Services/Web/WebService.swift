@@ -17,7 +17,7 @@ class WebService {
         guard let token = try? decode(jwt: accessToken) else { throw NetworkErrors.unauthorized }
         
         if (token.expired) {
-            guard let _ = try? await AuthViewModel.refreshTokens() else { throw NetworkErrors.unauthorized }
+            guard let _ = try? await AuthWebService.refreshToken() else { throw NetworkErrors.unauthorized }
         }
     }
     

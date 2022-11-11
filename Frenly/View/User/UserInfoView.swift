@@ -42,8 +42,6 @@ struct UserInfoView: View {
                     .frame(width: UIScreen.main.bounds.width * 0.8)
                     .padding(.bottom)
             }
-            
-            Divider()
         }
     }
 }

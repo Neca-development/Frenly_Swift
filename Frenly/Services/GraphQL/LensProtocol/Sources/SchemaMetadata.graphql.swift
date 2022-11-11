@@ -30,6 +30,8 @@ public enum SchemaMetadata: ApolloAPI.SchemaMetadata {
     case "MetadataOutput": return LensProtocol.Objects.MetadataOutput
     case "Profile": return LensProtocol.Objects.Profile
     case "PublicationStats": return LensProtocol.Objects.PublicationStats
+    case "MetadataAttributeOutput": return LensProtocol.Objects.MetadataAttributeOutput
+    case "PaginatedResultInfo": return LensProtocol.Objects.PaginatedResultInfo
     case "AuthChallengeResult": return LensProtocol.Objects.AuthChallengeResult
     case "Mutation": return LensProtocol.Objects.Mutation
     case "AuthenticationResult": return LensProtocol.Objects.AuthenticationResult

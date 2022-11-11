@@ -57,8 +57,6 @@ class AuthWebService: WebService {
             throw NetworkErrors.invalidURL
         }
         
-        try await validateTokens()
-        
         guard let accessToken = AuthTokenHelper.readAccessToken() else { throw NetworkErrors.noData }
         guard let refreshToken = AuthTokenHelper.readRefreshToken() else { throw NetworkErrors.noData }
         

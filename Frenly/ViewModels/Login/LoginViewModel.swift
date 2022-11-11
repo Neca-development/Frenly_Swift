@@ -36,7 +36,7 @@ class AuthViewModel: ObservableObject {
 
         AuthTokenHelper.saveAccessToken(response.data.accessToken)
         AuthTokenHelper.saveRefreshToken(response.data.refreshToken)
-        
+            
         return JWTPair(
             accessToken: response.data.accessToken,
             refreshToken: response.data.refreshToken

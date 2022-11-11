@@ -89,6 +89,10 @@ struct LoginView: View {
             
             try await login.authorizeWithLensSignature(walletAddress: walletAddress, signature: lensSignature)
             
+            await wallet.switchNetworkToMumbai()
+            
+            try? await Task.sleep(nanoseconds: 3_000_000_000)
+            
             login.status = .authorized
         } catch {
             wallet.wcStatus = .failed

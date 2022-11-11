@@ -56,6 +56,7 @@ class TotalFeedViewModel: ObservableObject {
             posts.append(Post(
                 id: backendPosts[i].id,
                 lensId: backendPosts[i].lensId!,
+                ownerAddress: lensPost.ownerWalletAddress,
                 username: postOwner?.data.username ?? UtilsService.User.nameFromWalletAddress(walletAddress: lensPost.ownerWalletAddress),
                 avatar: postOwner?.data.avatar ?? "",
                 fromAddress: backendPosts[i].fromAddress,

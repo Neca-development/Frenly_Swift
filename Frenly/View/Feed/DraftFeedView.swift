@@ -28,6 +28,8 @@ struct DraftFeedView: View {
                     description: user.user.description
                 )
                 
+                Divider()
+                
                 LazyVStack {
                     if (isRefreshing) {
                         Spacer()

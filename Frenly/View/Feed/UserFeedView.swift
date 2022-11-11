@@ -9,46 +9,58 @@ import SwiftUI
 
 struct UserFeedView: View {
     @StateObject private var user = UserViewModel()
+    @StateObject private var feed = UserFeedViewModel()
+    
+    var walletAddress: String
     
     var body: some View {
         ScrollView {
-            UserInfoView(avatar: "", description: "description")
-
-            NavigationLink {
-                PostWithCommentsView(post: Post())
-            } label: {
-                PostWithUserView()
-            }
-            .buttonStyle(PlainButtonStyle())
-
-            Divider()
+            UserInfoView(avatar: user.user.avatar, description: user.user.description)
             
-            NavigationLink {
-                PostWithCommentsView(post: Post())
+            Button {
+                
             } label: {
-                PostWithUserView()
+                Text("Follow")
+                    .font(.system(size: 18, weight: .bold, design: .rounded))
+                    .frame(
+                        width: UIScreen.main.bounds.width * 0.3,
+                        height: 40
+                    )
+                    .background(Color.lightBlue)
+                    .foregroundColor(Color.white)
+                    .cornerRadius(20)
+                    .padding(.bottom, 20)
             }
-            .buttonStyle(PlainButtonStyle())
-            
-            Divider()
-            
-            NavigationLink {
-                PostWithCommentsView(post: Post())
-            } label: {
-                PostWithUserView()
-            }
-            .buttonStyle(PlainButtonStyle())
             
             Divider()
             
-            NavigationLink {
-                PostWithCommentsView(post: Post())
-            } label: {
-                PostWithUserView()
+            LazyVStack {
+                ForEach(feed.posts, id: \.lensId) { post in
+                    NavigationLink {
+                        PostWithCommentsView(post: post)
+                    } label: {
+                        PostWithoutUser(post: post)
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                    .onAppear() {
+                        if (post.lensId == feed.posts.last?.lensId) {
+                            Task { await feed.fetchPosts(walletAddress: walletAddress) }
+                        }
+                    }
+                    
+                    Divider()
+                }
+                
+                if (feed.isFetching) {
+                    Spacer()
+                    ProgressView()
+                    Spacer()
+                }
+                
+                if (feed.isEndOfPage) {
+                    EndOfTotalFeedView()
+                }
             }
-            .buttonStyle(PlainButtonStyle())
-            
-            Divider()
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
@@ -58,12 +70,15 @@ struct UserFeedView: View {
             }
             
             ToolbarItem(placement: .principal) {
-                Text("Username")
+                Text(user.user.username)
                     .font(.system(size: 24, weight: .bold, design: .rounded))
             }
         }
         .onAppear() {
-            Task { await user.fetchUser() }
+            Task {
+                await user.fetchUserByWalletAddress(walletAddress: walletAddress)
+                await feed.fetchPosts(walletAddress: walletAddress)
+            }
         }
     }
 }
@@ -71,7 +86,7 @@ struct UserFeedView: View {
 struct UserFeedView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            UserFeedView()
+            UserFeedView(walletAddress: "")
         }
     }
 }

@@ -113,6 +113,72 @@ class LensProtocolService {
         }
     }
     
+    static func getUsersPostById(profileId: String, cursor: String? = nil) async -> UserPostsResponse {
+        await withCheckedContinuation { continuation in
+            let gqlCursor: GraphQLNullable<String> = cursor == nil ? .null : .some(cursor!)
+            
+            apolloClient.fetch(query: UserPostsByLensIdQuery(profileId: profileId, cursor: gqlCursor)) { result in
+                var posts: [UserPostInfo] = []
+                
+                guard let data = try? result.get().data else {
+                    continuation.resume(returning: UserPostsResponse(posts: posts, cursor: nil))
+                    return
+                }
+                
+                let cursor = data.publications.pageInfo.next
+                
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+                
+                for i in 0..<data.publications.items.count {
+                    if (data.publications.items[i].asPost?.id != nil) {
+                        let post = data.publications.items[i].asPost!
+                        let createdAt = dateFormatter.date(from: post.createdAt)!
+                        
+                        posts.append(UserPostInfo(
+                            id: post.id,
+                            isMirror: false,
+                            mirrorFrom: "",
+                            image: (post.metadata.attributes.first(where: { $0.traitType == "image"})?.value)!,
+                            transactionHash: (post.metadata.attributes.first(where: { $0.traitType == "Transaction hash"})?.value)!,
+                            scAddress: (post.metadata.attributes.first(where: { $0.traitType == "Contract address"})?.value)!,
+                            fromAddress: (post.metadata.attributes.first(where: { $0.traitType == "From address"})?.value)!,
+                            toAddress: (post.metadata.attributes.first(where: { $0.traitType == "To address"})?.value)!,
+                            transferType: (post.metadata.attributes.first(where: { $0.traitType == "Transfer type"})?.value)!,
+                            totalAmountOfComments: post.stats.totalAmountOfComments,
+                            totalUpvotes: post.stats.totalUpvotes,
+                            totalAmountOfMirrors: post.stats.totalAmountOfMirrors,
+                            creationDate: createdAt
+                        ))
+                    } else if (data.publications.items[i].asMirror?.id != nil) {
+                        let mirror = data.publications.items[i].asMirror!
+                        let post = data.publications.items[i].asMirror!.mirrorOf.asPost!
+                        
+                        let createdAt = dateFormatter.date(from: mirror.createdAt)!
+                        
+                        posts.append(UserPostInfo(
+                            id: mirror.id,
+                            isMirror: true,
+                            mirrorFrom: post.profile.ownedBy,
+                            image: (post.metadata.attributes.first(where: { $0.traitType == "image"})?.value)!,
+                            transactionHash: (post.metadata.attributes.first(where: { $0.traitType == "Transaction hash"})?.value)!,
+                            scAddress: (post.metadata.attributes.first(where: { $0.traitType == "Contract address"})?.value)!,
+                            fromAddress: (post.metadata.attributes.first(where: { $0.traitType == "From address"})?.value)!,
+                            toAddress: (post.metadata.attributes.first(where: { $0.traitType == "To address"})?.value)!,
+                            transferType: (post.metadata.attributes.first(where: { $0.traitType == "Transfer type"})?.value)!,
+                            totalAmountOfComments: mirror.stats.totalAmountOfComments,
+                            totalUpvotes: mirror.stats.totalUpvotes,
+                            totalAmountOfMirrors: mirror.stats.totalAmountOfMirrors,
+                            creationDate: createdAt
+                        ))
+                    }
+                }
+                
+                continuation.resume(returning: UserPostsResponse(posts: posts, cursor: cursor))
+            }
+        }
+    }
+    
     static func getCommentsByPostId(postId: String) async -> [Comment] {
         await withCheckedContinuation { continuation in
 
@@ -150,6 +216,8 @@ class LensProtocolService {
         var refreshToken: String
     }
     
+    // // Posts
+    
     struct FeedPostInfo {
         var id: String
         var ownerWalletAddress: String
@@ -160,6 +228,34 @@ class LensProtocolService {
         var totalAmountOfComments: Int
         var totalUpvotes: Int
         var totalAmountOfMirrors: Int
+    }
+    
+    struct UserPostsResponse {
+        var posts: [UserPostInfo]
+        var cursor: String?
+    }
+    
+    struct UserPostInfo {
+        var id: String
+        
+        var isMirror: Bool
+        var mirrorFrom: String
+        
+        var image: String
+    
+        var transactionHash: String
+        
+        var scAddress: String
+        var fromAddress: String
+        var toAddress: String
+        
+        var transferType: String
+        
+        var totalAmountOfComments: Int
+        var totalUpvotes: Int
+        var totalAmountOfMirrors: Int
+        
+        var creationDate: Date
     }
     
     struct Comment {

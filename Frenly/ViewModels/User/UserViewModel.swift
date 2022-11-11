@@ -12,6 +12,7 @@ import UIKit
 @MainActor
 class UserViewModel: ObservableObject {
     @Published var user = User()
+    @Published var walletAddress = ""
     
     func fetchUser() async -> Void {
         guard let accessToken = AuthTokenHelper.readAccessToken() else { return }
@@ -19,7 +20,14 @@ class UserViewModel: ObservableObject {
         
         let walletAddress = jwt.body["walletAddress"] as! String
         
+        guard let response = try? await UserWebService.getUserInfo(walletAddress: walletAddress) else { return }
         
+        user.avatar = response.data.avatar ?? ""
+        user.username = response.data.username ?? UtilsService.User.nameFromWalletAddress(walletAddress: walletAddress)
+        user.description = response.data.description ?? ""
+    }
+    
+    func fetchUserByWalletAddress(walletAddress: String) async -> Void {
         guard let response = try? await UserWebService.getUserInfo(walletAddress: walletAddress) else { return }
         
         user.avatar = response.data.avatar ?? ""

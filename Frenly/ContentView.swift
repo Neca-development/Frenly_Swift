@@ -29,7 +29,7 @@ struct ContentView: View {
                     .environmentObject(wallet)
                     .animation(.easeInOut(duration: 0.4), value: auth.status)
             }
-            
+
             if (auth.status == .inProgress) {
                 Color.appBackground.ignoresSafeArea()
 
@@ -42,30 +42,28 @@ struct ContentView: View {
             }
         }
         .onAppear() {
-            tryConnectWithDefaults()
+            Task { await tryConnectWithDefaults() }
         }
     }
     
-    func tryConnectWithDefaults() -> Void {
+    func tryConnectWithDefaults() async -> Void {
         let status = wallet.reconnect()
 
         if (status == .success) {
             wallet.wcStatus = .connected
         }
         
-        Task {
-            guard let _ = try? await AuthViewModel.refreshTokens() else {
-                auth.status = .unauthorized
-                return
-            }
-            
-            guard let _ = try? await AuthViewModel.refreshLensTokens() else {
-                auth.status = .unauthorized
-                return
-            }
-                
-            auth.status = .authorized
+        guard let _ = try? await AuthViewModel.refreshTokens() else {
+            auth.status = .unauthorized
+            return
         }
+        
+        guard let _ = try? await AuthViewModel.refreshLensTokens() else {
+            auth.status = .unauthorized
+            return
+        }
+        
+        auth.status = .authorized
     }
 }
 
