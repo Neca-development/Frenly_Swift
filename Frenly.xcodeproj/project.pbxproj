@@ -96,6 +96,8 @@
 		71EA828E291E6B250003F57A /* CreatePostTypedData.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 71EA828D291E6B250003F57A /* CreatePostTypedData.graphql */; };
 		71EA8292291E6B880003F57A /* CreatePostTypedDataMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71EA8291291E6B880003F57A /* CreatePostTypedDataMutation.graphql.swift */; };
 		71EA829429213DDF0003F57A /* AppLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71EA829329213DDE0003F57A /* AppLoader.swift */; };
+		71EA8296292146A10003F57A /* CreateCommentTypedData.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 71EA8295292146A10003F57A /* CreateCommentTypedData.graphql */; };
+		71EA8298292155550003F57A /* CreateCommentTypedDataMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71EA8297292155550003F57A /* CreateCommentTypedDataMutation.graphql.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -184,6 +186,8 @@
 		71EA828D291E6B250003F57A /* CreatePostTypedData.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = CreatePostTypedData.graphql; sourceTree = "<group>"; };
 		71EA8291291E6B880003F57A /* CreatePostTypedDataMutation.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatePostTypedDataMutation.graphql.swift; sourceTree = "<group>"; };
 		71EA829329213DDE0003F57A /* AppLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLoader.swift; sourceTree = "<group>"; };
+		71EA8295292146A10003F57A /* CreateCommentTypedData.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = CreateCommentTypedData.graphql; sourceTree = "<group>"; };
+		71EA8297292155550003F57A /* CreateCommentTypedDataMutation.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateCommentTypedDataMutation.graphql.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -576,6 +580,8 @@
 			children = (
 				71E052D02917FD04006FB1DC /* PostComments.graphql */,
 				71E052D22917FD80006FB1DC /* PostCommentsQuery.graphql.swift */,
+				71EA8295292146A10003F57A /* CreateCommentTypedData.graphql */,
+				71EA8297292155550003F57A /* CreateCommentTypedDataMutation.graphql.swift */,
 			);
 			path = Comments;
 			sourceTree = "<group>";
@@ -762,6 +768,7 @@
 			files = (
 				71EA827F291E13F30003F57A /* UserPostsByLensId.graphql in Resources */,
 				71AD718D2912C20700BC7CF7 /* lens-protocol-schema.graphqls in Resources */,
+				71EA8296292146A10003F57A /* CreateCommentTypedData.graphql in Resources */,
 				71D775DB29011283005F7D7D /* Preview Assets.xcassets in Resources */,
 				71EA828A291E5DD00003F57A /* CreateProfile.graphql in Resources */,
 				71E052D12917FD04006FB1DC /* PostComments.graphql in Resources */,
@@ -849,6 +856,7 @@
 				7164398A2905D19A0065EA09 /* TotalFeedView.swift in Sources */,
 				7164397A2905C3510065EA09 /* WalletType.swift in Sources */,
 				71E18EFB2912D07300FDBC05 /* GraphQLErrors.swift in Sources */,
+				71EA8298292155550003F57A /* CreateCommentTypedDataMutation.graphql.swift in Sources */,
 				7164396E290596760065EA09 /* UtilsErrors.swift in Sources */,
 				716439AF2906BE5D0065EA09 /* PostInDraftView.swift in Sources */,
 				71C4DB202912856B008B4A8C /* LensProtocolService.swift in Sources */,

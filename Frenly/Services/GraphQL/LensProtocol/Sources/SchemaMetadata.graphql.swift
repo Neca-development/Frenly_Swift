@@ -29,15 +29,19 @@ public enum SchemaMetadata: ApolloAPI.SchemaMetadata {
     case "Mirror": return LensProtocol.Objects.Mirror
     case "MetadataOutput": return LensProtocol.Objects.MetadataOutput
     case "Profile": return LensProtocol.Objects.Profile
+    case "Mutation": return LensProtocol.Objects.Mutation
+    case "CreateCommentBroadcastItemResult": return LensProtocol.Objects.CreateCommentBroadcastItemResult
+    case "CreateCommentEIP712TypedData": return LensProtocol.Objects.CreateCommentEIP712TypedData
+    case "CreateCommentEIP712TypedDataTypes": return LensProtocol.Objects.CreateCommentEIP712TypedDataTypes
+    case "EIP712TypedDataField": return LensProtocol.Objects.EIP712TypedDataField
+    case "EIP712TypedDataDomain": return LensProtocol.Objects.EIP712TypedDataDomain
+    case "CreateCommentEIP712TypedDataValue": return LensProtocol.Objects.CreateCommentEIP712TypedDataValue
     case "PublicationStats": return LensProtocol.Objects.PublicationStats
     case "MetadataAttributeOutput": return LensProtocol.Objects.MetadataAttributeOutput
     case "PaginatedResultInfo": return LensProtocol.Objects.PaginatedResultInfo
-    case "Mutation": return LensProtocol.Objects.Mutation
     case "CreatePostBroadcastItemResult": return LensProtocol.Objects.CreatePostBroadcastItemResult
     case "CreatePostEIP712TypedData": return LensProtocol.Objects.CreatePostEIP712TypedData
     case "CreatePostEIP712TypedDataTypes": return LensProtocol.Objects.CreatePostEIP712TypedDataTypes
-    case "EIP712TypedDataField": return LensProtocol.Objects.EIP712TypedDataField
-    case "EIP712TypedDataDomain": return LensProtocol.Objects.EIP712TypedDataDomain
     case "CreatePostEIP712TypedDataValue": return LensProtocol.Objects.CreatePostEIP712TypedDataValue
     case "RelayerResult": return LensProtocol.Objects.RelayerResult
     case "RelayError": return LensProtocol.Objects.RelayError

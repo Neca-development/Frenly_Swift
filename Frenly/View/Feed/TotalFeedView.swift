@@ -30,14 +30,16 @@ struct TotalFeedView: View {
                         Spacer()
                     }
                     
-                    ForEach(feed.posts, id: \.id) { post in
+                    ForEach($feed.posts, id: \.id) { $post in
                         NavigationLink {
-                            PostWithCommentsView(post: post)
+                            PostWithCommentsView(post: $post)
+                                .environmentObject(wallet)
                         } label: {
                             PostWithUserView(
                                 post: post,
                                 navigateToUser: true
                             )
+                            .environmentObject(wallet)
                         }
                         .buttonStyle(PlainButtonStyle())
                         .onAppear() {

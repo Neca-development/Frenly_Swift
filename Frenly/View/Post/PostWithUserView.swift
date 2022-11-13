@@ -7,7 +7,9 @@
 
 import SwiftUI
 
-struct PostWithUserView: View {    
+struct PostWithUserView: View {
+    @EnvironmentObject private var wallet: WalletViewModel
+    
     var post = Post()
     var navigateToUser = false
     
@@ -16,6 +18,7 @@ struct PostWithUserView: View {
             if (navigateToUser) {
                 NavigationLink {
                     UserFeedView(walletAddress: post.ownerAddress)
+                        .environmentObject(wallet)
                 } label: {
                     avatar(name: post.avatar)
                 }
@@ -160,5 +163,6 @@ struct PostWithUserView: View {
 struct PostWithUserView_Previews: PreviewProvider {
     static var previews: some View {
         PostWithUserView()
+            .environmentObject(WalletViewModel())
     }
 }

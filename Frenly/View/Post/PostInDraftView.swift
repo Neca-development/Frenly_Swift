@@ -140,7 +140,9 @@ struct PostInDraftView: View {
     }
     
     func publishPostAction() async -> Void {
-//        await wallet.switchNetworkToMumbai()
+        if (wallet.chainId != Constants.MUMBAI_CHAIN_ID_DECIMAL) {
+            await wallet.switchNetworkToMumbai()
+        }
         
         guard let walletAddress = wallet.walletAddress else {
             return

@@ -89,6 +89,40 @@ final class SmartContractService {
         return ethData.hex()
     }
     
+    func createCommentABIData(params: CreateCommentTypedDataMutation.Data.CreateCommentTypedData.TypedData) async -> String? {
+        /*
+         [
+             profileId: uint256,
+             contentURI: string,
+             profileIdPointed: uint256,
+             pubIdPointed: uint256,
+             referenceModuleData: bytes,
+             collectModule: address,
+             collectModuleInitData: bytes,
+             referenceModule: address,
+             referenceModuleInitData: bytes
+         ]
+         */
+
+        let params = SolidityTuple(
+            SolidityWrappedValue.uint(BigUInt(params.value.profileId.dropFirst(2), radix: 16)!),
+            SolidityWrappedValue.string(params.value.contentURI),
+            SolidityWrappedValue.uint(BigUInt(params.value.profileIdPointed.dropFirst(2), radix: 16)!),
+            SolidityWrappedValue.uint(BigUInt(params.value.pubIdPointed.dropFirst(2), radix: 16)!),
+            SolidityWrappedValue.bytes(Data(hex: params.value.referenceModuleData)),
+            SolidityWrappedValue.address(try! EthereumAddress(hex: params.value.collectModule, eip55: false)),
+            SolidityWrappedValue.bytes(Data(hex: params.value.collectModuleInitData)),
+            SolidityWrappedValue.address(try! EthereumAddress(hex: params.value.referenceModule, eip55: false)),
+            SolidityWrappedValue.bytes(Data(hex: params.value.referenceModuleInitData))
+        )
+        
+        guard let ethData = contract["comment"]!(params).encodeABI() else {
+            return nil
+        }
+        
+        return ethData.hex()
+    }
+    
     func splitSignature(signature: String) -> SplittedSignature? {
         var bytes = Array<UInt8>.init(hex: signature)
         

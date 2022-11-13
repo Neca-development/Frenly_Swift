@@ -1,0 +1,43 @@
+mutation CreateCommentTypedData($profileId: ProfileId!, $publicationId: InternalPublicationId!, $contentURI: Url!) {
+  createCommentTypedData(request: {
+    profileId: $profileId,
+    publicationId: $publicationId,
+    contentURI: $contentURI,
+    collectModule: {
+      revertCollectModule: true
+    },
+    referenceModule: {
+      followerOnlyReferenceModule: false
+    }
+  }) {
+    id
+    expiresAt
+    typedData {
+      types {
+        CommentWithSig {
+          name
+          type
+        }
+      }
+      domain {
+        name
+        chainId
+        version
+        verifyingContract
+      }
+      value {
+        nonce
+        deadline
+        profileId
+        profileIdPointed
+        pubIdPointed
+        contentURI
+        referenceModuleData
+        collectModule
+        collectModuleInitData
+        referenceModule
+        referenceModuleInitData
+      }
+    }
+  }
+}

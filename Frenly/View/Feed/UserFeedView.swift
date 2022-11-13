@@ -10,6 +10,8 @@ import SwiftUI
 import JWTDecode
 
 struct UserFeedView: View {
+    @EnvironmentObject private var wallet: WalletViewModel
+    
     @StateObject private var user = UserViewModel()
     @StateObject private var feed = UserFeedViewModel()
     
@@ -58,9 +60,10 @@ struct UserFeedView: View {
             Divider()
             
             LazyVStack {
-                ForEach(feed.posts, id: \.lensId) { post in
+                ForEach($feed.posts, id: \.lensId) { $post in
                     NavigationLink {
-                        PostWithCommentsView(post: post)
+                        PostWithCommentsView(post: $post)
+                            .environmentObject(wallet)
                     } label: {
                         PostWithoutUser(post: post)
                     }
@@ -110,6 +113,7 @@ struct UserFeedView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             UserFeedView(walletAddress: "")
+                .environmentObject(WalletViewModel())
         }
     }
 }
