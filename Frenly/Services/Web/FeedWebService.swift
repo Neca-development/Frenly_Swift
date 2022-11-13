@@ -58,6 +58,109 @@ class FeedWebService: WebService {
         return response
     }
     
+    static func getOwnedPostMetadataURL (contentId: Int) async throws -> ApiResponse<String> {
+        guard let url = URL(string: "\(APP_URL)/content/\(contentId)/metadata") else {
+            throw NetworkErrors.invalidURL
+        }
+        
+        try await validateTokens()
+        
+        guard let accessToken = AuthTokenHelper.readAccessToken() else { throw NetworkErrors.noData }
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = "GET"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        
+        guard let (data, _) = try? await URLSession.shared.data(for: request) else {
+            throw NetworkErrors.noData
+        }
+        
+        guard let response = try? JSONCoder().decoder.decode(ApiResponse<String>.self, from: data) else {
+            throw NetworkErrors.decodingError
+        }
+
+        return response
+    }
+    
+    static func bindContentWithLensId (contentId: Int, lensId: String) async throws -> Int {
+        guard let url = URL(string: "\(APP_URL)/content/\(contentId)/\(lensId)") else {
+            throw NetworkErrors.invalidURL
+        }
+        
+        try await validateTokens()
+        
+        guard let accessToken = AuthTokenHelper.readAccessToken() else { throw NetworkErrors.noData }
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = "PUT"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        
+        guard let (_, response) = try? await URLSession.shared.data(for: request) else {
+            throw NetworkErrors.noData
+        }
+        
+        let httpResponse = response as? HTTPURLResponse
+        guard let statusCode = httpResponse?.statusCode else {
+            throw NetworkErrors.intenalServerError
+        }
+        
+        return statusCode
+    }
+    
+    static func publishContent (contentId: Int) async throws -> Int {
+        guard let url = URL(string: "\(APP_URL)/content/\(contentId)") else {
+            throw NetworkErrors.invalidURL
+        }
+        
+        try await validateTokens()
+        
+        guard let accessToken = AuthTokenHelper.readAccessToken() else { throw NetworkErrors.noData }
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        
+        guard let (_, response) = try? await URLSession.shared.data(for: request) else {
+            throw NetworkErrors.noData
+        }
+        
+        let httpResponse = response as? HTTPURLResponse
+        guard let statusCode = httpResponse?.statusCode else {
+            throw NetworkErrors.intenalServerError
+        }
+        
+        return statusCode
+    }
+    
+    static func removeContent (contentId: Int) async throws -> Int {
+        guard let url = URL(string: "\(APP_URL)/content/\(contentId)") else {
+            throw NetworkErrors.invalidURL
+        }
+        
+        try await validateTokens()
+        
+        guard let accessToken = AuthTokenHelper.readAccessToken() else { throw NetworkErrors.noData }
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = "DELETE"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        
+        guard let (_, response) = try? await URLSession.shared.data(for: request) else {
+            throw NetworkErrors.noData
+        }
+        
+        let httpResponse = response as? HTTPURLResponse
+        guard let statusCode = httpResponse?.statusCode else {
+            throw NetworkErrors.intenalServerError
+        }
+        
+        return statusCode
+    }
+    
     // Responses
     
     struct NftPostResponse: Codable {

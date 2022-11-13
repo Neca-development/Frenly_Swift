@@ -1,0 +1,16 @@
+mutation CreateProfile($profileName: CreateHandle!) {
+  createProfile(request:{
+                handle: $profileName,
+                profilePictureUri: null,
+                followNFTURI: null,
+                followModule: null
+                }) {
+    ... on RelayerResult {
+      txHash
+    }
+    ... on RelayError {
+      reason
+    }
+    __typename
+  }
+}

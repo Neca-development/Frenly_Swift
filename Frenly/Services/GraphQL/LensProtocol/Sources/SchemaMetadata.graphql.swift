@@ -32,8 +32,16 @@ public enum SchemaMetadata: ApolloAPI.SchemaMetadata {
     case "PublicationStats": return LensProtocol.Objects.PublicationStats
     case "MetadataAttributeOutput": return LensProtocol.Objects.MetadataAttributeOutput
     case "PaginatedResultInfo": return LensProtocol.Objects.PaginatedResultInfo
-    case "AuthChallengeResult": return LensProtocol.Objects.AuthChallengeResult
     case "Mutation": return LensProtocol.Objects.Mutation
+    case "CreatePostBroadcastItemResult": return LensProtocol.Objects.CreatePostBroadcastItemResult
+    case "CreatePostEIP712TypedData": return LensProtocol.Objects.CreatePostEIP712TypedData
+    case "CreatePostEIP712TypedDataTypes": return LensProtocol.Objects.CreatePostEIP712TypedDataTypes
+    case "EIP712TypedDataField": return LensProtocol.Objects.EIP712TypedDataField
+    case "EIP712TypedDataDomain": return LensProtocol.Objects.EIP712TypedDataDomain
+    case "CreatePostEIP712TypedDataValue": return LensProtocol.Objects.CreatePostEIP712TypedDataValue
+    case "RelayerResult": return LensProtocol.Objects.RelayerResult
+    case "RelayError": return LensProtocol.Objects.RelayError
+    case "AuthChallengeResult": return LensProtocol.Objects.AuthChallengeResult
     case "AuthenticationResult": return LensProtocol.Objects.AuthenticationResult
     default: return nil
     }

@@ -91,6 +91,11 @@
 		71EA827F291E13F30003F57A /* UserPostsByLensId.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 71EA827E291E13F20003F57A /* UserPostsByLensId.graphql */; };
 		71EA8283291E1F060003F57A /* UserFeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71EA8282291E1F060003F57A /* UserFeedViewModel.swift */; };
 		71EA8287291E378D0003F57A /* UserPostsByLensIdQuery.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71EA8286291E378D0003F57A /* UserPostsByLensIdQuery.graphql.swift */; };
+		71EA828A291E5DD00003F57A /* CreateProfile.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 71EA8289291E5DD00003F57A /* CreateProfile.graphql */; };
+		71EA828C291E5E6D0003F57A /* CreateProfileMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71EA828B291E5E6D0003F57A /* CreateProfileMutation.graphql.swift */; };
+		71EA828E291E6B250003F57A /* CreatePostTypedData.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 71EA828D291E6B250003F57A /* CreatePostTypedData.graphql */; };
+		71EA8292291E6B880003F57A /* CreatePostTypedDataMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71EA8291291E6B880003F57A /* CreatePostTypedDataMutation.graphql.swift */; };
+		71EA829429213DDF0003F57A /* AppLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71EA829329213DDE0003F57A /* AppLoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -174,6 +179,11 @@
 		71EA827E291E13F20003F57A /* UserPostsByLensId.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = UserPostsByLensId.graphql; sourceTree = "<group>"; };
 		71EA8282291E1F060003F57A /* UserFeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFeedViewModel.swift; sourceTree = "<group>"; };
 		71EA8286291E378D0003F57A /* UserPostsByLensIdQuery.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPostsByLensIdQuery.graphql.swift; sourceTree = "<group>"; };
+		71EA8289291E5DD00003F57A /* CreateProfile.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = CreateProfile.graphql; sourceTree = "<group>"; };
+		71EA828B291E5E6D0003F57A /* CreateProfileMutation.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateProfileMutation.graphql.swift; sourceTree = "<group>"; };
+		71EA828D291E6B250003F57A /* CreatePostTypedData.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = CreatePostTypedData.graphql; sourceTree = "<group>"; };
+		71EA8291291E6B880003F57A /* CreatePostTypedDataMutation.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatePostTypedDataMutation.graphql.swift; sourceTree = "<group>"; };
+		71EA829329213DDE0003F57A /* AppLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -456,6 +466,7 @@
 		71AD718B2912C1DB00BC7CF7 /* Queries */ = {
 			isa = PBXGroup;
 			children = (
+				71EA8288291E5D240003F57A /* Profile */,
 				71E052CF2917FCE2006FB1DC /* Comments */,
 				71E18EFF2913036E00FDBC05 /* Posts */,
 				71E18EEF2912CE1800FDBC05 /* Authentication */,
@@ -539,6 +550,7 @@
 			isa = PBXGroup;
 			children = (
 				71E052C22913A73A006FB1DC /* ImagePicker.swift */,
+				71EA829329213DDE0003F57A /* AppLoader.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -627,6 +639,8 @@
 				71E052BB291388EC006FB1DC /* FeedPostsInfoQuery.graphql.swift */,
 				71EA827E291E13F20003F57A /* UserPostsByLensId.graphql */,
 				71EA8286291E378D0003F57A /* UserPostsByLensIdQuery.graphql.swift */,
+				71EA828D291E6B250003F57A /* CreatePostTypedData.graphql */,
+				71EA8291291E6B880003F57A /* CreatePostTypedDataMutation.graphql.swift */,
 			);
 			path = Posts;
 			sourceTree = "<group>";
@@ -662,6 +676,15 @@
 				71EA827A291D1DF10003F57A /* LensHubAbi.json */,
 			);
 			path = SmartContract;
+			sourceTree = "<group>";
+		};
+		71EA8288291E5D240003F57A /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				71EA8289291E5DD00003F57A /* CreateProfile.graphql */,
+				71EA828B291E5E6D0003F57A /* CreateProfileMutation.graphql.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -740,12 +763,14 @@
 				71EA827F291E13F30003F57A /* UserPostsByLensId.graphql in Resources */,
 				71AD718D2912C20700BC7CF7 /* lens-protocol-schema.graphqls in Resources */,
 				71D775DB29011283005F7D7D /* Preview Assets.xcassets in Resources */,
+				71EA828A291E5DD00003F57A /* CreateProfile.graphql in Resources */,
 				71E052D12917FD04006FB1DC /* PostComments.graphql in Resources */,
 				71E18EF32912CE7D00FDBC05 /* RefreshJWT.graphql in Resources */,
 				71C4DB3D29129550008B4A8C /* Challenge.graphql in Resources */,
 				71AD71962912C5F400BC7CF7 /* apollo-codegen-config.json in Resources */,
 				71E18EF12912CE3F00FDBC05 /* Authenticate.graphql in Resources */,
 				71D775D829011283005F7D7D /* Assets.xcassets in Resources */,
+				71EA828E291E6B250003F57A /* CreatePostTypedData.graphql in Resources */,
 				71EA827B291D1DF10003F57A /* LensHubAbi.json in Resources */,
 				71E18F012913039000FDBC05 /* FeedPostsInfo.graphql in Resources */,
 			);
@@ -774,6 +799,7 @@
 				71E18EFD2912D50A00FDBC05 /* LensTokensHelper.swift in Sources */,
 				710CB7B72910FF1900367885 /* WalletConnectError.swift in Sources */,
 				71E18EF92912CF0700FDBC05 /* ChallengeQuery.graphql.swift in Sources */,
+				71EA828C291E5E6D0003F57A /* CreateProfileMutation.graphql.swift in Sources */,
 				719E5A5D2907A3FB0005A1DF /* UserFeedView.swift in Sources */,
 				710CB7B12910F29E00367885 /* Constants.swift in Sources */,
 				71E18EF72912CF0700FDBC05 /* RefreshMutation.graphql.swift in Sources */,
@@ -793,6 +819,7 @@
 				7164399329066F0D0065EA09 /* PostWithCommentsView.swift in Sources */,
 				71E052C92913AD55006FB1DC /* MediaUtil.swift in Sources */,
 				716439B12906C07D0065EA09 /* UserInfoView.swift in Sources */,
+				71EA829429213DDF0003F57A /* AppLoader.swift in Sources */,
 				71E052C62913AC74006FB1DC /* Media.swift in Sources */,
 				71E052D9291802CB006FB1DC /* CommentsViewModel.swift in Sources */,
 				71E052BE29138CA3006FB1DC /* UserUtil.swift in Sources */,
@@ -813,6 +840,7 @@
 				71E18EF82912CF0700FDBC05 /* AuthenticateMutation.graphql.swift in Sources */,
 				710CB7C5291133C400367885 /* FeedWebService.swift in Sources */,
 				71E052CC2913AEF7006FB1DC /* Data.swift in Sources */,
+				71EA8292291E6B880003F57A /* CreatePostTypedDataMutation.graphql.swift in Sources */,
 				719E5A5F2907A7930005A1DF /* PostWithUserView.swift in Sources */,
 				71E052CE2917EE9C006FB1DC /* DraftFeedViewModel.swift in Sources */,
 				710CB7B32910F33300367885 /* WebService.swift in Sources */,

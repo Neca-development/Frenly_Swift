@@ -99,6 +99,26 @@ final class WalletConnectService {
         }
     }
     
+    func signTypedData(message: String) async throws -> String {
+        return try await withCheckedThrowingContinuation { continuation in
+            guard let accounts = self.session?.walletInfo?.accounts, let wallet = accounts.first else { return }
+            
+            do {
+                try self.client.eth_signTypedData(
+                    url: self.session.url,
+                    account: wallet,
+                    message: message
+                ) { response in
+                    guard let responseHash = try? response.result(as: String.self) else { return }
+                    continuation.resume(with: .success(responseHash))
+                }
+            } catch {
+                continuation.resume(with: .failure(error))
+            }
+        }
+    }
+    
+    
     enum ReconnectStatus {
         case success
         case failed

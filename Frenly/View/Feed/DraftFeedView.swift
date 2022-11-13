@@ -19,6 +19,7 @@ struct DraftFeedView: View {
     
     @State private var isEditing = false
     @State private var isRefreshing = false
+    @State private var isLoading = false
     
     var body: some View {
         ScrollView(showsIndicators: false) {
@@ -38,8 +39,14 @@ struct DraftFeedView: View {
                     }
                     
                     ForEach(drafts.posts, id: \.id) { post in
-                        PostInDraftView(post: post)
-                            .environmentObject(drafts)
+                        PostInDraftView(
+                            post: post,
+                            isLoading: $isLoading
+                        )
+                        .environmentObject(drafts)
+                        .environmentObject(wallet)
+                        
+                        Divider()
                     }
                 }
                 .background(GeometryReader {
@@ -72,7 +79,9 @@ struct DraftFeedView: View {
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                BackNavButton()
+                if (!isLoading) {
+                    BackNavButton()
+                }
             }
             
             ToolbarItem(placement: .principal) {
@@ -83,13 +92,20 @@ struct DraftFeedView: View {
             }
             
             ToolbarItem(placement: .navigationBarTrailing) {
-                EditButton
+                if (!isLoading) {
+                    EditButton
+                }
             }
         }
         .onAppear() {
             Task {
                 await user.fetchUser()
                 await drafts.fetchPosts()
+            }
+        }
+        .overlay {
+            if (isLoading) {
+                AppLoader()
             }
         }
     }

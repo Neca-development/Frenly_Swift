@@ -25,4 +25,6 @@ extension Color {
     static let declineButtonForeground = Color("Color_DeclineButton_Foreground")
     
     static let eyesLogo = Color("Color_Eyes_Simple")
+    
+    static let appLoader = Color("Color_App_Loader")
 }

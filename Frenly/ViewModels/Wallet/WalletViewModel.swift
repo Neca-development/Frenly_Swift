@@ -60,6 +60,62 @@ final class WalletViewModel: ObservableObject {
         return try await wcService.sign(message: message)
     }
     
+    func signCreateLensPost(params: CreatePostParams) async throws -> String {
+        return try await withCheckedThrowingContinuation { continuation in
+            do {
+                let wcUrl = wcService.session.url.absoluteString
+
+                try? openExternalWalletApp(wcUrl: wcUrl)
+
+                let jsonEncoder = JSONEncoder()
+                let jsonData = try? jsonEncoder.encode(params)
+                let message = String(data: jsonData!, encoding: .utf8)!
+
+                try wcService.client.eth_signTypedData(url: wcService.wcUrl, account: walletAddress!, message: message) { result in
+                    guard let signature = try? result.result(as: String.self) else {
+                        continuation.resume(throwing: NetworkErrors.noData)
+                        return
+                    }
+                    
+                    continuation.resume(returning: signature)
+                }
+            } catch {
+                continuation.resume(throwing: NetworkErrors.intenalServerError)
+            }
+        }
+    }
+    
+    func sendTransaction(data: String) async throws -> String {
+        return try await withCheckedThrowingContinuation { continuation in
+            do {
+                let transaclion = MetamaskTransaction(
+                    to: Constants.MUMBAI_LENS_CONTRACT_ADDRESS,
+                    from: "0xfABA15fa0CfEe6a4450f00a2078Cb4A2FA0279d2",
+                    data: data
+                )
+                
+                let request = try Request(
+                    url: wcService.wcUrl,
+                    method: "eth_sendTransaction",
+                    params: [transaclion]
+                )
+                
+                try wcService.client.send(request) { response in
+                    guard let txHash = try? response.result(as: String.self) else {
+                        continuation.resume(throwing: NetworkErrors.noData)
+                        return
+                    }
+                    
+                    continuation.resume(returning: txHash)
+                }
+
+                try openExternalWalletApp(wcUrl: wcService.session.url.absoluteString)
+            } catch {
+                continuation.resume(throwing: NetworkErrors.intenalServerError)
+            }
+        }
+    }
+    
     func switchNetworkToMumbai() async -> Void {
         let params = AddETHChainParams(
             chainId: Constants.MUMBAI_CHAIN_ID,
@@ -74,20 +130,21 @@ final class WalletViewModel: ObservableObject {
             iconUrls: ["https://polygonscan.com/images/svg/brands/polygon.svg"]
         )
 
-        guard let request = try? Request(
-            url: wcService.wcUrl,
-            method: "wallet_addEthereumChain",
-            params: [params]
-        ) else {
-            print("ERROR WHILE REQUEST CREATION")
-            return
-        }
-        
-        try? wcService.client.send(request) { response in
-            print(response)
-        }
+        do {
+            let request = try Request(
+                url: wcService.wcUrl,
+                method: "wallet_addEthereumChain",
+                params: [params]
+            )
+            
+            try wcService.client.send(request) { response in
+                print(response)
+            }
 
-        try? openExternalWalletApp(wcUrl: wcService.session.url.absoluteString)
+            try openExternalWalletApp(wcUrl: wcService.session.url.absoluteString)
+        } catch {
+            print(error)
+        }
     }
     
     func disconnect() -> Void {
@@ -138,6 +195,8 @@ extension WalletViewModel: WalletConnectDelegate {
     }
 }
 
+// Support types
+
 struct AddETHChainParams: Codable {
     var chainId: String
     var chainName: String
@@ -154,4 +213,54 @@ struct NativeCurrency: Codable {
     var name: String
     var symbol: String
     var decimals: Int
+}
+
+// Create post typed data
+
+struct CreatePostParams: Codable {
+    var domain: CreatePostDomain
+    var types: CreatePostTypes
+    var message: CreatePostValues
+    var primaryType: String
+}
+
+struct CreatePostDomain: Codable {
+    var version: String
+    var chainId: String
+    var verifyingContract: String
+    var name: String
+}
+
+struct CreatePostTypes: Codable {
+    var PostWithSig: [PostWithSigParams]
+}
+
+struct PostWithSigParams: Codable {
+    var name: String
+    var type: String
+}
+
+struct CreatePostValues: Codable {
+    var referenceModule: String
+    var contentURI: String
+    var collectModule: String
+    var nonce: String
+    var profileId: String
+    var collectModuleInitData: String
+    var deadline: String
+    var referenceModuleInitData: String
+}
+
+// Transactions
+
+struct MetamaskTransaction: Codable {
+    var nonce: String?
+    var gasPrice: Int?
+    var gas: Int?
+    var to: String
+    var from: String
+    var value: String?
+    var data: String?
+    var chainId: String?
+    var maxPriorityFeePerGas: Int?
 }

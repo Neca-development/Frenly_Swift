@@ -30,4 +30,6 @@ class Constants {
     
     static let MUMBAI_RPC_URL = "https://polygon-mumbai.g.alchemy.com/v2/GHk7QUctHo69C1VGlveQ6cSu1-664KaS"
     static let MUMBAI_LENS_CONTRACT_ADDRESS = "0x60Ae865ee4C725cd04353b5AAb364553f56ceF82"
+    
+    static let TOPIC_POST_CREATED = "0xc672c38b4d26c3c978228e99164105280410b144af24dd3ed8e4f9d211d96a50"
 }

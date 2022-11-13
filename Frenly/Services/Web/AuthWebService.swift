@@ -79,6 +79,27 @@ class AuthWebService: WebService {
         return response
     }
     
+    static func isOwnLensProfile (walletAddress: String) async throws -> ApiResponse<Bool> {
+        guard let url = URL(string: "\(APP_URL)/auth/\(walletAddress)/lens-profile") else {
+            throw NetworkErrors.invalidURL
+        }
+        
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = "GET"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+    
+        guard let (data, _) = try? await URLSession.shared.data(for: request) else {
+            throw NetworkErrors.noData
+        }
+        
+        guard let response = try? JSONDecoder().decode(ApiResponse<Bool>.self, from: data) else {
+            throw NetworkErrors.decodingError
+        }
+
+        return response
+    }
+    
     // Requests
     struct ValidateSignatureBody: Codable {
         let signature: String

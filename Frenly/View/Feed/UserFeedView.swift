@@ -7,29 +7,52 @@
 
 import SwiftUI
 
+import JWTDecode
+
 struct UserFeedView: View {
     @StateObject private var user = UserViewModel()
     @StateObject private var feed = UserFeedViewModel()
     
     var walletAddress: String
+    var showFollowButton: Bool {
+        guard let token = AuthTokenHelper.readAccessToken() else {
+            return false
+        }
+        
+        guard let jwt = try? decode(jwt: token) else {
+            return false
+        }
+        
+        guard let currentUserAddress = jwt.body["walletAddress"] as? String else {
+            return false
+        }
+        
+        if (currentUserAddress.lowercased() == walletAddress.lowercased()) {
+            return false
+        }
+        
+        return true
+    }
     
     var body: some View {
         ScrollView {
             UserInfoView(avatar: user.user.avatar, description: user.user.description)
-            
-            Button {
-                
-            } label: {
-                Text("Follow")
-                    .font(.system(size: 18, weight: .bold, design: .rounded))
-                    .frame(
-                        width: UIScreen.main.bounds.width * 0.3,
-                        height: 40
-                    )
-                    .background(Color.lightBlue)
-                    .foregroundColor(Color.white)
-                    .cornerRadius(20)
-                    .padding(.bottom, 20)
+
+            if (showFollowButton) {
+                Button {
+                    
+                } label: {
+                    Text("Follow")
+                        .font(.system(size: 18, weight: .bold, design: .rounded))
+                        .frame(
+                            width: UIScreen.main.bounds.width * 0.3,
+                            height: 40
+                        )
+                        .background(Color.lightBlue)
+                        .foregroundColor(Color.white)
+                        .cornerRadius(20)
+                        .padding(.bottom, 20)
+                }
             }
             
             Divider()

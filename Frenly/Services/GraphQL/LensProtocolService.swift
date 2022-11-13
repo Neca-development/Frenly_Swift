@@ -7,6 +7,7 @@
 
 import Foundation
 import Apollo
+import ApolloAPI
 
 import LensProtocol
 
@@ -206,6 +207,87 @@ class LensProtocolService {
                 }
                 
                 continuation.resume(returning: comments)
+            }
+        }
+    }
+    
+    static func createPostTypedData(profileId: String, contentURI: String) async throws -> CreatePostTypedDataMutation.Data.CreatePostTypedData {
+        guard let tokens = try? await LensProtocolService.refreshTokens() else {
+            throw GraphQLErrors.unauthorized
+        }
+        
+        let apolloWithAuth: ApolloClient = {
+            let cache = InMemoryNormalizedCache()
+            let store = ApolloStore(cache: cache)
+            let authPayloads = ["x-access-token": tokens.accessToken]
+            let configuration = URLSessionConfiguration.default
+            configuration.httpAdditionalHeaders = authPayloads
+
+            let client = URLSessionClient(sessionConfiguration: configuration, callbackQueue: nil)
+            let provider = DefaultInterceptorProvider(client: client, shouldInvalidateClientOnDeinit: true, store: store)
+
+            let url = URL(string: Constants.LENS_URL)!
+
+            let requestChainTransport = RequestChainNetworkTransport(interceptorProvider: provider,
+                                                                     endpointURL: url)
+
+            return ApolloClient(networkTransport: requestChainTransport, store: store)
+           }()
+        
+        return try await withCheckedThrowingContinuation { continuation in
+
+            apolloWithAuth.perform(mutation: CreatePostTypedDataMutation(profileId: profileId, contentURI: contentURI)) { result in
+                guard let data = try? result.get().data else {
+                    continuation.resume(throwing: GraphQLErrors.profileNotCreated)
+                    return
+                }
+                
+                continuation.resume(returning: data.createPostTypedData)
+            }
+        }
+    }
+    
+    // Profile
+    
+    static func createProfile(walletAddress: String) async throws -> Void {
+        guard let tokens = try? await LensProtocolService.refreshTokens() else {
+            throw GraphQLErrors.unauthorized
+        }
+        
+        let profileName = "frenly_\(walletAddress.prefix(10))"
+        
+        let apolloWithAuth: ApolloClient = {
+            let cache = InMemoryNormalizedCache()
+            let store = ApolloStore(cache: cache)
+            let authPayloads = ["x-access-token": tokens.accessToken]
+            let configuration = URLSessionConfiguration.default
+            configuration.httpAdditionalHeaders = authPayloads
+
+            let client = URLSessionClient(sessionConfiguration: configuration, callbackQueue: nil)
+            let provider = DefaultInterceptorProvider(client: client, shouldInvalidateClientOnDeinit: true, store: store)
+
+            let url = URL(string: Constants.LENS_URL)!
+
+            let requestChainTransport = RequestChainNetworkTransport(interceptorProvider: provider,
+                                                                     endpointURL: url)
+
+            return ApolloClient(networkTransport: requestChainTransport, store: store)
+           }()
+        
+        return try await withCheckedThrowingContinuation { continuation in
+
+            apolloWithAuth.perform(mutation: CreateProfileMutation(profileName: profileName)) { result in
+                guard let data = try? result.get().data else {
+                    continuation.resume(throwing: GraphQLErrors.profileNotCreated)
+                    return
+                }
+                
+                if (data.createProfile.asRelayError?.reason != nil) {
+                    continuation.resume(throwing: GraphQLErrors.profileNotCreated)
+                    return
+                }
+
+                continuation.resume()
             }
         }
     }
