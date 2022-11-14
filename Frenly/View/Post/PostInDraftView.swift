@@ -188,7 +188,6 @@ struct PostInDraftView: View {
             return
         }
         
-        
         var response = await SmartContractService().getTransactionReceipt(txHash: txHash)
         
         let maxSleeps = 60

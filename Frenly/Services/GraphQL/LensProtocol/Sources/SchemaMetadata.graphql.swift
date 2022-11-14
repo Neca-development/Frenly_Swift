@@ -47,6 +47,10 @@ public enum SchemaMetadata: ApolloAPI.SchemaMetadata {
     case "RelayError": return LensProtocol.Objects.RelayError
     case "AuthChallengeResult": return LensProtocol.Objects.AuthChallengeResult
     case "AuthenticationResult": return LensProtocol.Objects.AuthenticationResult
+    case "CreateMirrorBroadcastItemResult": return LensProtocol.Objects.CreateMirrorBroadcastItemResult
+    case "CreateMirrorEIP712TypedData": return LensProtocol.Objects.CreateMirrorEIP712TypedData
+    case "CreateMirrorEIP712TypedDataTypes": return LensProtocol.Objects.CreateMirrorEIP712TypedDataTypes
+    case "CreateMirrorEIP712TypedDataValue": return LensProtocol.Objects.CreateMirrorEIP712TypedDataValue
     default: return nil
     }
   }

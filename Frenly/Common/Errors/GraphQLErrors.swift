@@ -11,4 +11,5 @@ enum GraphQLErrors: LocalizedError {
     case noChallengeReturned
     case unauthorized
     case profileNotCreated
+    case noUpvote
 }

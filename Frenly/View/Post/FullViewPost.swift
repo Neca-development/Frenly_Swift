@@ -8,7 +8,15 @@
 import SwiftUI
 
 struct FullViewPost: View {
-    var post: Post
+    @EnvironmentObject private var wallet: WalletViewModel
+    
+    @State private var isLikeInProgress = false
+    @State private var isMirrorInProgress = false
+    
+    @State private var isDescriptionPopover = false
+    @State private var description = ""
+    
+    @Binding var post: Post
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -77,27 +85,234 @@ struct FullViewPost: View {
                 
                 Spacer()
                 
-                Image("Image_Hearth")
-                Text("\(post.totalLikes)")
-                    .foregroundColor(.grayBlue)
-                    .padding(.trailing, 10)
-                
+                Button {
+                    Task {
+                        if (isLikeInProgress || isMirrorInProgress) {
+                            return
+                        }
+                        
+                        isLikeInProgress = true
+                        await upvote()
+                        isLikeInProgress = false
+                    }
+                } label: {
+                    Image("Image_Hearth")
+                    Text("\(post.totalLikes)")
+                        .foregroundColor(.grayBlue)
+                        .padding(.trailing, 10)
+                }
+
                 Image("Image_Comment")
                 Text("\(post.totalComments)")
                     .foregroundColor(.grayBlue)
                     .padding(.trailing, 10)
 
-                Image("Image_Repost")
-                Text("\(post.totalMirrors)")
-                    .foregroundColor(.grayBlue)
-                    .padding(.trailing, 10)
+                Button {
+                    if (isLikeInProgress || isMirrorInProgress) {
+                        return
+                    }
+                    
+                    isDescriptionPopover = true
+                    isMirrorInProgress = true
+                } label: {
+                    Image("Image_Repost")
+                    Text("\(post.totalMirrors)")
+                        .foregroundColor(.grayBlue)
+                        .padding(.trailing, 10)
+                }
+                .popover(isPresented: $isDescriptionPopover) {
+                    Text("Enter mirror description")
+                        .font(.headline)
+                    
+                    TextField("Description...", text: $description)
+                        .padding(EdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 0))
+                        .frame(
+                            width: UIScreen.main.bounds.width * 0.7,
+                            height: 40
+                        )
+                        .background(Color.commentInputBackground)
+                        .cornerRadius(20)
+                        .padding()
+                    
+                    HStack {
+                        Button {
+                            isDescriptionPopover = false
+
+                            Task {
+                                await mirror(text: description)
+                                isMirrorInProgress = false
+                            }
+                        } label: {
+                            Text("Mirror")
+                                .foregroundColor(.blue)
+                        }
+                        
+                        Button {
+                            isMirrorInProgress = false
+                            isDescriptionPopover = false
+                        } label: {
+                            Text("Dismiss")
+                                .foregroundColor(.red)
+                        }
+                    }
+               }
             }
         }
+    }
+    
+    func mirror(text: String) async -> Void {
+        if (wallet.chainId != Constants.MUMBAI_CHAIN_ID_DECIMAL) {
+            await wallet.switchNetworkToMumbai()
+        }
+        
+        guard let walletAddress = wallet.walletAddress else {
+            return
+        }
+
+        // Retrieve profile ID
+        guard let isOwnLensProfile = try? await AuthWebService.isOwnLensProfile(walletAddress: walletAddress) else {
+            return
+        }
+        
+        if (!isOwnLensProfile.data) {
+            guard let _ = try? await LensProtocolService.createProfile(walletAddress: walletAddress) else {
+                return
+            }
+        }
+        
+        let lensProfileId = (await SmartContractService().lensIdByWalletAddress(walletAddress: walletAddress))!
+        
+        // Form metadata
+        
+        var postId = post.lensId
+        
+        if (post.isMirror) {
+            guard let originalId = await LensProtocolService.getPublicationIdByMirrorId(publicationId: post.lensId) else {
+                return
+            }
+            
+            postId = originalId
+        }
+        
+        guard let createMirrorData = try? await LensProtocolService.createMirrorTypedData(
+            profileId: lensProfileId,
+            publicationId: postId
+        ) else {
+            return
+        }
+        
+        let typedData = createMirrorData.typedData
+        
+        // Encode metadata to ABI
+        
+        guard let data = await SmartContractService().createMirrorABIData(params: typedData) else {
+            return
+        }
+        
+        guard let txHash = try? await wallet.sendTransaction(data: data) else {
+            return
+        }
+        
+        var response = await SmartContractService().getTransactionReceipt(txHash: txHash)
+        
+        let maxSleeps = 60
+        var sleepCounter = 0
+        
+        // Wait until it got mined
+        
+        while (response == nil && sleepCounter < maxSleeps) {
+            try! await Task.sleep(nanoseconds: 1_000_000_000)
+            
+            response = await SmartContractService().getTransactionReceipt(txHash: txHash)
+            
+            sleepCounter += 1
+        }
+        
+        if (sleepCounter == maxSleeps) {
+            return
+        }
+        
+        if (response!!.status!.quantity.isZero) {
+            return
+        }
+        
+        // retrieve external lens ID
+        
+        guard let postCreatedLog = response!!.logs.first(where: { $0.topics[0].hex() == Constants.TOPIC_MIRROR_CREATED }) else {
+            return
+        }
+        let publicationIdHex = postCreatedLog.topics[2].hex()
+        var publicationId = String(Int(hexString: publicationIdHex)!, radix: 16)
+        
+        if (publicationId.count % 2 == 1) {
+            publicationId = "0" + publicationId
+        }
+        
+        publicationId = "0x" + publicationId
+        
+        let externalPubId = "\(lensProfileId)-\(publicationId)"
+        
+        guard let statusCode = try? await FeedWebService.repostContent(
+            oldPostLensId: post.lensId,
+            newLensId: externalPubId,
+            description: text
+        ) else {
+            return
+        }
+        
+        if (statusCode != 201) {
+            return
+        }
+        
+        post.totalMirrors += 1
+    }
+    
+    func upvote() async -> Void {
+        // Retrieve profile ID
+        guard let walletAddress = wallet.walletAddress else {
+            return
+        }
+        
+        guard let isOwnLensProfile = try? await AuthWebService.isOwnLensProfile(walletAddress: walletAddress) else {
+            return
+        }
+        
+        if (!isOwnLensProfile.data) {
+            guard let _ = try? await LensProtocolService.createProfile(walletAddress: walletAddress) else {
+                return
+            }
+        }
+        
+        guard let lensProfileId = await SmartContractService().lensIdByWalletAddress(walletAddress: walletAddress) else {
+            return
+        }
+        
+        guard let errors = try? await LensProtocolService.removeUpvote(
+            profileId: lensProfileId,
+            publicationId: post.lensId
+        ) else {
+            return
+        }
+        
+        if (errors == 1) {
+            guard let _ = try? await LensProtocolService.upvote(
+                profileId: lensProfileId,
+                publicationId: post.lensId
+            ) else {
+                return
+            }
+            
+            post.totalLikes += 1
+            return
+        }
+        
+        post.totalLikes -= 1
     }
 }
 
 struct PostLookup_Previews: PreviewProvider {
     static var previews: some View {
-        FullViewPost(post: Post())
+        FullViewPost(post: .constant(Post()))
+            .environmentObject(WalletViewModel())
     }
 }

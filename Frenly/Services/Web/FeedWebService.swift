@@ -111,6 +111,34 @@ class FeedWebService: WebService {
         return response
     }
     
+    static func repostContent (oldPostLensId: String, newLensId: String, description: String) async throws -> Int {
+        guard let url = URL(string: "\(APP_URL)/content/\(oldPostLensId)/repost/\(newLensId)") else {
+            throw NetworkErrors.invalidURL
+        }
+        
+        try await validateTokens()
+        
+        guard let accessToken = AuthTokenHelper.readAccessToken() else { throw NetworkErrors.noData }
+        var request = URLRequest(url: url)
+        let body = RepostBody(description: description)
+        
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        request.httpBody = try? JSONEncoder().encode(body)
+        
+        guard let (_, response) = try? await URLSession.shared.data(for: request) else {
+            throw NetworkErrors.noData
+        }
+        
+        let httpResponse = response as? HTTPURLResponse
+        guard let statusCode = httpResponse?.statusCode else {
+            throw NetworkErrors.intenalServerError
+        }
+        
+        return statusCode
+    }
+    
     static func bindContentWithLensId (contentId: Int, lensId: String) async throws -> Int {
         guard let url = URL(string: "\(APP_URL)/content/\(contentId)/\(lensId)") else {
             throw NetworkErrors.invalidURL
@@ -227,5 +255,9 @@ class FeedWebService: WebService {
         var lensId: String
         
         var comment: String
+    }
+    
+    struct RepostBody: Codable {
+        var description: String
     }
 }

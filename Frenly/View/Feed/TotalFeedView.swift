@@ -21,13 +21,12 @@ struct TotalFeedView: View {
     var body: some View {
         NavigationView {
             ScrollView(showsIndicators: false) {
-                LazyVStack {
+                LazyVStack {                    
                     Divider()
                     
                     if (isRefreshing) {
-                        Spacer()
                         ProgressView()
-                        Spacer()
+                            .frame(height: 50)
                     }
                     
                     ForEach($feed.posts, id: \.id) { $post in
@@ -36,7 +35,7 @@ struct TotalFeedView: View {
                                 .environmentObject(wallet)
                         } label: {
                             PostWithUserView(
-                                post: post,
+                                post: $post,
                                 navigateToUser: true
                             )
                             .environmentObject(wallet)
@@ -68,14 +67,11 @@ struct TotalFeedView: View {
                     if $0 < -80 && !isRefreshing {
                         isRefreshing = true
                         Task {
-                            await refresh?()
+                            await feed.refreshPosts()
                             isRefreshing = false
                         }
                     }
                 }
-            }
-            .refreshable {
-                await feed.refreshPosts()
             }
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

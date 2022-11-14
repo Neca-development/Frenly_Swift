@@ -1,0 +1,3 @@
+mutation RemoveUpvote($profileId: ProfileId!, $publicationId: InternalPublicationId!) {
+  removeReaction(request: { profileId: $profileId, reaction: UPVOTE, publicationId: $publicationId })
+}

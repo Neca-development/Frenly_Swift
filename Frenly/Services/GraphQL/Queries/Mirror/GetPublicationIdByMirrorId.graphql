@@ -1,0 +1,11 @@
+query GetPublicationIdByMirrorId($mirrorId: InternalPublicationId!) {
+  publication(request: { publicationId: $mirrorId }) {
+    ... on Mirror {
+      mirrorOf {
+        ... on Post {
+          id
+        }
+      }
+    }
+  }
+}

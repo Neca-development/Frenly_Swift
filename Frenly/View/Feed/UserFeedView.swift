@@ -65,7 +65,8 @@ struct UserFeedView: View {
                         PostWithCommentsView(post: $post)
                             .environmentObject(wallet)
                     } label: {
-                        PostWithoutUser(post: post)
+                        PostWithoutUser(post: $post)
+                            .environmentObject(wallet)
                     }
                     .buttonStyle(PlainButtonStyle())
                     .onAppear() {

@@ -98,6 +98,14 @@
 		71EA829429213DDF0003F57A /* AppLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71EA829329213DDE0003F57A /* AppLoader.swift */; };
 		71EA8296292146A10003F57A /* CreateCommentTypedData.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 71EA8295292146A10003F57A /* CreateCommentTypedData.graphql */; };
 		71EA8298292155550003F57A /* CreateCommentTypedDataMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71EA8297292155550003F57A /* CreateCommentTypedDataMutation.graphql.swift */; };
+		71EA829B292162460003F57A /* AddUpvote.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 71EA829A292162460003F57A /* AddUpvote.graphql */; };
+		71EA829D292162620003F57A /* AddUpvoteMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71EA829C292162620003F57A /* AddUpvoteMutation.graphql.swift */; };
+		71EA829F292167B10003F57A /* RemoveUpvote.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 71EA829E292167B10003F57A /* RemoveUpvote.graphql */; };
+		71EA82A1292167C90003F57A /* RemoveUpvoteMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71EA82A0292167C90003F57A /* RemoveUpvoteMutation.graphql.swift */; };
+		71EA82A429216F530003F57A /* CreateMirrorTypedData.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 71EA82A329216F530003F57A /* CreateMirrorTypedData.graphql */; };
+		71EA82A829216F840003F57A /* CreateMirrorTypedDataMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71EA82A729216F840003F57A /* CreateMirrorTypedDataMutation.graphql.swift */; };
+		71EA82AE29222C970003F57A /* GetPublicationIdByMirrorId.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 71EA82AD29222C970003F57A /* GetPublicationIdByMirrorId.graphql */; };
+		71EA82B029222CC50003F57A /* GetPublicationIdByMirrorIdQuery.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71EA82AF29222CC50003F57A /* GetPublicationIdByMirrorIdQuery.graphql.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -188,6 +196,14 @@
 		71EA829329213DDE0003F57A /* AppLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLoader.swift; sourceTree = "<group>"; };
 		71EA8295292146A10003F57A /* CreateCommentTypedData.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = CreateCommentTypedData.graphql; sourceTree = "<group>"; };
 		71EA8297292155550003F57A /* CreateCommentTypedDataMutation.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateCommentTypedDataMutation.graphql.swift; sourceTree = "<group>"; };
+		71EA829A292162460003F57A /* AddUpvote.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = AddUpvote.graphql; sourceTree = "<group>"; };
+		71EA829C292162620003F57A /* AddUpvoteMutation.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddUpvoteMutation.graphql.swift; sourceTree = "<group>"; };
+		71EA829E292167B10003F57A /* RemoveUpvote.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = RemoveUpvote.graphql; sourceTree = "<group>"; };
+		71EA82A0292167C90003F57A /* RemoveUpvoteMutation.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoveUpvoteMutation.graphql.swift; sourceTree = "<group>"; };
+		71EA82A329216F530003F57A /* CreateMirrorTypedData.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = CreateMirrorTypedData.graphql; sourceTree = "<group>"; };
+		71EA82A729216F840003F57A /* CreateMirrorTypedDataMutation.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateMirrorTypedDataMutation.graphql.swift; sourceTree = "<group>"; };
+		71EA82AD29222C970003F57A /* GetPublicationIdByMirrorId.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetPublicationIdByMirrorId.graphql; sourceTree = "<group>"; };
+		71EA82AF29222CC50003F57A /* GetPublicationIdByMirrorIdQuery.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetPublicationIdByMirrorIdQuery.graphql.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -470,6 +486,8 @@
 		71AD718B2912C1DB00BC7CF7 /* Queries */ = {
 			isa = PBXGroup;
 			children = (
+				71EA82A229216F3D0003F57A /* Mirror */,
+				71EA8299292162350003F57A /* Reactions */,
 				71EA8288291E5D240003F57A /* Profile */,
 				71E052CF2917FCE2006FB1DC /* Comments */,
 				71E18EFF2913036E00FDBC05 /* Posts */,
@@ -693,6 +711,28 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
+		71EA8299292162350003F57A /* Reactions */ = {
+			isa = PBXGroup;
+			children = (
+				71EA829A292162460003F57A /* AddUpvote.graphql */,
+				71EA829C292162620003F57A /* AddUpvoteMutation.graphql.swift */,
+				71EA829E292167B10003F57A /* RemoveUpvote.graphql */,
+				71EA82A0292167C90003F57A /* RemoveUpvoteMutation.graphql.swift */,
+			);
+			path = Reactions;
+			sourceTree = "<group>";
+		};
+		71EA82A229216F3D0003F57A /* Mirror */ = {
+			isa = PBXGroup;
+			children = (
+				71EA82A329216F530003F57A /* CreateMirrorTypedData.graphql */,
+				71EA82A729216F840003F57A /* CreateMirrorTypedDataMutation.graphql.swift */,
+				71EA82AD29222C970003F57A /* GetPublicationIdByMirrorId.graphql */,
+				71EA82AF29222CC50003F57A /* GetPublicationIdByMirrorIdQuery.graphql.swift */,
+			);
+			path = Mirror;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -768,13 +808,17 @@
 			files = (
 				71EA827F291E13F30003F57A /* UserPostsByLensId.graphql in Resources */,
 				71AD718D2912C20700BC7CF7 /* lens-protocol-schema.graphqls in Resources */,
+				71EA829F292167B10003F57A /* RemoveUpvote.graphql in Resources */,
 				71EA8296292146A10003F57A /* CreateCommentTypedData.graphql in Resources */,
 				71D775DB29011283005F7D7D /* Preview Assets.xcassets in Resources */,
+				71EA82AE29222C970003F57A /* GetPublicationIdByMirrorId.graphql in Resources */,
 				71EA828A291E5DD00003F57A /* CreateProfile.graphql in Resources */,
+				71EA829B292162460003F57A /* AddUpvote.graphql in Resources */,
 				71E052D12917FD04006FB1DC /* PostComments.graphql in Resources */,
 				71E18EF32912CE7D00FDBC05 /* RefreshJWT.graphql in Resources */,
 				71C4DB3D29129550008B4A8C /* Challenge.graphql in Resources */,
 				71AD71962912C5F400BC7CF7 /* apollo-codegen-config.json in Resources */,
+				71EA82A429216F530003F57A /* CreateMirrorTypedData.graphql in Resources */,
 				71E18EF12912CE3F00FDBC05 /* Authenticate.graphql in Resources */,
 				71D775D829011283005F7D7D /* Assets.xcassets in Resources */,
 				71EA828E291E6B250003F57A /* CreatePostTypedData.graphql in Resources */,
@@ -833,12 +877,15 @@
 				710CB7AE2910F1FF00367885 /* AuthWebService.swift in Sources */,
 				716439AD2906BDDF0065EA09 /* DraftFeedView.swift in Sources */,
 				7164399E290683FB0065EA09 /* CommentTextEditor.swift in Sources */,
+				71EA829D292162620003F57A /* AddUpvoteMutation.graphql.swift in Sources */,
+				71EA82A829216F840003F57A /* CreateMirrorTypedDataMutation.graphql.swift in Sources */,
 				71E18F0E2913188100FDBC05 /* JSONCoder.swift in Sources */,
 				71D775D42901127F005F7D7D /* FrenlyApp.swift in Sources */,
 				71EA827D291D296F0003F57A /* PostWithoutUser.swift in Sources */,
 				710CB7AB2910ED2E00367885 /* LoginViewModel.swift in Sources */,
 				710CB7C029111BB300367885 /* KeyChainHelper.swift in Sources */,
 				710CB7CB291136EF00367885 /* TotalFeedViewModel.swift in Sources */,
+				71EA82B029222CC50003F57A /* GetPublicationIdByMirrorIdQuery.graphql.swift in Sources */,
 				71EA8275291D0CB70003F57A /* SmartContractService.swift in Sources */,
 				710CB7D32911481400367885 /* UserWebService.swift in Sources */,
 				71E052BC291388EC006FB1DC /* FeedPostsInfoQuery.graphql.swift in Sources */,
@@ -857,6 +904,7 @@
 				7164397A2905C3510065EA09 /* WalletType.swift in Sources */,
 				71E18EFB2912D07300FDBC05 /* GraphQLErrors.swift in Sources */,
 				71EA8298292155550003F57A /* CreateCommentTypedDataMutation.graphql.swift in Sources */,
+				71EA82A1292167C90003F57A /* RemoveUpvoteMutation.graphql.swift in Sources */,
 				7164396E290596760065EA09 /* UtilsErrors.swift in Sources */,
 				716439AF2906BE5D0065EA09 /* PostInDraftView.swift in Sources */,
 				71C4DB202912856B008B4A8C /* LensProtocolService.swift in Sources */,

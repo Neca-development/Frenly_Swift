@@ -1,0 +1,3 @@
+mutation AddUpvote($profileId: ProfileId!, $publicationId: InternalPublicationId!) {
+  addReaction(request: { profileId: $profileId, reaction: UPVOTE, publicationId: $publicationId })
+}

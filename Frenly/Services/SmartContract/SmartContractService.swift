@@ -123,6 +123,34 @@ final class SmartContractService {
         return ethData.hex()
     }
     
+    func createMirrorABIData(params: CreateMirrorTypedDataMutation.Data.CreateMirrorTypedData.TypedData) async -> String? {
+        /*
+         [
+            profileId: uint256,
+            profileIdPointed: uint256,
+            pubIdPointed: uint256,
+            referenceModuleData: bytes,
+            referenceModule: address,
+            referenceModuleInitData: bytes
+         ]
+         */
+
+        let params = SolidityTuple(
+            SolidityWrappedValue.uint(BigUInt(params.value.profileId.dropFirst(2), radix: 16)!),
+            SolidityWrappedValue.uint(BigUInt(params.value.profileIdPointed.dropFirst(2), radix: 16)!),
+            SolidityWrappedValue.uint(BigUInt(params.value.pubIdPointed.dropFirst(2), radix: 16)!),
+            SolidityWrappedValue.bytes(Data(hex: params.value.referenceModuleData)),
+            SolidityWrappedValue.address(try! EthereumAddress(hex: params.value.referenceModule, eip55: false)),
+            SolidityWrappedValue.bytes(Data(hex: params.value.referenceModuleInitData))
+        )
+        
+        guard let ethData = contract["mirror"]!(params).encodeABI() else {
+            return nil
+        }
+        
+        return ethData.hex()
+    }
+    
     func splitSignature(signature: String) -> SplittedSignature? {
         var bytes = Array<UInt8>.init(hex: signature)
         

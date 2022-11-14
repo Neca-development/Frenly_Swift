@@ -114,6 +114,20 @@ class LensProtocolService {
         }
     }
     
+    static func getPublicationIdByMirrorId(publicationId: String) async -> String? {
+        await withCheckedContinuation { continuation in
+
+            apolloClient.fetch(query: GetPublicationIdByMirrorIdQuery(mirrorId: publicationId)) { result in
+                guard let data = try? result.get().data else {
+                    continuation.resume(returning: nil)
+                    return
+                }
+                
+                continuation.resume(returning: data.publication?.asMirror?.mirrorOf.asPost?.id)
+            }
+        }
+    }
+    
     static func getUsersPostById(profileId: String, cursor: String? = nil) async -> UserPostsResponse {
         await withCheckedContinuation { continuation in
             let gqlCursor: GraphQLNullable<String> = cursor == nil ? .null : .some(cursor!)
@@ -283,9 +297,114 @@ class LensProtocolService {
         }
     }
     
+    static func createMirrorTypedData(profileId: String, publicationId: String) async throws -> CreateMirrorTypedDataMutation.Data.CreateMirrorTypedData {
+        guard let tokens = try? await LensProtocolService.refreshTokens() else {
+            throw GraphQLErrors.unauthorized
+        }
+        
+        let apolloWithAuth: ApolloClient = {
+            let cache = InMemoryNormalizedCache()
+            let store = ApolloStore(cache: cache)
+            let authPayloads = ["x-access-token": tokens.accessToken]
+            let configuration = URLSessionConfiguration.default
+            configuration.httpAdditionalHeaders = authPayloads
+
+            let client = URLSessionClient(sessionConfiguration: configuration, callbackQueue: nil)
+            let provider = DefaultInterceptorProvider(client: client, shouldInvalidateClientOnDeinit: true, store: store)
+
+            let url = URL(string: Constants.LENS_URL)!
+
+            let requestChainTransport = RequestChainNetworkTransport(interceptorProvider: provider,
+                                                                     endpointURL: url)
+
+            return ApolloClient(networkTransport: requestChainTransport, store: store)
+           }()
+        
+        return try await withCheckedThrowingContinuation { continuation in
+
+            apolloWithAuth.perform(mutation: CreateMirrorTypedDataMutation(profileId: profileId, publicationId: publicationId)) { result in
+                guard let data = try? result.get().data else {
+                    continuation.resume(throwing: GraphQLErrors.profileNotCreated)
+                    return
+                }
+                
+                continuation.resume(returning: data.createMirrorTypedData)
+            }
+        }
+    }
+    
+    // Reactions
+    
+    static func upvote(profileId: String, publicationId: String) async throws -> Swift.Void {
+        guard let tokens = try? await LensProtocolService.refreshTokens() else {
+            throw GraphQLErrors.unauthorized
+        }
+        
+        let apolloWithAuth: ApolloClient = {
+            let cache = InMemoryNormalizedCache()
+            let store = ApolloStore(cache: cache)
+            let authPayloads = ["x-access-token": tokens.accessToken]
+            let configuration = URLSessionConfiguration.default
+            configuration.httpAdditionalHeaders = authPayloads
+
+            let client = URLSessionClient(sessionConfiguration: configuration, callbackQueue: nil)
+            let provider = DefaultInterceptorProvider(client: client, shouldInvalidateClientOnDeinit: true, store: store)
+
+            let url = URL(string: Constants.LENS_URL)!
+
+            let requestChainTransport = RequestChainNetworkTransport(interceptorProvider: provider,
+                                                                     endpointURL: url)
+
+            return ApolloClient(networkTransport: requestChainTransport, store: store)
+           }()
+        
+        return try await withCheckedThrowingContinuation { continuation in
+
+            apolloWithAuth.perform(mutation: AddUpvoteMutation(profileId: profileId, publicationId: publicationId)) { result in                
+                continuation.resume()
+            }
+        }
+    }
+    
+    static func removeUpvote(profileId: String, publicationId: String) async throws -> Int {
+        guard let tokens = try? await LensProtocolService.refreshTokens() else {
+            throw GraphQLErrors.unauthorized
+        }
+        
+        let apolloWithAuth: ApolloClient = {
+            let cache = InMemoryNormalizedCache()
+            let store = ApolloStore(cache: cache)
+            let authPayloads = ["x-access-token": tokens.accessToken]
+            let configuration = URLSessionConfiguration.default
+            configuration.httpAdditionalHeaders = authPayloads
+
+            let client = URLSessionClient(sessionConfiguration: configuration, callbackQueue: nil)
+            let provider = DefaultInterceptorProvider(client: client, shouldInvalidateClientOnDeinit: true, store: store)
+
+            let url = URL(string: Constants.LENS_URL)!
+
+            let requestChainTransport = RequestChainNetworkTransport(interceptorProvider: provider,
+                                                                     endpointURL: url)
+
+            return ApolloClient(networkTransport: requestChainTransport, store: store)
+           }()
+        
+        return try await withCheckedThrowingContinuation { continuation in
+
+            apolloWithAuth.perform(mutation: RemoveUpvoteMutation(profileId: profileId, publicationId: publicationId)) { result in
+                guard let errors = try? result.get().errors else {
+                    continuation.resume(returning: 0)
+                    return
+                }
+                
+                continuation.resume(returning: errors.count)
+            }
+        }
+    }
+    
     // Profile
     
-    static func createProfile(walletAddress: String) async throws -> Void {
+    static func createProfile(walletAddress: String) async throws -> Swift.Void {
         guard let tokens = try? await LensProtocolService.refreshTokens() else {
             throw GraphQLErrors.unauthorized
         }

@@ -27,10 +27,11 @@ struct PostWithCommentsView: View {
             Divider()
 
             if (isContentShown) {
-                FullViewPost(post: post)
+                FullViewPost(post: $post)
                     .frame(
                         width: UIScreen.main.bounds.width * 0.9
                     )
+                    .environmentObject(wallet)
             
                 Text("Comments")
                     .font(.system(size: 20, weight: .bold, design: .rounded))
