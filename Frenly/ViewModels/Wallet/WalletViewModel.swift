@@ -90,7 +90,7 @@ final class WalletViewModel: ObservableObject {
             do {
                 let transaclion = MetamaskTransaction(
                     to: Constants.MUMBAI_LENS_CONTRACT_ADDRESS,
-                    from: "0xfABA15fa0CfEe6a4450f00a2078Cb4A2FA0279d2",
+                    from: walletAddress!,
                     data: data
                 )
                 
