@@ -77,6 +77,15 @@ struct TotalFeedView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     UserFeedNavTitle()
+                        .onTapGesture {
+                            Task {
+                                if (!isRefreshing) {
+                                    isRefreshing = true
+                                    await feed.refreshPosts()
+                                    isRefreshing = false
+                                }
+                            }
+                        }
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
