@@ -25,6 +25,7 @@ class UserViewModel: ObservableObject {
         user.avatar = response.data.avatar ?? ""
         user.username = response.data.username ?? UtilsService.User.nameFromWalletAddress(walletAddress: walletAddress)
         user.description = response.data.description ?? ""
+        user.totalFollows = response.data.totalFollowers
     }
     
     func fetchUserByWalletAddress(walletAddress: String) async -> Void {
@@ -33,6 +34,7 @@ class UserViewModel: ObservableObject {
         user.avatar = response.data.avatar ?? ""
         user.username = response.data.username ?? UtilsService.User.nameFromWalletAddress(walletAddress: walletAddress)
         user.description = response.data.description ?? ""
+        user.totalFollows = response.data.totalFollowers
     }
     
     func uploadImage(image: UIImage) async -> Void {

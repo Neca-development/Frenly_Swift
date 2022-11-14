@@ -15,6 +15,8 @@ struct UserFeedView: View {
     @StateObject private var user = UserViewModel()
     @StateObject private var feed = UserFeedViewModel()
     
+    @State private var isFollowing = false
+    
     var walletAddress: String
     var showFollowButton: Bool {
         guard let token = AuthTokenHelper.readAccessToken() else {
@@ -41,19 +43,58 @@ struct UserFeedView: View {
             UserInfoView(avatar: user.user.avatar, description: user.user.description)
 
             if (showFollowButton) {
-                Button {
-                    
-                } label: {
-                    Text("Follow")
-                        .font(.system(size: 18, weight: .bold, design: .rounded))
-                        .frame(
-                            width: UIScreen.main.bounds.width * 0.3,
-                            height: 40
-                        )
-                        .background(Color.lightBlue)
-                        .foregroundColor(Color.white)
-                        .cornerRadius(20)
-                        .padding(.bottom, 20)
+                Text("Followers: \(user.user.totalFollows)")
+                    .font(.system(size: 18, weight: .regular, design: .rounded))
+                    .padding(.top)
+                
+                if (!isFollowing) {
+                    Button {
+                        Task {
+                            guard let status = try? await UserWebService.subscribe(walletAddress: walletAddress) else {
+                                return
+                            }
+                            
+                            if (status == 201) {
+                                isFollowing = true
+                                user.user.totalFollows += 1
+                            }
+                        }
+                    } label: {
+                        Text("Follow")
+                            .font(.system(size: 18, weight: .bold, design: .rounded))
+                            .frame(
+                                width: UIScreen.main.bounds.width * 0.3,
+                                height: 40
+                            )
+                            .background(Color.lightBlue)
+                            .foregroundColor(Color.white)
+                            .cornerRadius(20)
+                            .padding(.bottom, 20)
+                    }
+                } else {
+                    Button {
+                        Task {
+                            guard let status = try? await UserWebService.unsubscribe(walletAddress: walletAddress) else {
+                                return
+                            }
+                            
+                            if (status == 200) {
+                                isFollowing = false
+                                user.user.totalFollows -= 1
+                            }
+                        }
+                    } label: {
+                        Text("Unfollow")
+                            .font(.system(size: 18, weight: .bold, design: .rounded))
+                            .frame(
+                                width: UIScreen.main.bounds.width * 0.3,
+                                height: 40
+                            )
+                            .background(Color.grayBlue)
+                            .foregroundColor(Color.white)
+                            .cornerRadius(20)
+                            .padding(.bottom, 20)
+                    }
                 }
             }
             
@@ -105,6 +146,14 @@ struct UserFeedView: View {
             Task {
                 await user.fetchUserByWalletAddress(walletAddress: walletAddress)
                 await feed.fetchPosts(walletAddress: walletAddress)
+                
+                if (showFollowButton) {
+                    guard let isFollowig = try? await UserWebService.isFollow(walletAddress: walletAddress) else {
+                        return
+                    }
+                    
+                    self.isFollowing = isFollowig.data
+                }
             }
         }
     }

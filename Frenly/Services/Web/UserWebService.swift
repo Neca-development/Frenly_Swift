@@ -29,6 +29,31 @@ class UserWebService: WebService {
         return response
     }
     
+    static func isFollow (walletAddress: String) async throws -> ApiResponse<Bool> {
+        guard let url = URL(string: "\(APP_URL)/user/\(walletAddress)/is-follow") else {
+            throw NetworkErrors.invalidURL
+        }
+        
+        try await validateTokens()
+        
+        guard let accessToken = AuthTokenHelper.readAccessToken() else { throw NetworkErrors.noData }
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = "GET"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+    
+        guard let (data, _) = try? await URLSession.shared.data(for: request) else {
+            throw NetworkErrors.noData
+        }
+        
+        guard let response = try? JSONDecoder().decode(ApiResponse<Bool>.self, from: data) else {
+            throw NetworkErrors.decodingError
+        }
+
+        return response
+    }
+    
     static func uploadAvatart (avatar: Media) async throws -> ApiResponse<String?> {
         guard let url = URL(string: "\(APP_URL)/user/avatar") else {
             throw NetworkErrors.invalidURL
@@ -86,6 +111,58 @@ class UserWebService: WebService {
         return response
     }
     
+    static func subscribe (walletAddress: String) async throws -> Int {
+        guard let url = URL(string: "\(APP_URL)/user/subscribe/\(walletAddress)") else {
+            throw NetworkErrors.invalidURL
+        }
+        
+        try await validateTokens()
+        guard let accessToken = AuthTokenHelper.readAccessToken() else { throw NetworkErrors.noData }
+        
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+    
+        guard let (_, response) = try? await URLSession.shared.data(for: request) else {
+            throw NetworkErrors.noData
+        }
+        
+        let httpResponse = response as? HTTPURLResponse
+        guard let statusCode = httpResponse?.statusCode else {
+            throw NetworkErrors.intenalServerError
+        }
+        
+        return statusCode
+    }
+    
+    static func unsubscribe (walletAddress: String) async throws -> Int {
+        guard let url = URL(string: "\(APP_URL)/user/unsubscribe/\(walletAddress)") else {
+            throw NetworkErrors.invalidURL
+        }
+        
+        try await validateTokens()
+        guard let accessToken = AuthTokenHelper.readAccessToken() else { throw NetworkErrors.noData }
+        
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = "DELETE"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+    
+        guard let (_, response) = try? await URLSession.shared.data(for: request) else {
+            throw NetworkErrors.noData
+        }
+        
+        let httpResponse = response as? HTTPURLResponse
+        guard let statusCode = httpResponse?.statusCode else {
+            throw NetworkErrors.intenalServerError
+        }
+        
+        return statusCode
+    }
+    
     // Requests
     
     struct UpdateUserRequest: Codable {
@@ -99,5 +176,6 @@ class UserWebService: WebService {
         var username: String?
         var avatar: String?
         var description: String?
+        var totalFollowers: Int
     }
 }
