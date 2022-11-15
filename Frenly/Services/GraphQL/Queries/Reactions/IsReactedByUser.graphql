@@ -1,0 +1,11 @@
+query IsReactedByUser($publicationId: InternalPublicationId!, $profileId: ProfileId!) {
+  publication(request: { publicationId: $publicationId }) {
+    ... on Post {
+      reaction(request: { profileId: $profileId })
+    }
+    ... on Mirror {
+      reaction(request: { profileId: $profileId })
+    }
+  }
+}
+

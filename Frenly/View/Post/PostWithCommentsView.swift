@@ -123,7 +123,9 @@ struct PostWithCommentsView: View {
             }
         }
         .onAppear() {
-            Task { await comments.fetchComments(lensId: post.lensId) }
+            Task {
+                await comments.fetchComments(lensId: post.lensId)
+            }
         }
         .overlay {
             if (isLoading) {

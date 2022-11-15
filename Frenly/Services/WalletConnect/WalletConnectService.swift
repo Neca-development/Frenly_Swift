@@ -149,5 +149,8 @@ extension WalletConnectService: ClientDelegate {
 
     func client(_ client: Client, didUpdate session: Session) {
         delegate.didUpdate()
+        
+        self.session = session
+        try? UserDefaults.standard.setObject(session, forKey: Constants.WC_SESSION_KEY)
     }
 }

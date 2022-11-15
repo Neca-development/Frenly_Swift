@@ -335,6 +335,30 @@ class LensProtocolService {
     
     // Reactions
     
+    static func isReactedByUser(profileId: String, publicationId: String) async -> Bool {
+        return await withCheckedContinuation { continuation in
+
+            apolloClient.fetch(query: IsReactedByUserQuery(publicationId: publicationId, profileId: profileId)) { result in
+                guard let data = try? result.get().data else {
+                    continuation.resume(returning: false)
+                    return
+                }
+                
+                if (data.publication?.asPost?.reaction != nil) {
+                    continuation.resume(returning: true)
+                    return
+                }
+                
+                if (data.publication?.asMirror?.reaction != nil) {
+                    continuation.resume(returning: true)
+                    return
+                }
+                
+                continuation.resume(returning: false)
+            }
+        }
+    }
+    
     static func upvote(profileId: String, publicationId: String) async throws -> Swift.Void {
         guard let tokens = try? await LensProtocolService.refreshTokens() else {
             throw GraphQLErrors.unauthorized

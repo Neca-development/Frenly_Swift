@@ -190,7 +190,11 @@ extension WalletViewModel: WalletConnectDelegate {
 
     func didDisconnect() {
         DispatchQueue.main.async {
-            self.wcStatus = .disconnected
+            if (self.wcStatus != .disconnected) {
+                self.wcStatus = .disconnected
+                
+                let _ = self.reconnect()
+            }
         }
     }
 }

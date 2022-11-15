@@ -13,6 +13,8 @@ struct PostWithoutUser: View {
     @State private var isLikeInProgress = false
     @State private var isMirrorInProgress = false
     
+    @State private var isLiked = false
+    
     @State private var isDescriptionPopover = false
     @State private var description = ""
     
@@ -105,11 +107,16 @@ struct PostWithoutUser: View {
                         }
                         
                         isLikeInProgress = true
-                        await upvote()
+                        await addReaction()
                         isLikeInProgress = false
                     }
                 } label: {
-                    Image("Image_Hearth")
+                    if (isLiked) {
+                        Image("Image_Hearth")
+                    } else {
+                        Image("Image_Hearth_Border")
+                    }
+                    
                     Text("\(post.totalLikes)")
                         .foregroundColor(.grayBlue)
                         .padding(.trailing, 10)
@@ -168,13 +175,35 @@ struct PostWithoutUser: View {
                                 .foregroundColor(.red)
                         }
                     }
-               }
+                }
+                
+                Button {
+                    UtilsService.TwitterUtil.redirectToTwitter(post: post)
+                } label: {
+                    Image("Image_Twitter")
+                        .resizable()
+                        .frame(width: 23, height: 20)
+                        .padding(.trailing, 10)
+                }
             }
         }
         .frame(
             width: UIScreen.main.bounds.width * 0.9,
             alignment: .leading
         )
+        .onAppear() {
+            Task {
+                guard let walletAddress = wallet.walletAddress else {
+                    return
+                }
+                
+                guard let lensProfileId = await SmartContractService().lensIdByWalletAddress(walletAddress: walletAddress) else {
+                    return
+                }
+                
+                isLiked = await LensProtocolService.isReactedByUser(profileId: lensProfileId, publicationId: post.lensId)
+            }
+        }
     }
     
     func mirror(text: String) async -> Void {
@@ -284,7 +313,15 @@ struct PostWithoutUser: View {
         post.totalMirrors += 1
     }
     
-    func upvote() async -> Void {
+    func addReaction() async -> Void {
+        if (!isLiked) {
+            post.totalLikes += 1
+            isLiked = true
+        } else {
+            post.totalLikes -= 1
+            isLiked = false
+        }
+        
         // Retrieve profile ID
         guard let walletAddress = wallet.walletAddress else {
             return
@@ -304,26 +341,21 @@ struct PostWithoutUser: View {
             return
         }
         
-        guard let errors = try? await LensProtocolService.removeUpvote(
-            profileId: lensProfileId,
-            publicationId: post.lensId
-        ) else {
-            return
-        }
-        
-        if (errors == 1) {
+        if (!isLiked) {
             guard let _ = try? await LensProtocolService.upvote(
                 profileId: lensProfileId,
                 publicationId: post.lensId
             ) else {
                 return
             }
-            
-            post.totalLikes += 1
-            return
+        } else {
+            guard let _ = try? await LensProtocolService.removeUpvote(
+                profileId: lensProfileId,
+                publicationId: post.lensId
+            ) else {
+                return
+            }
         }
-        
-        post.totalLikes -= 1
     }
 }
 

@@ -47,6 +47,9 @@
 		716439AF2906BE5D0065EA09 /* PostInDraftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716439AE2906BE5D0065EA09 /* PostInDraftView.swift */; };
 		716439B12906C07D0065EA09 /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716439B02906C07D0065EA09 /* UserInfoView.swift */; };
 		716439B32906C1A60065EA09 /* DraftBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716439B22906C1A60065EA09 /* DraftBackButton.swift */; };
+		718A5AC629235C9600D31F9E /* IsReactedByUser.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 718A5AC529235C9600D31F9E /* IsReactedByUser.graphql */; };
+		718A5AC829235CF800D31F9E /* IsReactedByUserQuery.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718A5AC729235CF800D31F9E /* IsReactedByUserQuery.graphql.swift */; };
+		718A5ACA292363E200D31F9E /* TwitterUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718A5AC9292363E200D31F9E /* TwitterUtil.swift */; };
 		719E5A5D2907A3FB0005A1DF /* UserFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719E5A5C2907A3FB0005A1DF /* UserFeedView.swift */; };
 		719E5A5F2907A7930005A1DF /* PostWithUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719E5A5E2907A7930005A1DF /* PostWithUserView.swift */; };
 		719E5A672907B9C70005A1DF /* BackNavButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719E5A662907B9C70005A1DF /* BackNavButton.swift */; };
@@ -146,6 +149,9 @@
 		716439AE2906BE5D0065EA09 /* PostInDraftView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostInDraftView.swift; sourceTree = "<group>"; };
 		716439B02906C07D0065EA09 /* UserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
 		716439B22906C1A60065EA09 /* DraftBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraftBackButton.swift; sourceTree = "<group>"; };
+		718A5AC529235C9600D31F9E /* IsReactedByUser.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = IsReactedByUser.graphql; sourceTree = "<group>"; };
+		718A5AC729235CF800D31F9E /* IsReactedByUserQuery.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IsReactedByUserQuery.graphql.swift; sourceTree = "<group>"; };
+		718A5AC9292363E200D31F9E /* TwitterUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitterUtil.swift; sourceTree = "<group>"; };
 		719E5A5C2907A3FB0005A1DF /* UserFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFeedView.swift; sourceTree = "<group>"; };
 		719E5A5E2907A7930005A1DF /* PostWithUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostWithUserView.swift; sourceTree = "<group>"; };
 		719E5A662907B9C70005A1DF /* BackNavButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackNavButton.swift; sourceTree = "<group>"; };
@@ -315,6 +321,7 @@
 				716439692905954C0065EA09 /* RandomUtil.swift */,
 				71E052BD29138CA3006FB1DC /* UserUtil.swift */,
 				71E052C82913AD55006FB1DC /* MediaUtil.swift */,
+				718A5AC9292363E200D31F9E /* TwitterUtil.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -721,6 +728,8 @@
 				71EA829C292162620003F57A /* AddUpvoteMutation.graphql.swift */,
 				71EA829E292167B10003F57A /* RemoveUpvote.graphql */,
 				71EA82A0292167C90003F57A /* RemoveUpvoteMutation.graphql.swift */,
+				718A5AC529235C9600D31F9E /* IsReactedByUser.graphql */,
+				718A5AC729235CF800D31F9E /* IsReactedByUserQuery.graphql.swift */,
 			);
 			path = Reactions;
 			sourceTree = "<group>";
@@ -835,6 +844,7 @@
 				71EA828E291E6B250003F57A /* CreatePostTypedData.graphql in Resources */,
 				71EA827B291D1DF10003F57A /* LensHubAbi.json in Resources */,
 				71E18F012913039000FDBC05 /* FeedPostsInfo.graphql in Resources */,
+				718A5AC629235C9600D31F9E /* IsReactedByUser.graphql in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -867,6 +877,7 @@
 				71E18EF72912CF0700FDBC05 /* RefreshMutation.graphql.swift in Sources */,
 				71EA82B329225F7B0003F57A /* UINavigationControllerExtension.swift in Sources */,
 				716439A429068C840065EA09 /* StringExtension.swift in Sources */,
+				718A5AC829235CF800D31F9E /* IsReactedByUserQuery.graphql.swift in Sources */,
 				716439B32906C1A60065EA09 /* DraftBackButton.swift in Sources */,
 				71D775D62901127F005F7D7D /* ContentView.swift in Sources */,
 				71E052D62917FFFE006FB1DC /* Comment.swift in Sources */,
@@ -884,6 +895,7 @@
 				716439B12906C07D0065EA09 /* UserInfoView.swift in Sources */,
 				71EA829429213DDF0003F57A /* AppLoader.swift in Sources */,
 				71E052C62913AC74006FB1DC /* Media.swift in Sources */,
+				718A5ACA292363E200D31F9E /* TwitterUtil.swift in Sources */,
 				71E052D9291802CB006FB1DC /* CommentsViewModel.swift in Sources */,
 				71E052BE29138CA3006FB1DC /* UserUtil.swift in Sources */,
 				710CB7AE2910F1FF00367885 /* AuthWebService.swift in Sources */,
