@@ -25,7 +25,7 @@ final class WalletViewModel: ObservableObject {
 
     var chainId: Int? {
         get {
-            guard let chainId = wcService.session.walletInfo?.chainId else { return nil }
+            guard let chainId = wcService.session?.walletInfo?.chainId else { return nil }
             
             return chainId
         }

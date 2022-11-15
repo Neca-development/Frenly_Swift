@@ -66,16 +66,24 @@ struct PostInDraftView: View {
                     image
                         .resizable()
                         .aspectRatio(contentMode: .fill)
+                        .frame(
+                            height: UIScreen.main.bounds.height * 0.3,
+                            alignment: .center
+                        )
+                        .cornerRadius(30)
                 } else if phase.error == nil {
                     ProgressView()
+                        .frame(
+                            height: UIScreen.main.bounds.height * 0.3,
+                            alignment: .center
+                        )
+                } else {
+                    Image("Image_Eyes")
+                        .resizable()
+                        .frame(width: 80, height: 80, alignment: .center)
                 }
             }
-            .frame(
-                width: UIScreen.main.bounds.width * 0.9,
-                height: UIScreen.main.bounds.height * 0.3,
-                alignment: .center
-            )
-            .cornerRadius(30)
+            .frame(height: UIScreen.main.bounds.height * 0.3)
             
             Text("FrenlyDraft")
                 .font(.system(size: 18, weight: .regular, design: .rounded))

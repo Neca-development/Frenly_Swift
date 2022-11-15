@@ -19,6 +19,8 @@ class LensProtocolService {
     static func challenge(address: String) async throws -> String {
         try await withCheckedThrowingContinuation { continuation in
 
+            apolloClient.clearCache()
+            
             apolloClient.fetch(query: ChallengeQuery(address: address)) { result in
                 guard let data = try? result.get().data else {
                     continuation.resume(throwing: GraphQLErrors.noChallengeReturned)
@@ -77,6 +79,8 @@ class LensProtocolService {
     static func getFeedPostInfo(publicationIds: [String]) async -> [FeedPostInfo] {
         await withCheckedContinuation { continuation in
 
+            apolloClient.clearCache()
+            
             apolloClient.fetch(query: FeedPostsInfoQuery(publicationIds: .some(publicationIds))) { result in
                 var posts: [FeedPostInfo] = []
                 
@@ -84,6 +88,8 @@ class LensProtocolService {
                     continuation.resume(returning: posts)
                     return
                 }
+                
+                apolloClient.clearCache()
                 
                 for i in 0..<data.publications.items.count {
                     if (data.publications.items[i].asPost?.id != nil) {
@@ -117,6 +123,8 @@ class LensProtocolService {
     static func getPublicationIdByMirrorId(publicationId: String) async -> String? {
         await withCheckedContinuation { continuation in
 
+            apolloClient.clearCache()
+            
             apolloClient.fetch(query: GetPublicationIdByMirrorIdQuery(mirrorId: publicationId)) { result in
                 guard let data = try? result.get().data else {
                     continuation.resume(returning: nil)
@@ -131,6 +139,8 @@ class LensProtocolService {
     static func getUsersPostById(profileId: String, cursor: String? = nil) async -> UserPostsResponse {
         await withCheckedContinuation { continuation in
             let gqlCursor: GraphQLNullable<String> = cursor == nil ? .null : .some(cursor!)
+            
+            apolloClient.clearCache()
             
             apolloClient.fetch(query: UserPostsByLensIdQuery(profileId: profileId, cursor: gqlCursor)) { result in
                 var posts: [UserPostInfo] = []
@@ -197,6 +207,8 @@ class LensProtocolService {
     static func getCommentsByPostId(postId: String) async -> [Comment] {
         await withCheckedContinuation { continuation in
 
+            apolloClient.clearCache()
+            
             apolloClient.fetch(query: PostCommentsQuery(publicationId: postId)) { result in
                 var comments: [Comment] = []
                 
@@ -337,7 +349,9 @@ class LensProtocolService {
     
     static func isReactedByUser(profileId: String, publicationId: String) async -> Bool {
         return await withCheckedContinuation { continuation in
-
+            
+            apolloClient.clearCache()
+            
             apolloClient.fetch(query: IsReactedByUserQuery(publicationId: publicationId, profileId: profileId)) { result in
                 guard let data = try? result.get().data else {
                     continuation.resume(returning: false)
@@ -383,8 +397,7 @@ class LensProtocolService {
            }()
         
         return try await withCheckedThrowingContinuation { continuation in
-
-            apolloWithAuth.perform(mutation: AddUpvoteMutation(profileId: profileId, publicationId: publicationId)) { result in                
+            apolloWithAuth.perform(mutation: AddUpvoteMutation(profileId: profileId, publicationId: publicationId)) { result in
                 continuation.resume()
             }
         }
@@ -416,6 +429,8 @@ class LensProtocolService {
         return try await withCheckedThrowingContinuation { continuation in
 
             apolloWithAuth.perform(mutation: RemoveUpvoteMutation(profileId: profileId, publicationId: publicationId)) { result in
+                print(result)
+                
                 guard let errors = try? result.get().errors else {
                     continuation.resume(returning: 0)
                     return

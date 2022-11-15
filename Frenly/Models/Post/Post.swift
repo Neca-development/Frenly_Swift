@@ -30,6 +30,8 @@ struct Post {
     var mirroredFrom = ""
     var mirrorDescription = ""
     
+    var isLiked = false
+    
     var totalLikes = 0
     var totalComments = 0
     var totalMirrors = 0

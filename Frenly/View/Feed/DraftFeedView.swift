@@ -53,7 +53,7 @@ struct DraftFeedView: View {
                     Color.clear.preference(key: ViewOffsetKey.self, value: -$0.frame(in: .global).origin.y)
                 })
                 .onPreferenceChange(ViewOffsetKey.self) {
-                    if $0 < -80 && !isRefreshing {
+                    if $0 < -400 && !isRefreshing {
                         isRefreshing = true
                         Task {
                             await refresh?()

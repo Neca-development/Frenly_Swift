@@ -28,7 +28,7 @@ class CommentsViewModel: ObservableObject {
         }
         
         comments = unorderedComments.sorted() {
-            $0.createdAt > $1.createdAt
+            $0.createdAt < $1.createdAt
         }
     }
 }

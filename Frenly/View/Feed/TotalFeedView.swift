@@ -29,20 +29,28 @@ struct TotalFeedView: View {
                             .frame(height: 50)
                     }
                     
-                    ForEach($feed.posts, id: \.id) { $post in
+                    ForEach(feed.posts.indices, id: \.self) { index in
                         NavigationLink {
-                            PostWithCommentsView(post: $post)
-                                .environmentObject(wallet)
+                            PostWithCommentsView(post: Binding(
+                                get: { feed.posts.indices.contains(index) ? feed.posts[index] : Post() },
+                                set: { if (feed.posts.indices.contains(index)) { feed.posts[index] = $0 } }
+                            ))
+                            .environmentObject(wallet)
                         } label: {
                             PostWithUserView(
-                                post: $post,
+                                post: Binding(
+                                    get: { feed.posts.indices.contains(index) ? feed.posts[index] : Post() },
+                                    set: { if (feed.posts.indices.contains(index)) { feed.posts[index] = $0 } }
+                                ),
                                 navigateToUser: true
                             )
                             .environmentObject(wallet)
                         }
                         .buttonStyle(PlainButtonStyle())
                         .onAppear() {
-                            if (post.id == feed.posts.last?.id) {
+                            if (feed.posts.indices.contains(index) &&
+                                feed.posts[index].id == feed.posts.last?.id
+                            ) {
                                 Task { await feed.fetchPosts() }
                             }
                         }
@@ -64,7 +72,7 @@ struct TotalFeedView: View {
                     Color.clear.preference(key: ViewOffsetKey.self, value: -$0.frame(in: .global).origin.y)
                 })
                 .onPreferenceChange(ViewOffsetKey.self) {
-                    if $0 < -80 && !isRefreshing {
+                    if $0 < -200 && !isRefreshing {
                         isRefreshing = true
                         Task {
                             await feed.refreshPosts()
@@ -78,9 +86,9 @@ struct TotalFeedView: View {
                 ToolbarItem(placement: .navigationBarLeading) {
                     UserFeedNavTitle()
                         .onTapGesture {
-                            Task {
-                                if (!isRefreshing) {
-                                    isRefreshing = true
+                            if (!isRefreshing) {
+                                isRefreshing = true
+                                Task {
                                     await feed.refreshPosts()
                                     isRefreshing = false
                                 }

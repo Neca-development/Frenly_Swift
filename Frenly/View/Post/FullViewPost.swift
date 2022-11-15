@@ -13,8 +13,6 @@ struct FullViewPost: View {
     @State private var isLikeInProgress = false
     @State private var isMirrorInProgress = false
     
-    @State private var isLiked = false
-    
     @State private var isDescriptionPopover = false
     @State private var description = ""
     
@@ -62,16 +60,26 @@ struct FullViewPost: View {
                     image
                         .resizable()
                         .aspectRatio(contentMode: .fill)
+                        .frame(
+                            width: UIScreen.main.bounds.width * 0.9,
+                            height: UIScreen.main.bounds.height * 0.35,
+                            alignment: .center
+                        )
+                        .cornerRadius(30)
                 } else if phase.error == nil {
                     ProgressView()
+                        .frame(
+                            width: UIScreen.main.bounds.width * 0.9,
+                            height: UIScreen.main.bounds.height * 0.35,
+                            alignment: .center
+                        )
+                } else {
+                    Image("Image_Eyes")
+                        .resizable()
+                        .frame(width: 80, height: 80, alignment: .center)
                 }
             }
-            .frame(
-                width: UIScreen.main.bounds.width * 0.9,
-                height: UIScreen.main.bounds.height * 0.35,
-                alignment: .center
-            )
-            .cornerRadius(30)
+            .frame(width: UIScreen.main.bounds.width)
             
             Text("FrenlyPost")
                 .font(.system(size: 18, weight: .regular, design: .rounded))
@@ -98,7 +106,7 @@ struct FullViewPost: View {
                         isLikeInProgress = false
                     }
                 } label: {
-                    if (isLiked) {
+                    if (post.isLiked) {
                         Image("Image_Hearth")
                     } else {
                         Image("Image_Hearth_Border")
@@ -169,22 +177,9 @@ struct FullViewPost: View {
                 } label: {
                     Image("Image_Twitter")
                         .resizable()
-                        .frame(width: 23, height: 20)
+                        .frame(width: 20, height: 17)
                         .padding(.trailing, 10)
                 }
-            }
-        }
-        .onAppear {
-            Task {
-                guard let walletAddress = wallet.walletAddress else {
-                    return
-                }
-                
-                guard let lensProfileId = await SmartContractService().lensIdByWalletAddress(walletAddress: walletAddress) else {
-                    return
-                }
-                
-                isLiked = await LensProtocolService.isReactedByUser(profileId: lensProfileId, publicationId: post.lensId)
             }
         }
     }
@@ -297,12 +292,12 @@ struct FullViewPost: View {
     }
     
     func addReaction() async -> Void {
-        if (!isLiked) {
+        if (!post.isLiked) {
             post.totalLikes += 1
-            isLiked = true
+            post.isLiked = true
         } else {
             post.totalLikes -= 1
-            isLiked = false
+            post.isLiked = false
         }
         
         // Retrieve profile ID
@@ -324,7 +319,7 @@ struct FullViewPost: View {
             return
         }
         
-        if (!isLiked) {  
+        if (post.isLiked) {
             guard let _ = try? await LensProtocolService.upvote(
                 profileId: lensProfileId,
                 publicationId: post.lensId

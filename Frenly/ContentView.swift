@@ -23,7 +23,7 @@ struct ContentView: View {
                     .animation(.easeInOut(duration: 0.4), value: auth.status)
             }
 
-            if (auth.status == .authorized) {
+            if (auth.status == .authorized && wallet.wcStatus == .connected) {
                 TotalFeedView()
                     .environmentObject(auth)
                     .environmentObject(wallet)
@@ -42,16 +42,14 @@ struct ContentView: View {
             }
         }
         .onAppear() {
-            Task { await tryConnectWithDefaults() }
+            Task {
+                await tryConnectWithDefaults()
+            }
         }
     }
     
     func tryConnectWithDefaults() async -> Void {
-        let status = wallet.reconnect()
-
-        if (status == .success) {
-            wallet.wcStatus = .connected
-        }
+        let _ = wallet.reconnect()
         
         guard let _ = try? await AuthViewModel.refreshTokens() else {
             auth.status = .unauthorized

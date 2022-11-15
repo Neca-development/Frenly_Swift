@@ -11,6 +11,8 @@ struct LoginView: View {
     @EnvironmentObject private var login: AuthViewModel
     @EnvironmentObject private var wallet: WalletViewModel
     
+    @State private var isAuthButtonPressed = false
+    
     var body: some View {
         VStack {
             Spacer()
@@ -34,6 +36,7 @@ struct LoginView: View {
             
             Button {
                 Task {
+                    isAuthButtonPressed = true
                     login.status = .inProgress
                     
                     if (wallet.wcStatus != .connected) {
@@ -57,6 +60,10 @@ struct LoginView: View {
             Spacer()
         }
         .onChange(of: wallet.wcStatus) { newValue in
+            if (!isAuthButtonPressed) {
+                return
+            }
+            
             if (newValue == .failed) {
                 login.status = .unauthorized
             }
