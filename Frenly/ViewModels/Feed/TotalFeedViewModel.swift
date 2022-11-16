@@ -74,30 +74,6 @@ class TotalFeedViewModel: ObservableObject {
                 totalMirrors: lensPost.totalAmountOfMirrors,
                 createdDate: response.data[i].creationDate
             ))
-            
-            if (i == 0) {
-                print(Post(
-                    id: backendPosts[i].id,
-                    lensId: backendPosts[i].lensId!,
-                    ownerAddress: lensPost.ownerWalletAddress,
-                    username: postOwner?.data.username ?? UtilsService.User.nameFromWalletAddress(walletAddress: lensPost.ownerWalletAddress),
-                    avatar: postOwner?.data.avatar ?? "",
-                    fromAddress: backendPosts[i].fromAddress,
-                    toAddress: backendPosts[i].toAddress,
-                    contractAddress: backendPosts[i].contractAddress,
-                    transactionHash: backendPosts[i].transactionHash,
-                    transferType: backendPosts[i].transferType,
-                    image: backendPosts[i].image ?? "",
-                    scanLink: scanLink,
-                    isMirror: lensPost.isMirror,
-                    mirroredFrom: mirroredFrom?.data.username ?? UtilsService.User.nameFromWalletAddress(walletAddress: lensPost.mirrorFrom),
-                    mirrorDescription: backendPosts[i].mirrorDescription ?? "",
-                    totalLikes: lensPost.totalUpvotes,
-                    totalComments: lensPost.totalAmountOfComments,
-                    totalMirrors: lensPost.totalAmountOfMirrors,
-                    createdDate: response.data[i].creationDate
-                ))
-            }
         }
 
         skip += take

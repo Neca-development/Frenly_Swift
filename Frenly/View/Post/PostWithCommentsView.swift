@@ -142,7 +142,7 @@ struct PostWithCommentsView: View {
         guard let walletAddress = wallet.walletAddress else {
             return
         }
-
+        
         // Retrieve profile ID
         guard let isOwnLensProfile = try? await AuthWebService.isOwnLensProfile(walletAddress: walletAddress) else {
             return

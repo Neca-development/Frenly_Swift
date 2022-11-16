@@ -39,12 +39,15 @@ struct Post {
     var createdDate = Date()
     
     func getFormattedDate() -> String {
+        let secondsFromGMT = TimeZone.current.secondsFromGMT()
+        let localizedDate = createdDate + TimeInterval(secondsFromGMT)
+        
         let formatter = DateFormatter()
         
         formatter.dateFormat = "MMM, dd 'AT' HH:mm a"
         formatter.amSymbol = "AM"
         formatter.pmSymbol = "PM"
         
-        return formatter.string(from: createdDate).uppercased()
+        return formatter.string(from: localizedDate).uppercased()
     }
 }

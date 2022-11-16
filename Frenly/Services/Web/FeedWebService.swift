@@ -127,7 +127,7 @@ class FeedWebService: WebService {
         request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
         request.httpBody = try? JSONEncoder().encode(body)
         
-        guard let (_, response) = try? await URLSession.shared.data(for: request) else {
+        guard let (data, response) = try? await URLSession.shared.data(for: request) else {
             throw NetworkErrors.noData
         }
         

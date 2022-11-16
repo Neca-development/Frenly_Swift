@@ -17,32 +17,10 @@ struct CommentTextEditor: View {
     var onSubmitAction: () -> Void = {}
     
     var body: some View {
-        ZStack(alignment: .leading) {
-            // Placeholder
-            if (text == "") {
-                Text("Comment")
-                    .font(.system(size: 18, weight: .regular, design: .rounded))
-                    .padding(12)
-                    .foregroundColor(Color.commentInputForeground)
-            }
-            
-            Text(text)
+        if #available(iOS 16.0, *) {
+            TextField("Comment", text: $text, axis: .vertical)
                 .font(.system(size: 18, weight: .regular, design: .rounded))
-                .foregroundColor(.clear)
-                .background(GeometryReader {
-                    Color.clear.preference(
-                        key: ViewHeightKey.self,
-                        value: $0.frame(in: .local).size.height
-                    )
-                })
-            
-            TextEditor(text: $text)
                 .focused(focusedField, equals: 1)
-                .font(.system(size: 18, weight: .regular, design: .rounded))
-                .frame(maxHeight: max(40, textEditorHeight - 10))
-                .padding(9)
-                .background(Color.commentInputBackground)
-                .cornerRadius(30)
                 .onChange(of: text) { newValue in
                     onChangeAction()
                 }
@@ -53,17 +31,66 @@ struct CommentTextEditor: View {
                         onChangeAction()
                     }
                 }
-                .animation(.easeInOut(duration: 0.4), value: textEditorHeight)
-        }
-        .onPreferenceChange(ViewHeightKey.self) {
-            textEditorHeight = $0
-        }
-        .frame(
-            width: UIScreen.main.bounds.width * 0.8,
-            height: focusedField.wrappedValue != nil ? textEditorHeight + 35 : 50
-        )
-        .onAppear() {
-            UITextView.appearance().backgroundColor = .clear
+                .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 0))
+                .frame(minHeight: 35)
+                .background(Color.commentInputBackground)
+                .foregroundColor(Color.commentInputForeground)
+                .cornerRadius(30)
+                .lineLimit(3)
+                .padding()
+        } else {
+            ZStack(alignment: .leading) {
+                // Placeholder
+                if (text == "") {
+                    Text("Comment")
+                        .onChange(of: text) { newValue in
+                            onChangeAction()
+                        }
+                        .font(.system(size: 18, weight: .regular, design: .rounded))
+                        .padding(12)
+                        .foregroundColor(Color.commentInputForeground)
+                }
+                
+                Text(text)
+                    .font(.system(size: 18, weight: .regular, design: .rounded))
+                    .foregroundColor(.clear)
+                    .background(GeometryReader {
+                        Color.clear.preference(
+                            key: ViewHeightKey.self,
+                            value: $0.frame(in: .local).size.height
+                        )
+                    })
+                
+                TextEditor(text: $text)
+                    .focused(focusedField, equals: 1)
+                    .font(.system(size: 18, weight: .regular, design: .rounded))
+                    .frame(maxHeight: max(40, textEditorHeight - 10))
+                    .padding(9)
+                    .background(Color.commentInputBackground)
+                    .cornerRadius(30)
+                    .onChange(of: text) { newValue in
+                        onChangeAction()
+                    }
+                    .onChange(of: focusedField.wrappedValue) { newValue in
+                        if (newValue == nil) {
+                            onSubmitAction()
+                        } else {
+                            onChangeAction()
+                        }
+                    }
+                    .animation(.easeInOut(duration: 0.4), value: textEditorHeight)
+            }
+            .onPreferenceChange(ViewHeightKey.self) {
+                textEditorHeight = $0
+            }
+            .frame(
+                width: UIScreen.main.bounds.width * 0.8,
+                height: focusedField.wrappedValue != nil ? textEditorHeight + 35 : 50
+            )
+            .onAppear() {
+                UITextView.appearance().backgroundColor = .clear
+            }
+            
         }
     }
 }

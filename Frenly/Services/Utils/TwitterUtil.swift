@@ -32,13 +32,9 @@ extension UtilsService {
                 return
             }
             
-            print(formattedUrl)
-            
             guard let url = URL(string: formattedUrl) else {
                 return
             }
-            
-            print(formattedUrl)
             
             if (!UIApplication.shared.canOpenURL(url)) {
                 return

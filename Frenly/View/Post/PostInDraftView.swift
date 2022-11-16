@@ -237,8 +237,6 @@ struct PostInDraftView: View {
         
         // Publish on backend
         
-        print(externalPubId)
-        
         guard let bindStatusCode = try? await FeedWebService.bindContentWithLensId(contentId: post.id, lensId: externalPubId) else {
             return
         }

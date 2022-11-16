@@ -222,7 +222,10 @@ class LensProtocolService {
                     
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-                    let date = dateFormatter.date(from:isoDate)!
+                    var date = dateFormatter.date(from:isoDate)!
+                    
+                    let secondsFromGMT = TimeZone.current.secondsFromGMT()
+                    date += TimeInterval(secondsFromGMT)
                     
                     comments.append(Comment(
                         id: data.publications.items[i].asComment!.id,
@@ -429,8 +432,6 @@ class LensProtocolService {
         return try await withCheckedThrowingContinuation { continuation in
 
             apolloWithAuth.perform(mutation: RemoveUpvoteMutation(profileId: profileId, publicationId: publicationId)) { result in
-                print(result)
-                
                 guard let errors = try? result.get().errors else {
                     continuation.resume(returning: 0)
                     return
