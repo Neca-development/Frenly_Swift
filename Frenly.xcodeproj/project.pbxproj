@@ -53,6 +53,7 @@
 		719E5A5D2907A3FB0005A1DF /* UserFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719E5A5C2907A3FB0005A1DF /* UserFeedView.swift */; };
 		719E5A5F2907A7930005A1DF /* PostWithUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719E5A5E2907A7930005A1DF /* PostWithUserView.swift */; };
 		719E5A672907B9C70005A1DF /* BackNavButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719E5A662907B9C70005A1DF /* BackNavButton.swift */; };
+		719E66EA292501DF00DE5FEB /* ENSWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719E66E9292501DF00DE5FEB /* ENSWebService.swift */; };
 		71AD71862912BAA200BC7CF7 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 71AD71852912BAA200BC7CF7 /* Apollo */; };
 		71AD718D2912C20700BC7CF7 /* lens-protocol-schema.graphqls in Resources */ = {isa = PBXBuildFile; fileRef = 71AD718C2912C20700BC7CF7 /* lens-protocol-schema.graphqls */; };
 		71AD71962912C5F400BC7CF7 /* apollo-codegen-config.json in Resources */ = {isa = PBXBuildFile; fileRef = 71AD71952912C5F400BC7CF7 /* apollo-codegen-config.json */; };
@@ -155,6 +156,7 @@
 		719E5A5C2907A3FB0005A1DF /* UserFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFeedView.swift; sourceTree = "<group>"; };
 		719E5A5E2907A7930005A1DF /* PostWithUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostWithUserView.swift; sourceTree = "<group>"; };
 		719E5A662907B9C70005A1DF /* BackNavButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackNavButton.swift; sourceTree = "<group>"; };
+		719E66E9292501DF00DE5FEB /* ENSWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENSWebService.swift; sourceTree = "<group>"; };
 		71AD718C2912C20700BC7CF7 /* lens-protocol-schema.graphqls */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "lens-protocol-schema.graphqls"; sourceTree = "<group>"; };
 		71AD71952912C5F400BC7CF7 /* apollo-codegen-config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "apollo-codegen-config.json"; sourceTree = "<group>"; };
 		71C4DB1F2912856B008B4A8C /* LensProtocolService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LensProtocolService.swift; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 				710CB7B22910F33300367885 /* WebService.swift */,
 				710CB7C4291133C400367885 /* FeedWebService.swift */,
 				710CB7D22911481400367885 /* UserWebService.swift */,
+				719E66E9292501DF00DE5FEB /* ENSWebService.swift */,
 			);
 			path = Web;
 			sourceTree = "<group>";
@@ -924,6 +927,7 @@
 				710CB7B32910F33300367885 /* WebService.swift in Sources */,
 				71E18F052913144900FDBC05 /* EndOfTotalFeedView.swift in Sources */,
 				7164397D2905C7FB0065EA09 /* LoginView.swift in Sources */,
+				719E66EA292501DF00DE5FEB /* ENSWebService.swift in Sources */,
 				7164398A2905D19A0065EA09 /* TotalFeedView.swift in Sources */,
 				7164397A2905C3510065EA09 /* WalletType.swift in Sources */,
 				71E18EFB2912D07300FDBC05 /* GraphQLErrors.swift in Sources */,
@@ -1057,6 +1061,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Frenly/Preview Content\"";
@@ -1074,7 +1079,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.4;
+				MARKETING_VERSION = 0.1.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.cc.testfrenly;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1088,6 +1093,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Frenly/Preview Content\"";
@@ -1105,7 +1111,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.4;
+				MARKETING_VERSION = 0.1.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.cc.testfrenly;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

@@ -33,8 +33,8 @@ class FeedWebService: WebService {
         return response
     }
     
-    static func getDraftsNftPosts () async throws -> ApiResponse<[NftPostResponse]> {
-        guard let url = URL(string: "\(APP_URL)/content/unpublished") else {
+    static func getDraftsNftPosts (take: Int, skip: Int) async throws -> ApiResponse<[NftPostResponse]> {
+        guard let url = URL(string: "\(APP_URL)/content/unpublished?take=\(take)&skip=\(skip)") else {
             throw NetworkErrors.invalidURL
         }
         
@@ -127,7 +127,7 @@ class FeedWebService: WebService {
         request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
         request.httpBody = try? JSONEncoder().encode(body)
         
-        guard let (data, response) = try? await URLSession.shared.data(for: request) else {
+        guard let (_, response) = try? await URLSession.shared.data(for: request) else {
             throw NetworkErrors.noData
         }
         

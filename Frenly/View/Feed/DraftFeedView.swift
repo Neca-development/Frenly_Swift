@@ -26,7 +26,8 @@ struct DraftFeedView: View {
             if (!isEditing) {
                 UserInfoView(
                     avatar: user.user.avatar,
-                    description: user.user.description
+                    description: user.user.description,
+                    walletAddress: wallet.walletAddress!
                 )
                 
                 Divider()
@@ -45,35 +46,46 @@ struct DraftFeedView: View {
                         )
                         .environmentObject(drafts)
                         .environmentObject(wallet)
+                        .onAppear() {
+                            if (post.id == drafts.posts.last?.id) {
+                                Task { await drafts.fetchPosts() }
+                            }
+                        }
+                          
                         
                         Divider()
+                    }
+                    
+                    if (drafts.isFetching && drafts.posts.count > 0) {
+                        Spacer()
+                        ProgressView()
+                        Spacer()
+                    }
+                    
+                    
+                    if (drafts.isEndOfPage) {
+                        DraftBackButton()
                     }
                 }
                 .background(GeometryReader {
                     Color.clear.preference(key: ViewOffsetKey.self, value: -$0.frame(in: .global).origin.y)
                 })
                 .onPreferenceChange(ViewOffsetKey.self) {
-                    if $0 < -400 && !isRefreshing {
+                    if $0 < -250 && !isRefreshing {
                         isRefreshing = true
                         Task {
-                            await refresh?()
+                            await drafts.refreshPosts()
+                            try? await Task.sleep(nanoseconds: 2_500_000_000)
                             isRefreshing = false
                         }
                     }
                 }
-                
-            
-                DraftBackButton()
             } else {
                 UserEditView()
                     .environmentObject(user)
                     .environmentObject(wallet)
                     .environmentObject(auth)
             }
-        }
-        .refreshable {
-            drafts.posts = []
-            await drafts.fetchPosts()
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)

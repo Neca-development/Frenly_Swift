@@ -11,8 +11,28 @@ import Foundation
 class DraftFeedViewModel: ObservableObject {
     @Published var posts: [Post] = []
     
+    @Published var isFetching = false
+    @Published var isEndOfPage = false
+    
+    private var take = 5;
+    private var skip = 0;
+    
+    
     func fetchPosts() async -> Void {
-        guard let response = try? await FeedWebService.getDraftsNftPosts() else {
+        if (isEndOfPage || isFetching) {
+            return
+        }
+
+        isFetching = true
+        
+        guard let response = try? await FeedWebService.getDraftsNftPosts(take: take, skip: skip) else {
+            return
+        }
+        
+        
+        if (response.data.count == 0) {
+            isEndOfPage = true
+            isFetching = false
             return
         }
 
@@ -31,5 +51,22 @@ class DraftFeedViewModel: ObservableObject {
                 createdDate: response.data[i].creationDate
             ))
         }
+        
+        skip += take
+        isFetching = false
+    }
+    
+    func refreshPosts() async -> Void {
+        if (isFetching) {
+            return
+        }
+        
+        take = 5
+        skip = 0
+        
+        posts.removeAll()
+        
+        isEndOfPage = false
+        await fetchPosts()
     }
 }

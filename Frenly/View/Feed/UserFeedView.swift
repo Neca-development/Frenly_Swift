@@ -40,7 +40,11 @@ struct UserFeedView: View {
     
     var body: some View {
         ScrollView {
-            UserInfoView(avatar: user.user.avatar, description: user.user.description)
+            UserInfoView(
+                avatar: user.user.avatar,
+                description: user.user.description,
+                walletAddress: walletAddress
+            )
 
             if (showFollowButton) {
                 Text("Followers: \(user.user.totalFollows)")
